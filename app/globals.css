@@ -14,4 +14,13 @@
 
 @layer utilities {
   /* global styles */
+
+  /* auth pages */
+  .auth-root {
+    @apply w-screen flex bg-slate-50
+  }
+
+  .auth-container {
+    @apply w-1/2 max-lg:w-full flex justify-center self-start overflow-auto h-full pt-36
+  }
 }
