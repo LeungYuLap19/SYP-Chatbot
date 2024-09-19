@@ -1,6 +1,5 @@
 'use client'
-import { formUrlQuery } from '@/lib/utils';
-import { useRouter, useSearchParams, usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
 export default function HistoryChat(
@@ -14,7 +13,7 @@ export default function HistoryChat(
   };
 
   return (
-    <div onClick={handleOnClick}>
+    <div onClick={handleOnClick} className='cursor-pointer'>
       HistoryChat{index}
     </div>
   );
