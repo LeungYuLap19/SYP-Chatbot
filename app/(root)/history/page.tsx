@@ -1,7 +1,10 @@
+import History from '@/components/root/history/History'
 import React from 'react'
 
 export default function page() {
   return (
-    <div>history</div>
+    <div className='h-screen'>
+      <History />
+    </div>
   )
 }

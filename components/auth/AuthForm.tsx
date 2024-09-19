@@ -26,7 +26,7 @@ export default function AuthForm({ type }: AuthFormProps) {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    router.push('/home')
+    router.push('/chatroom');
   } 
 
   return (
