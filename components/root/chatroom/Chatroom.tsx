@@ -1,11 +1,11 @@
 'use client'
 import { useSearchParams } from 'next/navigation';
-import React from 'react'
+import React, { Suspense } from 'react'
 import Message from './Message';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
-export default function Chatroom() {
+function ChatroomPage() {
   const searchParams = useSearchParams();
   const id = searchParams.get('id');
 
@@ -33,3 +33,11 @@ export default function Chatroom() {
     </div>
   )
 }
+
+const Chatroom = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <ChatroomPage />
+  </Suspense>
+)
+
+export default Chatroom;
