@@ -3,13 +3,16 @@ import React, { useState } from 'react'
 import Logo from '../global/Logo'
 import Link from 'next/link'
 import { Form } from '../ui/form'
-import { authFormSchema } from '@/lib/utils';
+import { authFormSchema, showToast } from '@/lib/utils';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Button } from '../ui/button';
 import CustomInput from './CustomInput';
 import { useRouter } from 'next/navigation'
+import { createAccount, createUser, getUserByUID, signInAccount } from '@/lib/actions/auth/firebaseAuth.action'
+import { storeToCookies } from '@/lib/actions/cookies/cookies.action'
+import { COOKIES_KEY_USERDATA, DAYS_TO_EXPIRE, ERROR_TOAST_TITLE } from '@/constants'
 
 export default function AuthForm({ type }: AuthFormProps) {
   const router = useRouter();
@@ -26,7 +29,35 @@ export default function AuthForm({ type }: AuthFormProps) {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    router.push('/chatroom');
+    setLoading(true);
+    const authResult = type === 'sign-in' ? 
+      await signInAccount({ email: values.email, password: values.password }) :
+      await createAccount({ email: values.email, password: values.password });
+
+    if (authResult.data) {
+      const uid = authResult.data;
+      const fsResult = type === 'sign-in' ?
+        await getUserByUID({ uid: uid }) :
+        await createUser({ uid: uid, username: values.username!, email: values.email });
+      if (fsResult.data) {
+        const userData = fsResult.data;
+        const cookiesResult = await storeToCookies<UserData>({ key: COOKIES_KEY_USERDATA, data: userData, daysToExpire: DAYS_TO_EXPIRE });
+        if (cookiesResult.data) {
+          router.push('/chatroom');
+        }
+        else if (cookiesResult.error) {
+          showToast({ title: ERROR_TOAST_TITLE, description: cookiesResult.error.message });
+        }
+      }
+      else if (fsResult.error) {
+        showToast({ title: ERROR_TOAST_TITLE, description: fsResult.error.message });
+      }
+    }
+    else if (authResult.error) {
+      showToast({ title: ERROR_TOAST_TITLE, description: authResult.error.message });
+    }
+    form.reset();
+    setLoading(false);
   } 
 
   return (

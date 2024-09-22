@@ -2,9 +2,17 @@ import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 import { z } from "zod";
 import qs from "query-string";
+import { toast } from "@/hooks/use-toast";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
+}
+
+export function showToast({ title, description }: ShowToastParams) {
+  toast({
+    title: title,
+    description: description,
+  });
 }
 
 // form schemas

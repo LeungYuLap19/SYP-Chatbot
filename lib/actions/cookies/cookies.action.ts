@@ -3,7 +3,7 @@ import { cookies } from 'next/headers';
 import { getCookiesError } from '../errors/apiErrorsHandler';
 
 // Store to Cookies
-export async function storeToCookies<T>(key: string, data: T, daysToExpire: number = 7): Promise<Result<boolean>> {
+export async function storeToCookies<T>({ key, data, daysToExpire }: StoreToCookiesParams<T>): Promise<Result<boolean>> {
   try {
     const jsonData = JSON.stringify(data);
     const expires = new Date();
@@ -25,7 +25,7 @@ export async function storeToCookies<T>(key: string, data: T, daysToExpire: numb
 }
 
 // Get from Cookies
-export async function getFromCookies<T>(key: string): Promise<Result<T | null>> {
+export async function getFromCookies<T>({ key }: GetFromCookiesParams): Promise<Result<T | null>> {
   try {
     const jsonData = cookies().get(key);
     if (jsonData && jsonData.value) {
@@ -40,7 +40,7 @@ export async function getFromCookies<T>(key: string): Promise<Result<T | null>> 
 }
 
 // Remove from Cookies
-export async function removeFromCookies(key: string): Promise<Result<boolean>> {
+export async function removeFromCookies({ key }: RemoveFromCookiesParams): Promise<Result<boolean>> {
   try {
     cookies().delete(key);
     return { data: true }; // Success

@@ -4,3 +4,8 @@ declare interface formUrlQueryParams {
   query: Record<string, string>;
   extraRoute?: string;
 }
+
+declare interface ShowToastParams {
+  title: string;
+  description: string;
+}

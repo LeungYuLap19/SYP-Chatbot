@@ -29,15 +29,16 @@ export async function signInAccount({ email, password }: SignInAccountParams): P
 }
 
 // Create User in Firestore
-export async function createUser({ uid, username, email }: CreateUserParams): Promise<Result<boolean>> {
+export async function createUser({ uid, username, email }: CreateUserParams): Promise<Result<UserData>> {
+  const userData = { uid, username, email };
   try {
     await addDoc(collection(db, 'users'), {
-      uid: uid,
-      username: username,
-      email: email
+      uid: userData.uid,
+      username: userData.username,
+      email: userData.email
     });
-    console.log({ uid: uid, username: username, email: email });
-    return { data: true };  // Return success with data
+    console.log(userData);
+    return { data: userData };  // Return success with data
   } catch (error: any) {
     console.error('Create User Error:', error.code, error.message);
     return { error: getFirestoreError(error.code) };  // Return error message
