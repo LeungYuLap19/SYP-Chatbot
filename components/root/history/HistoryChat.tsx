@@ -13,7 +13,7 @@ export default function HistoryChat(
   };
 
   return (
-    <div onClick={handleOnClick} className='cursor-pointer'>
+    <div onClick={handleOnClick} className='cursor-pointer text-customBlack-100'>
       HistoryChat{index}
     </div>
   );

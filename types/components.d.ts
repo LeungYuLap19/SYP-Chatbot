@@ -3,8 +3,9 @@ interface AuthFormProps {
   type: 'sign-in' | 'sign-up'
 }
 
-interface NavigationTab {
+interface NavigationTabProps {
   label: string;
   route: string;
   index?: number;
+  imgUrl: string;
 }

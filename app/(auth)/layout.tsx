@@ -5,7 +5,7 @@ export default function RootLayout({ children }: Readonly<{children: React.React
   return (
     <main className='auth-root h-screen'>
       {children}
-      <div className='h-full w-1/2 max-lg:hidden relative bg-slate-600'>
+      <div className='h-full w-1/2 max-lg:hidden relative bg-customBlue-100'>
         {/* <Image 
           src={'/auth/auth-bg.jpg'}
           alt='auth-page-bg'

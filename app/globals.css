@@ -17,7 +17,7 @@
 
   /* auth pages */
   .auth-root {
-    @apply w-screen flex bg-slate-50
+    @apply w-screen flex bg-customWhite-100
   }
 
   .auth-container {

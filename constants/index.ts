@@ -1,19 +1,23 @@
 export const navLinks: NavigationTab[] = [
   {
     label: 'Chatroom',
-    route: '/chatroom'
+    route: '/chatroom',
+    imgUrl: '/nav/comment.svg',
   },
   {
     label: 'Chat History',
-    route: '/history'
+    route: '/history',
+    imgUrl: '/nav/time-past.svg',
   },
   {
     label: 'Profile',
-    route: '/profile'
+    route: '/profile',
+    imgUrl: '/nav/user.svg',
   },
   {
     label: 'Sign out',
-    route: '/sign-in'
+    route: '/sign-in',
+    imgUrl: '/nav/exit.svg',
   },
 ];
 
