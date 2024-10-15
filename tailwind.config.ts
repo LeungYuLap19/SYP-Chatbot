@@ -17,7 +17,7 @@ const config: Config = {
 			// maxHeight: {},
 			// width: {},
 			height: {
-				'page-custom': 'calc(100vh - 48px)',
+				'page-custom': 'calc(100vh - 56px)',
 			},
 			colors: {
 				customBlack: {

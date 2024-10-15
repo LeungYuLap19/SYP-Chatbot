@@ -23,7 +23,10 @@ export default function NavigationTab({ label, route, index, imgUrl }: Navigatio
 
   return (
     <Link 
-      className={`flex gap-2 items-center ${index == 1 && 'lg:hidden'}`}
+      className={`
+        flex gap-2 items-center text-sm p-1 rounded-lg 
+        ${index == 1 && 'lg:hidden'}
+      `}
       href={`${index !== 3 ? route : ''}`}
       onClick={handleOnClick}
     >
@@ -34,7 +37,7 @@ export default function NavigationTab({ label, route, index, imgUrl }: Navigatio
           width={16} height={16}
         />
       </div>
-      <p className='max-sm:hidden text-customWhite-100'>{label}</p>
+      <p className='max-sm:hidden text-customBlue-100'>{label}</p>
     </Link>
   )
 }

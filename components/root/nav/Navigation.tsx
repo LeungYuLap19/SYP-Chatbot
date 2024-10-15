@@ -4,8 +4,8 @@ import NavigationTab from './NavigationTab'
 
 export default function Navigation() {
   return (
-    <div className='flex flex-col gap-2 p-4 h-full'>
-      <p className='max-sm:hidden text-customWhite-100'>
+    <div className='flex flex-col gap-2 p-4 h-full sm:w-[200px]'>
+      <p className='max-sm:hidden text-customBlue-100 p-4'>
         APP NAME
       </p>
 

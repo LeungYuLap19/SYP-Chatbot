@@ -13,7 +13,7 @@ export default function RootLayout({ children }: Readonly<{children: React.React
       </div>
       
       <div className='
-        h-full flex-grow p-3 
+        h-full flex-grow
         max-sm:h-page-custom max-sm:p-0
       '>
         {children}
