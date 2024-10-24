@@ -10,7 +10,7 @@ export default function History() {
       <div className='w-full bg-customWhite-100 absolute top-0 left-0 p-4 drop-shadow-default'>
         History
       </div>
-      <div className='flex flex-col gap-2 overflow-auto mt-[56px] py-2'>
+      <div className='flex flex-col gap-2 overflow-auto mt-[56px] py-2 pt-4'>
         <HistoryChat key={-1} index={-1} />
         <HistoryTag name='Today' />
         {

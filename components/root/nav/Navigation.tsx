@@ -1,13 +1,12 @@
 import { navLinks } from '@/constants'
 import React from 'react'
 import NavigationTab from './NavigationTab'
+import Logo from '@/components/global/Logo'
 
 export default function Navigation() {
   return (
     <div className='flex flex-col gap-2 p-4 h-full sm:w-[200px]'>
-      <p className='max-sm:hidden text-customBlue-100 p-4'>
-        APP NAME
-      </p>
+      <Logo className='max-sm:hidden' />
 
       <div className='
         flex flex-col gap-4 

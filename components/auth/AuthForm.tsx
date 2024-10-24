@@ -61,15 +61,15 @@ export default function AuthForm({ type }: AuthFormProps) {
   } 
 
   return (
-    <div className='w-[70%] flex flex-col gap-2 max-sm:w-[80%]'>
-      <Logo />
+    <div className='w-[70%] flex flex-col max-sm:w-[80%]'>
+      <Logo className='!text-customBlack-100 invert'/>
 
-      <div className=''>
-        <p>
+      <div className='flex flex-col gap-2 mb-4'>
+        <p className='text-2xl font-semibold'>
           { type === 'sign-in' ? 'Sign In' : 'Sign Up' }
         </p>
 
-        <p>
+        <p className='text-sm'>
           {
             type === 'sign-in' ?
             'Welcome back!  Enter your details to continue.':
@@ -78,7 +78,7 @@ export default function AuthForm({ type }: AuthFormProps) {
         </p>
       </div>
 
-      <div className=''>
+      <div className='mb-6'>
         <Form { ...form }>
 					<form onSubmit={ form.handleSubmit(onSubmit) }>
 						<div className='flex flex-col gap-7 mb-10'>
@@ -103,15 +103,24 @@ export default function AuthForm({ type }: AuthFormProps) {
 						<Button
 							disabled={loading}
 							type='submit' 
-							className=''
+							className={`
+                bg-customWhite-100 border border-customBlack-100 transition-colors duration-500 hover:bg-customBlack-100 hover:text-customWhite-100 shadow-none min-w-[78px]
+                ${loading && 'bg-customBlack-100 !opacity-100'}
+              `}
 						>
-							{ type === 'sign-in' ? 'Sign In' : 'Sign Up' }
+							{
+                loading ? (
+                  <span className="loader"></span> 
+                ) : (
+                  type === 'sign-in' ? 'Sign In' : 'Sign Up'  
+                )
+              }
 						</Button>
 					</form>
 				</Form>
       </div>
 
-      <div className='flex w-full gap-1'>
+      <div className='flex w-full gap-1 text-sm'>
         <p className=''>
           {
 						type === 'sign-in' ?
@@ -121,7 +130,7 @@ export default function AuthForm({ type }: AuthFormProps) {
         </p>
 
         <Link
-          className=''
+          className='font-semibold underline'
           href={ type === 'sign-in' ? '/sign-up' : 'sign-in' }
         >
           { type === 'sign-in' ? 'Sign Up' : 'Sign In' }
