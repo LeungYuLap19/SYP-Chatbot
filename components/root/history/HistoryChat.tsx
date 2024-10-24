@@ -1,8 +1,8 @@
 'use client'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import React from 'react';
+import React, { Suspense } from 'react';
 
-export default function HistoryChat(
+function HistoryChatPage(
   // temp props
   { index }: { index: number }
 ) {
@@ -34,3 +34,13 @@ export default function HistoryChat(
     </div>
   );
 }
+
+const HistoryChat = (
+  { index }: { index: number }
+) => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <HistoryChatPage index={index} />
+  </Suspense>
+)
+
+export default HistoryChat;
