@@ -72,6 +72,13 @@ export function categorizeChatrooms(chatrooms: Chatroom[]) {
     categories[key] = categories[key].sort((a, b) =>
       dayjs(b.last_message_datetime).diff(dayjs(a.last_message_datetime))
     );
+    
+    // Sort messages within each chatroom
+    categories[key].forEach((chatroom) => {
+      chatroom.messages = chatroom.messages.sort((a, b) =>
+        dayjs(b.datetime).diff(dayjs(a.datetime))
+      );
+    });
   });
 
   return categories;
