@@ -4,15 +4,15 @@ import React, { Suspense } from 'react';
 
 function HistoryChatPage(
   // temp props
-  { index }: { index: number }
+  { chatroom }: { chatroom?: Chatroom }
 ) {
   const path = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
   const id = searchParams.get('id');
   const handleOnClick = () => {
-    if (index > -1) {
-      const route = `/chatroom?id=HistoryChat${index}`;
+    if (chatroom) {
+      const route = `/chatroom?id=${chatroom.cid}`;
       router.push(route);
     }
     else {
@@ -23,23 +23,23 @@ function HistoryChatPage(
   return (
     <div onClick={handleOnClick} className={`
       cursor-pointer text-customBlack-100 text-sm p-2 rounded-lg
-      ${id === 'HistoryChat' + index && 'bg-slate-300'}
-      ${!id && index === -1 && path !== '/history' && 'bg-slate-300'}
+      ${chatroom && id === chatroom.cid && 'bg-slate-300'}
+      ${!id && !chatroom && path !== '/history' && 'bg-slate-300'}
     `}>
       {
-        index > -1 ?
-        'HistoryChat' + index :
-        'Start a new chat'
+        !chatroom ?
+        'Start a new chat':
+        chatroom.chatroom_name
       }
     </div>
   );
 }
 
 const HistoryChat = (
-  { index }: { index: number }
+  { chatroom }: { chatroom?: Chatroom }
 ) => (
   <Suspense fallback={<div>Loading...</div>}>
-    <HistoryChatPage index={index} />
+    <HistoryChatPage chatroom={chatroom} />
   </Suspense>
 )
 

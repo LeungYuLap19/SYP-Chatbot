@@ -8,7 +8,7 @@ import { addDoc, collection, getDocs, query, where } from 'firebase/firestore';
 export async function createAccount({ email, password }: CreateAccountParams): Promise<Result<string>> {
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    console.log(userCredential);
+    // console.log(userCredential);
     return { data: userCredential.user.uid };  // Return success with data
   } catch (error: any) {
     console.error('Create Account Error:', error.code, error.message);
@@ -20,7 +20,7 @@ export async function createAccount({ email, password }: CreateAccountParams): P
 export async function signInAccount({ email, password }: SignInAccountParams): Promise<Result<string>> {
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    console.log(userCredential.user);
+    // console.log(userCredential.user);
     return { data: userCredential.user.uid };  // Return success with data
   } catch (error: any) {
     console.error('Sign In Account Error:', error.code, error.message);

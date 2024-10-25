@@ -1,8 +1,15 @@
+'use client'
 import React from 'react'
 import HistoryChat from './HistoryChat'
 import HistoryTag from './HistoryTag'
+import chatroomsJson from '../../../jsonTest/chatrooms.json'
+import { categorizeChatrooms } from '@/lib/utils';
 
 export default function History() {
+  // data from testing json
+  const chatrooms = chatroomsJson.chatrooms;
+  const categories = categorizeChatrooms(chatrooms);
+
   return (
     <div className='
       h-full flex flex-col gap-2 px-4 bg-customWhite-100 relative overflow-hidden
@@ -11,25 +18,43 @@ export default function History() {
         History
       </div>
       <div className='flex flex-col gap-2 overflow-auto mt-[56px] py-2 pt-4'>
-        <HistoryChat key={-1} index={-1} />
-        <HistoryTag name='Today' />
+        <HistoryChat key={-1} />
+
         {
-          Array.from({ length: 3 }).map((_, index) => (
-            <HistoryChat key={index} index={index} />
-          ))
+          categories.today.length > 0 &&
+          <> 
+            <HistoryTag name='Today' />
+              {
+                categories.today.map(chatroom => (
+                  <HistoryChat key={chatroom.cid} chatroom={chatroom} />
+                ))
+              }
+          </>
         }
-        <HistoryTag name='Yesterday' />
+
         {
-         Array.from({ length: 5 }).map((_, index) => (
-            <HistoryChat key={index + 3} index={index + 3} />
-          ))
-        } 
-        <HistoryTag name='Previous 7 days' />
+          categories.yesterday.length > 0 &&
+          <>
+            <HistoryTag name='Yesterday' />
+              {
+                categories.yesterday.map(chatroom => (
+                  <HistoryChat key={chatroom.cid} chatroom={chatroom} />
+                ))
+              } 
+          </>
+        }
+
         {
-         Array.from({ length: 20 }).map((_, index) => (
-            <HistoryChat key={index + 8} index={index + 8} />
-          ))
-        } 
+          categories.previous7days.length > 0 &&
+           <>
+            <HistoryTag name='Previous 7 days' />
+              {
+                categories.previous7days.map(chatroom => (
+                  <HistoryChat key={chatroom.cid} chatroom={chatroom} />
+                ))
+              } 
+           </>
+        }
       </div>
     </div>
   )

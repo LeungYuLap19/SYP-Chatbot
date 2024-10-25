@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function Logo({ className }: { className?: string }) {
   return (
-    <div className={`w-full flex gap-2 items-center px-1 ${className}`}>
+    <div className={`w-full flex gap-2 items-center px-1 select-none ${className}`}>
       <div className='flex-shrink-0 relative'>
         <Image 
           src='/logo/icon.png'

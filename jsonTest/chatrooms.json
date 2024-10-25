@@ -1,0 +1,58 @@
+{
+  "chatrooms": [
+    {
+      "cid": "01",
+      "uid": "1qaL9dXgRl4M9x6w9lGP",
+      "chatroom_name": "Travel Assistance",
+      "last_message_datetime": "2024-10-24T10:00:00Z",
+      "messages": [
+        {
+          "sender": "user",
+          "text": "What are the best restaurants in New York?",
+          "datetime": "2024-10-24T09:58:00Z"
+        },
+        {
+          "sender": "bot",
+          "text": "Here are some top-rated restaurants: Le Bernardin, Gramercy Tavern, and Daniel.",
+          "datetime": "2024-10-24T09:59:00Z"
+        }
+      ]
+    },
+    {
+      "cid": "02",
+      "uid": "1qaL9dXgRl4M9x6w9lGP",
+      "chatroom_name": "Flight Check",
+      "last_message_datetime": "2024-10-23T15:30:00Z",
+      "messages": [
+        {
+          "sender": "user",
+          "text": "Can you check the flight status from JFK to LAX?",
+          "datetime": "2024-10-23T15:25:00Z"
+        },
+        {
+          "sender": "bot",
+          "text": "The flight from JFK to LAX is on time and scheduled to depart at 6:00 PM.",
+          "datetime": "2024-10-23T15:30:00Z"
+        }
+      ]
+    },
+    {
+      "cid": "03",
+      "uid": "1qaL9dXgRl4M9x6w9lGP",
+      "chatroom_name": "Currency Exchange",
+      "last_message_datetime": "2024-10-22T12:45:00Z",
+      "messages": [
+        {
+          "sender": "user",
+          "text": "What's the current exchange rate for USD to EUR?",
+          "datetime": "2024-10-22T12:40:00Z"
+        },
+        {
+          "sender": "bot",
+          "text": "The current exchange rate is 1 USD = 0.85 EUR.",
+          "datetime": "2024-10-22T12:45:00Z"
+        }
+      ]
+    }
+  ]
+}
