@@ -16,6 +16,12 @@ export function showToast({ title, description }: ShowToastParams) {
   });
 }
 
+export const handleKeyDown = ({event, func}: HandleKeyDownParams) => {
+  if (event.key === 'Enter') {
+    func();
+  }
+};
+
 // form schemas
 export const authFormSchema = (type: 'sign-in' | 'sign-up') => z.object({
   username: type === 'sign-in' ? z.string().optional() : z.string().min(5).max(20),
@@ -37,7 +43,7 @@ export function formUrlQuery({ params, query, extraRoute }: formUrlQueryParams) 
   );
 }
 
-export function categorizeChatrooms(chatrooms: Chatroom[]) {
+export function categorizeChatrooms(chatrooms: Chatroom[]): Record<'today' | 'yesterday' | 'previous7days', Chatroom[]> {
   const today = dayjs().startOf('day');
   const yesterday = today.subtract(1, 'day');
   const sevenDaysAgo = today.subtract(7, 'day');

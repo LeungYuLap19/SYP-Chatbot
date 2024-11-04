@@ -1,4 +1,4 @@
-export const navLinks: NavigationTab[] = [
+export const navLinks: NavigationTabProps[] = [
   {
     label: 'Chatroom',
     route: '/chatroom',

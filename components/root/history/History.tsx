@@ -2,13 +2,11 @@
 import React from 'react'
 import HistoryChat from './HistoryChat'
 import HistoryTag from './HistoryTag'
-import chatroomsJson from '../../../jsonTest/chatrooms.json'
-import { categorizeChatrooms } from '@/lib/utils';
+import { useGetHistory } from '@/lib/hooks/useGetHistory'
 
 export default function History() {
-  // data from testing json
-  const chatrooms = chatroomsJson.chatrooms;
-  const categories = categorizeChatrooms(chatrooms);
+  const history = useGetHistory();
+  const categories = history.categories;
 
   return (
     <div className='
@@ -19,41 +17,27 @@ export default function History() {
       </div>
       <div className='flex flex-col gap-2 overflow-auto mt-[56px] py-2 pt-4'>
         <HistoryChat key={-1} />
-
         {
-          categories.today.length > 0 &&
-          <> 
-            <HistoryTag name='Today' />
-              {
-                categories.today.map(chatroom => (
-                  <HistoryChat key={chatroom.cid} chatroom={chatroom} />
-                ))
-              }
-          </>
-        }
-
-        {
-          categories.yesterday.length > 0 &&
-          <>
-            <HistoryTag name='Yesterday' />
-              {
-                categories.yesterday.map(chatroom => (
-                  <HistoryChat key={chatroom.cid} chatroom={chatroom} />
-                ))
-              } 
-          </>
-        }
-
-        {
-          categories.previous7days.length > 0 &&
-           <>
-            <HistoryTag name='Previous 7 days' />
-              {
-                categories.previous7days.map(chatroom => (
-                  <HistoryChat key={chatroom.cid} chatroom={chatroom} />
-                ))
-              } 
-           </>
+          categories &&
+          ['today', 'yesterday', 'previous7days'].map((key) => {
+            const category = key as keyof typeof categories;
+            const categoryNameMap: Record<typeof category, string> = {
+              today: 'Today',
+              yesterday: 'Yesterday',
+              previous7days: 'Previous 7 days',
+            };
+            
+            return (
+              categories[category].length > 0 && (
+                <React.Fragment key={category}>
+                  <HistoryTag name={categoryNameMap[category]} />
+                  {categories[category].map(chatroom => (
+                    <HistoryChat key={chatroom.cid} chatroom={chatroom} />
+                  ))}
+                </React.Fragment>
+              )
+            );
+          })      
         }
       </div>
     </div>

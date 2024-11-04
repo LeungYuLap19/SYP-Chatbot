@@ -20,7 +20,7 @@ interface UserData extends CreateUserParams {}
 // firestore api
 // items / objects
 interface Chatroom {
-  cid: string;
+  cid?: string;
   uid: string;
   chatroom_name: string;
   last_message_datetime: string;

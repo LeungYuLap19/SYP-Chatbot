@@ -7,12 +7,12 @@ import { authFormSchema, showToast } from '@/lib/utils';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Button } from '../ui/button';
 import CustomInput from './CustomInput';
 import { useRouter } from 'next/navigation'
 import { createAccount, createUser, getUserByUID, signInAccount } from '@/lib/actions/auth/firebaseAuth.action'
 import { storeToCookies } from '@/lib/actions/cookies/cookies.action'
 import { COOKIES_KEY_USERDATA, DAYS_TO_EXPIRE, ERROR_TOAST_TITLE } from '@/constants'
+import CustomButton from '../global/CustomButton'
 
 export default function AuthForm({ type }: AuthFormProps) {
   const router = useRouter();
@@ -100,22 +100,11 @@ export default function AuthForm({ type }: AuthFormProps) {
 							/>
 						</div>
 
-						<Button
-							disabled={loading}
-							type='submit' 
-							className={`
-                bg-customWhite-100 border border-customBlack-100 transition-colors duration-500 hover:bg-customBlack-100 hover:text-customWhite-100 shadow-none min-w-[78px]
-                ${loading && 'bg-customBlack-100 !opacity-100'}
-              `}
-						>
-							{
-                loading ? (
-                  <span className="loader"></span> 
-                ) : (
-                  type === 'sign-in' ? 'Sign In' : 'Sign Up'  
-                )
-              }
-						</Button>
+            <CustomButton 
+              loading={loading} 
+              type={'submit'} 
+              label={type === 'sign-in' ? 'Sign In' : 'Sign Up'} 
+            />
 					</form>
 				</Form>
       </div>

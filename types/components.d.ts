@@ -9,3 +9,10 @@ interface NavigationTabProps {
   index?: number;
   imgUrl: string;
 }
+
+interface CustomButtonProps {
+  loading: boolean;
+  type: 'submit' | 'button';
+  label: string;
+  onClick?: () => void;
+}

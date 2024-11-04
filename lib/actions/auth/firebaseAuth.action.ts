@@ -37,7 +37,7 @@ export async function createUser({ uid, username, email }: CreateUserParams): Pr
       username: userData.username,
       email: userData.email
     });
-    console.log(userData);
+    // console.log(userData);
     return { data: userData };  // Return success with data
   } catch (error: any) {
     console.error('Create User Error:', error.code, error.message);
@@ -55,7 +55,7 @@ export async function getUserByUID({ uid }: GetUserByUIDParams): Promise<Result<
     if (!querySnapshot.empty) {
       const userDoc = querySnapshot.docs[0];
       const userData = userDoc.data() as UserData;
-      console.log(userData);
+      // console.log(userData);
       return { data: userData };  // Return success with data
     } else {
       return { data: null };  // Return null if no user found
