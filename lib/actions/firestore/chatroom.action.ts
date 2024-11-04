@@ -3,7 +3,7 @@ import { db } from "@/lib/firebase"
 import { addDoc, collection, deleteDoc, doc } from "firebase/firestore"
 import { getFirestoreError } from "../errors/apiErrorsHandler";
 
-export async function createChatroom(chatroom: Chatroom): Promise<Result<String>> {
+export async function createChatroom(chatroom: Chatroom): Promise<Result<string>> {
   try {
     const docRef = await addDoc(collection(db, 'chatrooms'), chatroom);
     return { data: docRef.id };

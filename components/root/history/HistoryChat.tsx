@@ -30,6 +30,7 @@ function HistoryChatPage(
       const result = await deleteChatroom(chatroom.cid);
       if (result.data) {
         showToast({ title: 'Notification', description: `${chatroom.chatroom_name} deleted` });
+        router.push('/chatroom');
       }
       if (result.error) {
         showToast({ title: ERROR_TOAST_TITLE, description: result.error.message });

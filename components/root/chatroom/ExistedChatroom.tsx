@@ -1,46 +1,15 @@
-import React, { useRef, useState } from 'react'
+import React from 'react'
 import Message from './Message'
 import { Input } from '@/components/ui/input'
 import { useGetHistory } from '@/lib/hooks/useGetHistory'
-import { handleKeyDown, showToast } from '@/lib/utils'
-import { storeMessage } from '@/lib/actions/firestore/message.action'
-import { ERROR_TOAST_TITLE } from '@/constants'
+import { handleKeyDown } from '@/lib/utils'
 import CustomButton from '@/components/global/CustomButton'
+import { useChatroom } from '@/lib/hooks/useChatroom'
 
 export default function ExistedChatroom({ id }: { id: string }) {
-  const inputRef = useRef<HTMLInputElement>(null);
   const history = useGetHistory(id);
   const chatroom = history.selected;
-  const [loading, setLoading] = useState<boolean>(false);
-
-  const handleSubmit = async () => {
-    if (loading) {
-      return;
-    }
-    else {
-      setLoading(true);
-    }
-
-    const inputText = inputRef.current?.value || '';
-    if (!inputText.trim()) {
-      setLoading(false);
-      return; 
-    }
-    const message: Message = {
-      sender: 'user',
-      text: inputText.trim(),
-      datetime: new Date().toISOString()
-    }
-    const firestoreResult = await storeMessage({ cid: id, message: message });
-    if (firestoreResult.data && inputRef.current) {
-      inputRef.current.value = '';
-    }
-    if (firestoreResult.error) {
-      showToast({ title: ERROR_TOAST_TITLE, description: firestoreResult.error.message });
-    }
-
-    setLoading(false);
-  }
+  const { loading, handleSubmit, inputRef } = useChatroom(id);
 
   return (
     <>

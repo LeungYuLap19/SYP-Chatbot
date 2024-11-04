@@ -49,3 +49,30 @@ export function getCookiesError(errorCode: string): ErrorMessage {
       return { errorCode: errorCode, message: 'An unknown cookie error occurred.' };
   }
 }
+
+export function getHttpError(statusCode: number): ErrorMessage {
+  switch (statusCode) {
+    case 400:
+      return { errorCode: 'http/bad-request', message: 'Bad request. Please check your input and try again.' };
+    case 401:
+      return { errorCode: 'http/unauthorized', message: 'Unauthorized. Please log in to continue.' };
+    case 403:
+      return { errorCode: 'http/forbidden', message: 'Forbidden. You do not have permission to access this resource.' };
+    case 404:
+      return { errorCode: 'http/not-found', message: 'Resource not found. The requested item does not exist.' };
+    case 408:
+      return { errorCode: 'http/request-timeout', message: 'Request timed out. Please try again.' };
+    case 429:
+      return { errorCode: 'http/too-many-requests', message: 'Too many requests. Please wait and try again later.' };
+    case 500:
+      return { errorCode: 'http/internal-server-error', message: 'Internal server error. Please try again later.' };
+    case 502:
+      return { errorCode: 'http/bad-gateway', message: 'Bad gateway. There may be an issue with the server.' };
+    case 503:
+      return { errorCode: 'http/service-unavailable', message: 'Service unavailable. Please try again later.' };
+    case 504:
+      return { errorCode: 'http/gateway-timeout', message: 'Gateway timed out. Please try again later.' };
+    default:
+      return { errorCode: 'http/unknown-error', message: 'An unknown error occurred. Please try again later.' };
+  }
+}
