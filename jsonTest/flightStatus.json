@@ -1,0 +1,215 @@
+{
+  "url": "https://api.magicapi.dev/api/v1/aedbx/aerodatabox/flights/Number/CX271/2025-01-12?withAircraftImage=false&withLocation=false",
+  "response_body": 
+  [
+    {
+      "greatCircleDistance": {
+        "meter": 9290300.53,
+        "km": 9290.3,
+        "mile": 5772.73,
+        "nm": 5016.36,
+        "feet": 30479988.61
+      },
+      "departure": {
+        "airport": {
+          "icao": "VHHH",
+          "iata": "HKG",
+          "name": "Hong Kong Chek Lap Kok",
+          "shortName": "Chek Lap Kok",
+          "municipalityName": "Hong Kong",
+          "location": {
+            "lat": 22.3089,
+            "lon": 113.915
+          },
+          "countryCode": "HK",
+          "timeZone": "Asia/Shanghai"
+        },
+        "scheduledTime": {
+          "utc": "2025-01-11 15:20Z",
+          "local": "2025-01-11 23:20+08:00"
+        },
+        "revisedTime": {
+          "utc": "2025-01-11 15:20Z",
+          "local": "2025-01-11 23:20+08:00"
+        },
+        "runwayTime": {
+          "utc": "2025-01-11 15:51Z",
+          "local": "2025-01-11 23:51+08:00"
+        },
+        "terminal": "1",
+        "checkInDesk": "B,C",
+        "gate": "6",
+        "runway": "07L",
+        "quality": [
+          "Basic",
+          "Live"
+        ]
+      },
+      "arrival": {
+        "airport": {
+          "icao": "EHAM",
+          "iata": "AMS",
+          "name": "Amsterdam Schiphol",
+          "shortName": "Schiphol",
+          "municipalityName": "Amsterdam",
+          "location": {
+            "lat": 52.3086,
+            "lon": 4.763889
+          },
+          "countryCode": "NL",
+          "timeZone": "Europe/Amsterdam"
+        },
+        "scheduledTime": {
+          "utc": "2025-01-12 05:35Z",
+          "local": "2025-01-12 06:35+01:00"
+        },
+        "revisedTime": {
+          "utc": "2025-01-12 05:09Z",
+          "local": "2025-01-12 06:09+01:00"
+        },
+        "runwayTime": {
+          "utc": "2025-01-12 05:09Z",
+          "local": "2025-01-12 06:09+01:00"
+        },
+        "terminal": "4",
+        "gate": "G3",
+        "baggageBelt": "20",
+        "quality": [
+          "Basic",
+          "Live"
+        ]
+      },
+      "lastUpdatedUtc": "2025-01-12 05:21Z",
+      "number": "CX 271",
+      "callSign": "CPA271",
+      "status": "Arrived",
+      "codeshareStatus": "IsOperator",
+      "isCargo": false,
+      "aircraft": {
+        "reg": "B-LXD",
+        "modeS": "789216",
+        "model": "Airbus A350",
+        "image": {
+          "url": "https://farm5.staticflickr.com/4470/37237901474_dd2924d4f0_z.jpg",
+          "webUrl": "https://www.flickr.com/photos/20476255@N00/37237901474/",
+          "author": "Riik@mctr",
+          "title": "CX/CPA Cathay Pacific Airbus A350 B-LRS",
+          "description": "Manchester Airport (EGCC)",
+          "license": "AttributionShareAlikeCC",
+          "htmlAttributions": [
+            "Original of \"<span property='dc:title' itemprop='name'>CX/CPA Cathay Pacific Airbus A350 B-LRS</span>\" by  <a rel='dc:creator nofollow' property='cc:attributionName' href='https://www.flickr.com/photos/20476255@N00/37237901474/' target='_blank'><span itemprop='producer'>Riik@mctr</span></a>.",
+            "Shared and hosted by <span itemprop='publisher'>Flickr</span> under <a target=\"_blank\" rel=\"license cc:license nofollow\" href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC BY-SA</a>"
+          ]
+        }
+      },
+      "airline": {
+        "name": "Cathay Pacific",
+        "iata": "CX",
+        "icao": "CPA"
+      }
+    },
+    {
+      "greatCircleDistance": {
+        "meter": 9290300.53,
+        "km": 9290.3,
+        "mile": 5772.73,
+        "nm": 5016.36,
+        "feet": 30479988.61
+      },
+      "departure": {
+        "airport": {
+          "icao": "VHHH",
+          "iata": "HKG",
+          "name": "Hong Kong Chek Lap Kok",
+          "shortName": "Chek Lap Kok",
+          "municipalityName": "Hong Kong",
+          "location": {
+            "lat": 22.3089,
+            "lon": 113.915
+          },
+          "countryCode": "HK",
+          "timeZone": "Asia/Shanghai"
+        },
+        "scheduledTime": {
+          "utc": "2025-01-12 15:20Z",
+          "local": "2025-01-12 23:20+08:00"
+        },
+        "revisedTime": {
+          "utc": "2025-01-12 15:20Z",
+          "local": "2025-01-12 23:20+08:00"
+        },
+        "terminal": "1",
+        "checkInDesk": "B,C",
+        "gate": "43",
+        "quality": [
+          "Basic",
+          "Live"
+        ]
+      },
+      "arrival": {
+        "airport": {
+          "icao": "EHAM",
+          "iata": "AMS",
+          "name": "Amsterdam Schiphol",
+          "shortName": "Schiphol",
+          "municipalityName": "Amsterdam",
+          "location": {
+            "lat": 52.3086,
+            "lon": 4.763889
+          },
+          "countryCode": "NL",
+          "timeZone": "Europe/Amsterdam"
+        },
+        "scheduledTime": {
+          "utc": "2025-01-13 05:35Z",
+          "local": "2025-01-13 06:35+01:00"
+        },
+        "revisedTime": {
+          "utc": "2025-01-13 05:08Z",
+          "local": "2025-01-13 06:08+01:00"
+        },
+        "runwayTime": {
+          "utc": "2025-01-13 05:08Z",
+          "local": "2025-01-13 06:08+01:00"
+        },
+        "terminal": "4",
+        "gate": "G7",
+        "baggageBelt": "20",
+        "runway": "18R",
+        "quality": [
+          "Basic",
+          "Live"
+        ]
+      },
+      "lastUpdatedUtc": "2025-01-13 05:11Z",
+      "number": "CX 271",
+      "callSign": "CPA271",
+      "status": "Arrived",
+      "codeshareStatus": "IsOperator",
+      "isCargo": false,
+      "aircraft": {
+        "reg": "B-LXR",
+        "modeS": "78926B",
+        "model": "Airbus A350-1000",
+        "image": {
+          "url": "https://farm8.staticflickr.com/7857/46448374895_9d291e864b_z.jpg",
+          "webUrl": "https://www.flickr.com/photos/9998127@N06/46448374895/",
+          "author": "wbaiv",
+          "title": "Cathay Pacific Airbus A350 -1000 B-LRD DSC_0095",
+          "description": "This is the first A350 I've seen. Clean and tidy, with a notably asymmetric nose that gives a better view forward. With that long a fuselage body, how tapered does the nose have to be? Seems like a useful tradeoff to me. I expect it has a lovely subsonic ogive viewed from above or below, I'll have to go find that drawing. The sharklets have a complex curve to their leading edges, not unlike the Dual Scimitar setup on 737s. Like the Dreamliner, the trailing edge of the vertical stabilizer is much higher than the leading edge, making it more or less level at the approach angle of attack. Again, nice tradeoff, matching the profile to low speed landing and takeoff needs, the most sensitive flight regime. Thus lowest wetted area, least structure weight. Is there a drag difference between a raked tip and the traditional tip, parallel to cruising flight? \n\nThe fuselage seems taller than I expect- deeper under the cabin floor, actually, judging from the cabin door sills. I remember Airbus trying to make a case that the 767 was inferior to the A330-A340 because it had shallow under underfloor spaces and couldn't accommodate standard freight containers. \n\nHappy landings!",
+          "license": "AttributionShareAlikeCC",
+          "htmlAttributions": [
+            "Original of \"<span property='dc:title' itemprop='name'>Cathay Pacific Airbus A350 -1000 B-LRD DSC_0095</span>\" by  <a rel='dc:creator nofollow' property='cc:attributionName' href='https://www.flickr.com/photos/9998127@N06/46448374895/' target='_blank'><span itemprop='producer'>wbaiv</span></a>.",
+            "Shared and hosted by <span itemprop='publisher'>Flickr</span> under <a target=\"_blank\" rel=\"license cc:license nofollow\" href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC BY-SA</a>"
+          ]
+        }
+      },
+      "airline": {
+        "name": "Cathay Pacific",
+        "iata": "CX",
+        "icao": "CPA"
+      }
+    }
+  ]
+}
+

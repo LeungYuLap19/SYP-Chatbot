@@ -1,0 +1,6 @@
+curl -X 'GET' \
+  'https://api.magicapi.dev/api/v1/aedbx/aerodatabox/flights/Number/CX271/2025-01-12?withAircraftImage=true&withLocation=false' \
+  -H 'accept: application/json' \
+  -H 'x-magicapi-key: cm5grg07t0001mn039deavyh6'
+
+considered api: https://aviation-edge.com/premium-api/

@@ -10,9 +10,9 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Chatbot', // to be named
-  description: 'Senior Year Project Chatbot'
-  // icons: { icon: '...url...' }
+  title: 'Chatbot', 
+  description: 'Senior Year Project Chatbot',
+  icons: { icon: '/logo/icon.png' }
 }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode; }>) {

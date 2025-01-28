@@ -9,12 +9,12 @@ const nextConfig = {
   images: {
     remotePatterns: [
       // allowing the following img url to be used in nextjs
-      // {
-      //   protocol: 'https',
-      //   hostname: '...',
-      //   port: '',
-      //   pathname: '/**',
-      // },
+      {
+        protocol: 'https',
+        hostname: 'farm8.staticflickr.com',
+        port: '',
+        pathname: '/**',
+      },
     ]
   },
   reactStrictMode: false,

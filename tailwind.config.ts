@@ -22,10 +22,12 @@ const config: Config = {
 			colors: {
 				customBlack: {
 					// color id: '#color code'
-					100: "#2b2d42"
+					100: "#2b2d42",
+					200: '#787878'
 				},
 				customBlue: {
-					100: '#8d99ae'
+					100: '#8d99ae',
+					200: '#328CA5'
 				},
 				customWhite: {
 					100: '#edf2f4'

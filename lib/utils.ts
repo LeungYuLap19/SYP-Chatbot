@@ -89,3 +89,37 @@ export function categorizeChatrooms(chatrooms: Chatroom[]): Record<'today' | 'ye
 
   return categories;
 }
+
+export function formatDate(localDate: string) {
+  const date = new Date(localDate);
+  const day = date.getDate();
+  const month = date.toLocaleString('default', { month: 'short' });
+  const year = date.getFullYear();
+
+  const suffix = (day: number) => {
+    if (day > 3 && day < 21) return 'th';
+    switch (day % 10) {
+      case 1: return "st";
+      case 2: return "nd";
+      case 3: return "rd";
+      default: return "th";
+    }
+  }
+  return `${day}${suffix(day)} ${month} ${year}`;
+}
+
+export function formatTime(localDate: string) {
+  const date = new Date(localDate); 
+  const hours = String(date.getHours()).padStart(2, '0'); 
+  const minutes = String(date.getMinutes()).padStart(2, '0'); 
+  return `${hours}:${minutes}`;
+}
+
+export function getDuration(localDate1: string, localDate2: string) {
+  const date1 = new Date(localDate1);
+  const date2 = new Date(localDate2);
+  const diff = date2.getTime() - date1.getTime();
+  const hours = Math.floor(diff / 1000 / 60 / 60);
+  const minutes = Math.floor(diff / 1000 / 60 % 60);
+  return `${hours}h ${minutes}m`;
+}

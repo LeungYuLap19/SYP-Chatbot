@@ -8,7 +8,7 @@ import React, { Suspense, useState } from 'react';
 
 function HistoryChatPage(
   // temp props
-  { chatroom }: { chatroom?: Chatroom }
+  { chatroom, test }: { chatroom?: Chatroom; test?: boolean }
 ) {
   const [loading, setLoading] = useState<boolean>(false);
   const path = usePathname();
@@ -16,7 +16,10 @@ function HistoryChatPage(
   const searchParams = useSearchParams();
   const id = searchParams.get('id');
   const handleOnClick = () => {
-    if (chatroom) {
+    if (test) {
+      router.push('/chatroom?id=test');
+    }
+    else if (chatroom) {
       const route = `/chatroom?id=${chatroom.cid}`;
       router.push(route);
     }
@@ -46,7 +49,8 @@ function HistoryChatPage(
       ${!id && !chatroom && path !== '/history' && 'bg-slate-300'}
     `}>
       {
-        !chatroom ?
+        test ? 'Test chat' :
+        !chatroom ? 
         'Start a new chat':
         chatroom.chatroom_name
       }
@@ -68,10 +72,10 @@ function HistoryChatPage(
 }
 
 const HistoryChat = (
-  { chatroom }: { chatroom?: Chatroom }
+  { chatroom, test }: { chatroom?: Chatroom; test?: boolean }
 ) => (
   <Suspense fallback={<div>Loading...</div>}>
-    <HistoryChatPage chatroom={chatroom} />
+    <HistoryChatPage chatroom={chatroom} test={test} />
   </Suspense>
 )
 
