@@ -116,10 +116,26 @@ export function formatTime(localDate: string) {
 }
 
 export function getDuration(localDate1: string, localDate2: string) {
+  // Parse the date strings while preserving the time zone information
   const date1 = new Date(localDate1);
   const date2 = new Date(localDate2);
-  const diff = date2.getTime() - date1.getTime();
-  const hours = Math.floor(diff / 1000 / 60 / 60);
-  const minutes = Math.floor(diff / 1000 / 60 % 60);
+
+  // Convert both times to UTC before calculating the difference
+  const utc1 = date1.getTime();
+  const utc2 = date2.getTime();
+
+  // Calculate the difference in milliseconds
+  const diff = utc2 - utc1;
+
+  // Convert to hours and minutes
+  const hours = Math.floor(Math.abs(diff) / 1000 / 60 / 60);
+  const minutes = Math.floor(Math.abs(diff) / 1000 / 60 % 60);
+
+  return `${hours}h ${minutes}m`;
+}
+
+export function getDurationWithMinutes(duration: number) {
+  const hours = Math.floor(duration / 60);
+  const minutes = duration % 60;
   return `${hours}h ${minutes}m`;
 }

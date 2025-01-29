@@ -16,3 +16,35 @@ interface CustomButtonProps {
   label: string;
   onClick?: () => void;
 }
+
+interface DepArrProps {
+  localTime: string;
+  fromIATA: string;
+  fromCity: string;
+  fromAirport: string;
+  toIATA: string;
+  toCity: string;
+  toAirport: string;
+}
+
+interface FromToProps {
+  fromIATA: string;
+  fromAirport?: string;
+  fromLocalTime: string;
+  fromCountryCode?: string;
+  toIATA: string;
+  toAirport?: string;
+  toLocalTime: string;
+  toCountryCode?: string;
+  fromUTCTime: string;
+  toUTCTime: string;
+}
+
+interface SearchResultTitleProps {
+  index: number;
+  totalDuration: number;
+  airlineLogo: string;
+  price: number;
+  showDetails: number;
+  setShowDetails: React.Dispatch<React.SetStateAction<number>>;
+}
