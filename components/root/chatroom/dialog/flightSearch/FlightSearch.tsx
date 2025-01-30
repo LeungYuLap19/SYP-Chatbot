@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react'
-import DepArr from './DepArr'
+import DepArr from '../common/DepArr'
 import SearchResult from './SearchResult'
 import SearchResultTitle from './SearchResultTitle'
 import FlightOverview from './FlightOverview'
@@ -17,9 +17,9 @@ export default function FlightSearch({ flightSearch }: { flightSearch: FlightRes
           </p>
         </div>
 
-        <DepArr 
+        <DepArr
           localTime={
-            flightSearch.best_flights?.[0].flights[0].departure_airport.time || 
+            flightSearch.best_flights?.[0].flights[0].departure_airport.time ||
             flightSearch.other_flights[0].flights[0].departure_airport.time ||
             ''
           }
@@ -29,16 +29,17 @@ export default function FlightSearch({ flightSearch }: { flightSearch: FlightRes
           toIATA={flightSearch.airports[0].arrival[0].airport.id}
           toAirport={flightSearch.airports[0].arrival[0].airport.name.replace("Airport", "").trim()}
           toCity={flightSearch.airports[0].arrival[0].city}
+          className='py-0'
         />
 
         <div className='flex flex-col gap-5 p-6'>
           {
             flightSearch.best_flights?.map((flightOption, index) => (
-              <div key={index} className='flex flex-col gap-5'>
+              <div key={index} className='flex flex-col gap-4'>
                 <div className='flex'>
                   <span className='w-full h-[1px] bg-slate-200'></span>
                 </div>
-                <SearchResultTitle 
+                <SearchResultTitle
                   index={index}
                   totalDuration={flightOption.total_duration}
                   airlineLogo={flightOption.airline_logo || ''}
@@ -48,11 +49,11 @@ export default function FlightSearch({ flightSearch }: { flightSearch: FlightRes
                 />
                 {
                   showDetails === index ?
-                    <SearchResult 
+                    <SearchResult
                       key={index}
                       flightOption={flightOption}
                     /> :
-                  <FlightOverview flightOption={flightOption} />  
+                    <FlightOverview flightOption={flightOption} />
                 }
               </div>
             ))

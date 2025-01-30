@@ -5,10 +5,11 @@ import React from 'react'
 export default function DepArr({ 
   localTime, 
   fromIATA, fromCity, fromAirport, 
-  toIATA, toCity, toAirport,  
+  toIATA, toCity, toAirport, 
+  className
 }: DepArrProps) {
   return (
-    <div className='p-6 pt-0 flex flex-col gap-2'>
+    <div className={`p-6 pt-0 flex flex-col gap-2 ${className}`}>
         <p className='text-customBlue-200 font-semibold text-xs'>On {formatDate(localTime)}</p>
 
         <div className='flex items-center justify-between gap-5'>

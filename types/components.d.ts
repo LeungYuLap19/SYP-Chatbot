@@ -25,6 +25,7 @@ interface DepArrProps {
   toIATA: string;
   toCity: string;
   toAirport: string;
+  className?: string;
 }
 
 interface FromToProps {

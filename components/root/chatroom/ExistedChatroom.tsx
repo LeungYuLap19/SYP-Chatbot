@@ -1,15 +1,17 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Message from './Message'
 import { Input } from '@/components/ui/input'
 import { useGetHistory } from '@/lib/hooks/useGetHistory'
 import { handleKeyDown } from '@/lib/utils'
 import CustomButton from '@/components/global/CustomButton'
 import { useChatroom } from '@/lib/hooks/useChatroom'
-import FlightStatus from './dialog/FlightStatus'
+import FlightStatus from './dialog/flightStatus/FlightStatus'
 import flightStatusData from '@/jsonTest/flightStatus.json';
-import FlightSearch from './dialog/FlightSearch'
+import FlightSearch from './dialog/flightSearch/FlightSearch'
 import flightSearchData from '@/jsonTest/flightSearch.json';
 import LoadingMessage from './dialog/LoadingMessage'
+import PlaceSearch from './dialog/placeSearch/PlaceSearch'
+import PlaceSearchData from '@/jsonTest/placeSearch.json';
 
 export default function ExistedChatroom({ id, test }: { id: string; test?: boolean }) {
   const history = useGetHistory(id);
@@ -19,6 +21,7 @@ export default function ExistedChatroom({ id, test }: { id: string; test?: boole
   // test
   const testFlightStatus: FlightStatus = flightStatusData.response_body[1];
   const testFlightSearch: FlightResponse = flightSearchData;
+  const testPlaceSearch: ResultItem[] = PlaceSearchData.results
 
   return (
     <>
@@ -46,6 +49,8 @@ export default function ExistedChatroom({ id, test }: { id: string; test?: boole
               <>
                 <FlightStatus flightStatus={testFlightStatus} />
                 <FlightSearch flightSearch={testFlightSearch} />
+                <PlaceSearch resultItem={testPlaceSearch} />
+                <LoadingMessage type='flightSearch' />
               </>
             )}
           </div>

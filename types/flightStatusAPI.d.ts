@@ -10,7 +10,7 @@ interface FlightStatus {
   isCargo: boolean;
   aircraft: Aircraft;
   airline: Airline;
-  location: FlightLocation;
+  location?: FlightLocation;
 }
 
 interface GreatCircleDistance {
@@ -25,20 +25,20 @@ interface FlightEvent {
   airport: Airport;
   scheduledTime: TimeDetails;
   revisedTime: TimeDetails;
-  predictedTime: TimeDetails;
-  runwayTime: TimeDetails;
+  predictedTime?: TimeDetails; 
+  runwayTime?: TimeDetails;
   terminal: string;
-  checkInDesk: string;
+  checkInDesk?: string;
   gate: string;
-  baggageBelt: string;
-  runway: string;
+  baggageBelt?: string; 
+  runway?: string;
   quality: string[];
 }
 
 interface Airport {
   icao: string;
   iata: string;
-  localCode: string;
+  localCode?: string; 
   name: string;
   shortName: string;
   municipalityName: string;

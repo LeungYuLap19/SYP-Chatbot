@@ -20,6 +20,12 @@ const nextConfig = {
         hostname: 'www.gstatic.com',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'ss3.4sqi.net',
+        port: '',
+        pathname: '/**',
       }
     ]
   },

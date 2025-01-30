@@ -2,8 +2,8 @@ import { formatTime, getDuration } from '@/lib/utils';
 import Image from 'next/image';
 import React from 'react'
 import InformationBlock from './InformationBlock';
-import DepArr from './DepArr';
-import FromTo from './FromTo';
+import DepArr from '../common/DepArr';
+import FromTo from '../common/FromTo';
 
 export default function FlightStatus({ flightStatus }: { flightStatus: FlightStatus }) {
   return (
@@ -18,7 +18,7 @@ export default function FlightStatus({ flightStatus }: { flightStatus: FlightSta
           </p>
         </div>
 
-        <DepArr 
+        <DepArr
           localTime={flightStatus.departure.scheduledTime.local}
           fromIATA={flightStatus.departure.airport.iata}
           fromCity={flightStatus.departure.airport.municipalityName}
@@ -30,7 +30,7 @@ export default function FlightStatus({ flightStatus }: { flightStatus: FlightSta
 
         <div className='p-6 pt-0 flex flex-col gap-2'>
           <p className='text-customBlue-200 font-semibold text-xs'>Flight information</p>
-          <FromTo 
+          <FromTo
             fromIATA={flightStatus.departure.airport.iata}
             fromLocalTime={flightStatus.departure.scheduledTime.local}
             fromCountryCode={flightStatus.departure.airport.countryCode}
