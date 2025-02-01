@@ -2,19 +2,26 @@ import Image from 'next/image'
 import React from 'react'
 import PlaceCategory from './PlaceCategory'
 
-export default function PlaceOverview({ resultItem }: { resultItem: ResultItem }) {
+export default function PlaceOverview({ resultItem, selectedPlace, setSelectedPlace }: PlaceOverviewProps) {
   return (
     <div className='p-2 pt-0'>
-      <div className='p-2 hover:bg-gray-100 hover:drop-shadow-sm rounded-lg cursor-pointer flex flex-col gap-2'>
+      <div 
+        className='p-2 hover:bg-gray-100 hover:drop-shadow-sm rounded-lg cursor-pointer flex flex-col gap-2'
+        onClick={() => {
+          selectedPlace === resultItem.fsq_id ? setSelectedPlace(null) : setSelectedPlace(resultItem.fsq_id)
+        }}
+      >
         <div className='w-full h-[180px] bg-slate-200 rounded-md'>
           {/* <Image /> */}
         </div>
 
         <div className='w-full display flex justify-between items-center'>
-          <p className='font-semibold text-lg'>{resultItem.name}</p>
+          <p className='font-semibold'>{resultItem.name}</p>
           <div className='flex gap-1 items-center ml-2 flex-shrink-0'>
             <p>
-              <span className='text-customBlue-200 font-semibold'>4.6</span>/5
+            <span className='text-customBlue-200 font-semibold'>
+              {(Math.ceil((resultItem.rating / 2) * 10) / 10).toFixed(1)}
+            </span>/5
             </p>
             <div className='relative'>
               <Image 

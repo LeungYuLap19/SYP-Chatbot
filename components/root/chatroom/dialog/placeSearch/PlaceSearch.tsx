@@ -1,7 +1,15 @@
-import React from 'react'
+'use client'
+import React, { useState } from 'react'
 import PlaceOverview from './PlaceOverview'
+import PlaceDetails from './PlaceDetails'
+import PlaceDetailsData from '@/jsonTest/placeDetails.json'
 
 export default function PlaceSearch({ resultItem }: { resultItem: ResultItem[] }) {
+  const [selectedPlace, setSelectedPlace] = useState<string | null>(null);
+
+  // testing
+  const testPlaceDetails: PlaceDetails = PlaceDetailsData;
+
   return (
     <div className='w-full flex'>
       <div className='w-[40%] max-2xl:w-[50%] max-xl:w-[60%] max-lg:w-[65%] max-md:w-full flex flex-col rounded-lg bg-white text-sm overflow-hidden'>
@@ -16,11 +24,26 @@ export default function PlaceSearch({ resultItem }: { resultItem: ResultItem[] }
 
         <div className='flex flex-col gap-4'>
           {
-            resultItem.map((item) => (
-              <PlaceOverview
-                key={item.fsq_id}
-                resultItem={item}
-              />
+            resultItem.map((item, index) => (
+              <div className='flex flex-col' key={item.fsq_id}>
+                <PlaceOverview
+                  resultItem={item}
+                  selectedPlace={selectedPlace}
+                  setSelectedPlace={setSelectedPlace}
+                />
+                {
+                  selectedPlace === item.fsq_id && 
+                  <>
+                    <PlaceDetails placeDetails={testPlaceDetails} />
+                    {
+                      index != resultItem.length - 1 &&
+                        <div className='flex px-2'>
+                          <span className='w-full h-[1px] bg-slate-200'></span>
+                        </div>
+                    }
+                  </>
+                }
+              </div>
             ))
           }
         </div>

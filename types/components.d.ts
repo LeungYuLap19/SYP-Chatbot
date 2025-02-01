@@ -10,6 +10,12 @@ interface NavigationTabProps {
   imgUrl: string;
 }
 
+interface SocialMediaProps {
+  name: string;
+  url: string;
+  imgUrl: string;
+}
+
 interface CustomButtonProps {
   loading: boolean;
   type: 'submit' | 'button';
@@ -48,4 +54,10 @@ interface SearchResultTitleProps {
   price: number;
   showDetails: number;
   setShowDetails: React.Dispatch<React.SetStateAction<number>>;
+}
+
+interface PlaceOverviewProps {
+  resultItem: ResultItem;
+  selectedPlace: string | null;
+  setSelectedPlace: React.Dispatch<React.SetStateAction<string | null>>;
 }

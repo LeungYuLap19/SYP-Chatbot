@@ -28,20 +28,14 @@ interface PlacePhoto {
 
 interface PlaceDetails {
   fsq_id: string;
-  description: string;
-  tips: Tip[];
-  hours: Hours;
-  hours_popular: OpenClose[];
-  features: Features;
-  location: Location;
-  tel: string;
   email: string;
+  tel: string;
   website: string;
-  social_media: SocialMedia;
+  location: PlaceLocation; 
   geocodes: Geocodes;
-  photos: PlacePhoto[];
-  price: number;
+  hours: Hours;
   popularity: number;
+  social_media: SocialMedia;
 }
 
 interface Geocodes {
@@ -60,7 +54,7 @@ interface SocialMedia {
   twitter: string;
 }
 
-interface Location {
+interface PlaceLocation { 
   address: string;
   country: string;
   cross_street: string;
@@ -68,109 +62,6 @@ interface Location {
   locality: string;
   postcode: string;
   region: string;
-}
-
-interface Features {
-  payment: PaymentFeatures;
-  food_and_drink: FoodNDrinkFeatures;
-  services: ServicesFeatures;
-  amenities: AmenitiesFeatures;
-  attributes: AttributesFeatures;
-}
-
-interface AttributesFeatures {
-  business_meeting: string;
-  clean: string;
-  crowded: string;
-  dates_popular: string;
-  dressy: string;
-  families_popular: string;
-  gluten_free_diet: string;
-  good_for_dogs: string;
-  groups_popular: string;
-  healthy_diet: string;
-  late_night: string;
-  noisy: string;
-  quick_bite: string;
-  romantic: string;
-  service_quality: string;
-  singles_popular: string;
-  special_occasion: string;
-  trendy: string;
-  value_for_money: string;
-  vegan_diet: string;
-  vegetarian_diet: string;
-}
-
-interface AmenitiesFeatures {
-  restroom: boolean;
-  smoking: boolean;
-  jukebox: boolean;
-  music: boolean;
-  live_music: boolean;
-  private_room: boolean;
-  outdoor_seating: boolean;
-  tvs: boolean;
-  atm: boolean;
-  coat_check: boolean;
-  wheelchair_accessible: boolean;
-  parking: {
-    parking: boolean;
-    street_parking: boolean;
-    valet_parking: boolean;
-    public_lot: boolean;
-    private_lot: boolean;
-  };
-  sit_down_dining: boolean;
-  wifi: string;
-}
-
-interface ServicesFeatures {
-  delivery: boolean;
-  takeout: boolean;
-  drive_through: boolean;
-  dine_in: {
-    reservations: boolean;
-    online_reservations: boolean;
-    groups_only_reservations: boolean;
-    essential_reservations: boolean;
-  };
-}
-
-interface FoodNDrinkFeatures {
-  alcohol: {
-    bar_service: boolean;
-    beer: boolean;
-    byo: boolean;
-    cocktails: boolean;
-    full_bar: boolean;
-    wine: boolean;
-  },
-  meals: {
-    bar_snacks: boolean;
-    breakfast: boolean;
-    brunch: boolean;
-    lunch: boolean;
-    happy_hour: boolean;
-    dessert: boolean;
-    dinner: boolean;
-    tasting_menu: boolean;
-  }
-}
-
-interface PaymentFeatures {
-  credit_cards: {
-    accepts_credit_cards: boolean;
-    amex: boolean;
-    discover: boolean;
-    visa: boolean;
-    diners_club: boolean;
-    master_card: boolean;
-    union_pay: boolean;
-  },
-  digital_wallet: {
-    accepts_nfc: boolean;
-  }
 }
 
 interface Hours {
@@ -181,12 +72,7 @@ interface Hours {
 }
 
 interface OpenClose {
+  open: string;
   close: string;
   day: number;
-  open: string;
-}
-
-interface Tip {
-  created_at: string;
-  text: string;
 }

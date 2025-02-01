@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import { custom } from "zod";
 
 const config: Config = {
 	darkMode: ["class"],
@@ -31,7 +32,10 @@ const config: Config = {
 				},
 				customWhite: {
 					100: '#edf2f4'
-				}
+				},
+				customGreen: {
+					100: '#618685'
+				},
 			},
 			dropShadow: {
         default: '0px 0px 8px rgba(0, 0, 0, 0.10)'
