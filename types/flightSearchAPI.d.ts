@@ -3,6 +3,7 @@ interface FlightResponse {
   other_flights: FlightOption[]; // Always present if no separation occurs
   price_insights?: PriceInsights;
   airports: AirportGroup[];
+  sortedFlights?: FlightOption[];
 }
 
 // Flight option (used in best_flights and other_flights)

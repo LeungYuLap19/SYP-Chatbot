@@ -139,3 +139,16 @@ export function getDurationWithMinutes(duration: number) {
   const minutes = duration % 60;
   return `${hours}h ${minutes}m`;
 }
+
+export function sortFlightSearch(flightSearchResult: FlightResponse): FlightResponse {
+  const combinedFlights: FlightOption[] = (flightSearchResult.best_flights || []).concat(flightSearchResult.other_flights);
+  
+  const nonStopFlights: FlightOption[] = combinedFlights.filter(flight => !flight.layovers).sort((a, b) => a.price - b.price);
+  const stopFlights: FlightOption[] = combinedFlights.filter(flight => flight.layovers).sort((a, b) => a.price - b.price);
+
+  const sortedFlights: FlightOption[] = [...nonStopFlights, ...stopFlights];
+  return {
+    ...flightSearchResult,
+    sortedFlights: sortedFlights
+  };
+}

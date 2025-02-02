@@ -50,6 +50,7 @@ interface FromToProps {
 interface SearchResultTitleProps {
   index: number;
   totalDuration: number;
+  airline?: string;
   airlineLogo: string;
   price: number;
   showDetails: number;

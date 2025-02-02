@@ -13,7 +13,8 @@ import LoadingMessage from './dialog/LoadingMessage'
 import PlaceSearch from './dialog/placeSearch/PlaceSearch'
 import PlaceSearchData from '@/jsonTest/placeSearch.json';
 import { getFlightStatus } from '@/lib/actions/aerobox/flightStatus.action'
-import { TEST_FLIGHT_DATE, TEST_FLIGHT_NUMBER } from '@/constants'
+import { TEST_FLIGHT_ARRIVAL, TEST_FLIGHT_DATE, TEST_FLIGHT_DEPARTURE, TEST_FLIGHT_DEPARTURE_DATE, TEST_FLIGHT_NUMBER } from '@/constants'
+import { getFlightSearch } from '@/lib/actions/serpapi/flightSearch.action'
 
 export default function ExistedChatroom({ id, test }: { id: string; test?: boolean }) {
   const history = useGetHistory(id);
@@ -27,17 +28,26 @@ export default function ExistedChatroom({ id, test }: { id: string; test?: boole
 
   // test api
   // const [flightStatus, setFlightStatus] = useState<FlightStatus | null>(null);
+  const [flightResponse, setFlightResponse] = useState<FlightResponse | null>(null);
 
-  // const getTestingFlightStatus = async () => {
+  const searchFlight = async () => {
+    const response = await getFlightSearch(TEST_FLIGHT_DEPARTURE, TEST_FLIGHT_ARRIVAL, TEST_FLIGHT_DEPARTURE_DATE);
+    if (response) {
+      setFlightResponse(response);
+    }
+  }
+
+  // const searchFlightStatus = async () => {
   //   const response = await getFlightStatus(TEST_FLIGHT_NUMBER, TEST_FLIGHT_DATE);
   //   if (response) {
   //     setFlightStatus(response);
   //   }
   // }
 
-  // useEffect(() => {
-  //   getTestingFlightStatus();
-  // }, []);
+  useEffect(() => {
+    // searchFlightStatus();
+    searchFlight();
+  }, []);
 
   return (
     <>
@@ -67,7 +77,10 @@ export default function ExistedChatroom({ id, test }: { id: string; test?: boole
                   testFlightStatus && 
                   <FlightStatus flightStatus={testFlightStatus} />
                 }
-                <FlightSearch flightSearch={testFlightSearch} />
+                {
+                  flightResponse &&
+                  <FlightSearch flightSearch={flightResponse} />
+                }
                 <PlaceSearch resultItem={testPlaceSearch} />
                 <LoadingMessage type='flightSearch' />
               </>

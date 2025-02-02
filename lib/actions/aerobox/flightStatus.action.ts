@@ -1,3 +1,4 @@
+'use server'
 import axios from "axios";
 
 // add return type later, include error handling
@@ -9,7 +10,7 @@ export async function getFlightStatus(flightNumber: string, date: string) {
         'x-magicapi-key': process.env.NEXT_PUBLIC_AERODATABOX_API_KEY
       },
     });
-    console.log(response.data);
+    // console.log(response.data);
     if (response.data) {
       return response.data[0];
     }

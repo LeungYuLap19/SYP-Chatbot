@@ -10,7 +10,7 @@ export default function FlightSearch({ flightSearch }: { flightSearch: FlightRes
 
   return (
     <div className='w-full flex'>
-      <div className='max-w-[70%] max-lg:max-w-full flex flex-col rounded-lg bg-white text-sm overflow-hidden'>
+      <div className='w-[50%] max-2xl:w-[60%] max-xl:w-[80%] max-lg:w-full flex flex-col rounded-lg bg-white text-sm overflow-hidden'>
         <div className='p-6'>
           <p>
             Here are some scheduled flights I found:
@@ -32,28 +32,48 @@ export default function FlightSearch({ flightSearch }: { flightSearch: FlightRes
           className='py-0'
         />
 
-        <div className='flex flex-col gap-5 p-6'>
+        <div className='flex flex-col py-6'>
           {
-            flightSearch.best_flights?.map((flightOption, index) => (
+            flightSearch.sortedFlights?.map((flightOption, index) => (
               <div key={index} className='flex flex-col gap-4'>
-                <div className='flex'>
-                  <span className='w-full h-[1px] bg-slate-200'></span>
+                <div className='flex px-6'>
+                  {
+                    index == 0 && !flightOption.layovers ?
+                    <p className='text-xs text-customBlue-200 font-semibold'>
+                      Non-Stop Flights
+                    </p> :
+                    index === flightSearch.sortedFlights?.findIndex(f => f.layovers) && flightOption.layovers ?
+                    <p className={`text-xs text-customBlue-200 font-semibold ${index !== 0 && 'mt-4'}`}>
+                      Flights With Layovers
+                    </p> :
+                    <></>
+                  }
                 </div>
-                <SearchResultTitle
-                  index={index}
-                  totalDuration={flightOption.total_duration}
-                  airlineLogo={flightOption.airline_logo || ''}
-                  price={flightOption.price}
-                  showDetails={showDetails}
-                  setShowDetails={setShowDetails}
-                />
+                <div className='px-4'>
+                  <SearchResultTitle
+                    index={index}
+                    airline={!flightOption.airline_logo?.includes('multi.png') ? flightOption.flights[0].airline : undefined}
+                    totalDuration={flightOption.total_duration}
+                    airlineLogo={flightOption.airline_logo || ''}
+                    price={flightOption.price}
+                    showDetails={showDetails}
+                    setShowDetails={setShowDetails}
+                  />
+                </div>
                 {
-                  showDetails === index ?
+                  showDetails === index &&
+                  <>
                     <SearchResult
                       key={index}
                       flightOption={flightOption}
-                    /> :
-                    <FlightOverview flightOption={flightOption} />
+                    /> 
+                    <div className='px-6 flex'>
+                      <span className='w-full h-[1px] bg-slate-200 '></span>
+                    </div>
+                  </>
+                  
+                  // :
+                  // <FlightOverview flightOption={flightOption} />
                 }
               </div>
             ))

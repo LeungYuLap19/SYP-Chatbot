@@ -4,7 +4,7 @@ import { getDurationWithMinutes } from '@/lib/utils'
 
 export default function SearchResult({ flightOption }: { flightOption: FlightOption }) {
   return (
-    <div className='flex flex-col gap-6'>
+    <div className='flex flex-col gap-6 px-7'>
       {
         flightOption.flights.map((flightDetails, index) => (
           <>

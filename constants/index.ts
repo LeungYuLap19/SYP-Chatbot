@@ -60,8 +60,8 @@ export const ERROR_TOAST_TITLE = 'Something went wrong';
 export const TEST_FLIGHT_NUMBER = 'CX270';
 export const TEST_FLIGHT_DATE = '2025-02-20';
 // flight search
-export const TEST_FLIGHT_DEPARTURE = 'Hong Kong';
-export const TEST_FLIGHT_ARRIVAL = 'London';
-export const TEST_FLIGHT_DEPARTURE_DATE = '2025-08-01';
+export const TEST_FLIGHT_DEPARTURE = 'HKG'; // Los Angeles
+export const TEST_FLIGHT_ARRIVAL = 'SYD'; // Sydney
+export const TEST_FLIGHT_DEPARTURE_DATE = '2025-05-18';
 // place search
 export const TEST_PLACE = 'Hong Kong';
