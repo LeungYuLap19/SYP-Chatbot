@@ -13,8 +13,10 @@ import LoadingMessage from './dialog/LoadingMessage'
 import PlaceSearch from './dialog/placeSearch/PlaceSearch'
 import PlaceSearchData from '@/jsonTest/placeSearch.json';
 import { getFlightStatus } from '@/lib/actions/aerobox/flightStatus.action'
-import { TEST_FLIGHT_ARRIVAL, TEST_FLIGHT_DATE, TEST_FLIGHT_DEPARTURE, TEST_FLIGHT_DEPARTURE_DATE, TEST_FLIGHT_NUMBER } from '@/constants'
+import { TEST_AUTOCOMPLETION, TEST_FLIGHT_ARRIVAL, TEST_FLIGHT_DATE, TEST_FLIGHT_DEPARTURE, TEST_FLIGHT_DEPARTURE_DATE, TEST_FLIGHT_NUMBER, TEST_SEARCH_LIMIT } from '@/constants'
 import { getFlightSearch } from '@/lib/actions/serpapi/flightSearch.action'
+import { getLocationDetails } from '@/lib/actions/google/geocoding.action'
+import { getPopularPlaces } from '@/lib/actions/foursquare/placeSearch.action'
 
 export default function ExistedChatroom({ id, test }: { id: string; test?: boolean }) {
   const history = useGetHistory(id);
@@ -29,6 +31,8 @@ export default function ExistedChatroom({ id, test }: { id: string; test?: boole
   // test api
   // const [flightStatus, setFlightStatus] = useState<FlightStatus | null>(null);
   const [flightResponse, setFlightResponse] = useState<FlightResponse | null>(null);
+  const [geoResponse, setGeoResponse] = useState<Geocoding[] | null>(null);
+  const [placeResponse, setPlaceResponse] = useState<ResultItem[] | null>(null);
 
   const searchFlight = async () => {
     const response = await getFlightSearch(TEST_FLIGHT_DEPARTURE, TEST_FLIGHT_ARRIVAL, TEST_FLIGHT_DEPARTURE_DATE);
@@ -44,9 +48,23 @@ export default function ExistedChatroom({ id, test }: { id: string; test?: boole
   //   }
   // }
 
+  const placeSearch = async () => {
+    const geoResult: Geocoding[] = await getLocationDetails(TEST_AUTOCOMPLETION);
+    if (geoResult) {
+      setGeoResponse(geoResult);
+      const ne: Northeast = geoResult[0].geometry.bounds.northeast;
+      const sw: Southwest = geoResult[0].geometry.bounds.southwest;
+      const response = await getPopularPlaces(ne, sw, TEST_SEARCH_LIMIT);
+      if (response) {
+        setPlaceResponse(response);
+      }
+    }
+  }
+
   useEffect(() => {
     // searchFlightStatus();
     searchFlight();
+    placeSearch();
   }, []);
 
   return (
@@ -81,7 +99,10 @@ export default function ExistedChatroom({ id, test }: { id: string; test?: boole
                   flightResponse &&
                   <FlightSearch flightSearch={flightResponse} />
                 }
-                <PlaceSearch resultItem={testPlaceSearch} />
+                {
+                  placeResponse && geoResponse &&
+                  <PlaceSearch resultItem={placeResponse} geoResponse={geoResponse[0]} />
+                }
                 <LoadingMessage type='flightSearch' />
               </>
             )}

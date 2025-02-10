@@ -42,14 +42,9 @@ interface Airport {
   name: string;
   shortName: string;
   municipalityName: string;
-  location: GeoLocation;
+  location: Geo;
   countryCode: string;
   timeZone: string;
-}
-
-interface GeoLocation {
-  lat: number;
-  lon: number;
 }
 
 interface TimeDetails {

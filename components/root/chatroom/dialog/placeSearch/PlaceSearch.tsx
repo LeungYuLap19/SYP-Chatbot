@@ -1,10 +1,10 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PlaceOverview from './PlaceOverview'
 import PlaceDetails from './PlaceDetails'
 import PlaceDetailsData from '@/jsonTest/placeDetails.json'
 
-export default function PlaceSearch({ resultItem }: { resultItem: ResultItem[] }) {
+export default function PlaceSearch({ resultItem, geoResponse }: { resultItem: ResultItem[]; geoResponse: Geocoding }) {
   const [selectedPlace, setSelectedPlace] = useState<string | null>(null);
 
   // testing
@@ -18,7 +18,7 @@ export default function PlaceSearch({ resultItem }: { resultItem: ResultItem[] }
             Here are some popular {' '}
             <span className='text-customBlue-200 font-semibold'> attractions</span> {' '}
             I found in {' '}
-            <span className='text-customBlue-200 font-semibold'> New York City</span>:
+            <span className='text-customBlue-200 font-semibold'> {geoResponse.address_components[0].short_name}</span>:
           </p>
         </div>
 

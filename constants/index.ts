@@ -1,3 +1,5 @@
+import GeocodingData from '@/jsonTest/geocoding.json';
+
 export const navLinks: NavigationTabProps[] = [
   {
     label: 'Chatroom',
@@ -49,6 +51,8 @@ export const weekDays: string[] = [
   'Sunday',
 ];
 
+export const placeSearchFields: string[] = ['fsq_id', 'name', 'rating', 'categories', 'photos'];
+
 export const COOKIES_KEY_USERDATA = 'user_data';
 
 export const DAYS_TO_EXPIRE = 7;
@@ -60,8 +64,12 @@ export const ERROR_TOAST_TITLE = 'Something went wrong';
 export const TEST_FLIGHT_NUMBER = 'CX270';
 export const TEST_FLIGHT_DATE = '2025-02-20';
 // flight search
-export const TEST_FLIGHT_DEPARTURE = 'HKG'; // Los Angeles
-export const TEST_FLIGHT_ARRIVAL = 'SYD'; // Sydney
-export const TEST_FLIGHT_DEPARTURE_DATE = '2025-05-18';
+export const TEST_FLIGHT_DEPARTURE = 'HKG'; 
+export const TEST_FLIGHT_ARRIVAL = 'AMS'; 
+export const TEST_FLIGHT_DEPARTURE_DATE = '2025-04-30';
+// auto completion 
+export const TEST_AUTOCOMPLETION = 'brussel';
 // place search
-export const TEST_PLACE = 'Hong Kong';
+export const TEST_SEARCH_LIMIT = 5;
+// export const TEST_NE: GeoLocation = GeocodingData.results[0].geometry.bounds.northeast;
+// export const TEST_SW: GeoLocation = GeocodingData.results[0].geometry.bounds.southwest;

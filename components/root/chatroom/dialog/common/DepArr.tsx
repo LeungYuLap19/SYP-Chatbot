@@ -15,8 +15,8 @@ export default function DepArr({
         <div className='flex items-center justify-between gap-5'>
           <div className='flex flex-col gap-2'>
             <div className='flex items-center gap-2 text-xl'>
-              <span className='font-bold'>{fromIATA}</span>
-              <p>{fromCity}</p>
+              <span className='font-bold max-sm:hidden'>{fromIATA}</span>
+              <p className='max-sm:font-bold'>{fromCity}</p>
             </div>
             <p className='text-xs text-customBlack-200'>{fromAirport} Airport</p>
           </div>
@@ -31,8 +31,8 @@ export default function DepArr({
 
           <div className='flex flex-col gap-2'>
             <div className='flex items-center gap-2 text-xl'>
-              <span className='font-bold'>{toIATA}</span>
-              <p>{toCity}</p>
+              <span className='font-bold max-sm:hidden'>{toIATA}</span>
+              <p className='max-sm:font-bold'>{toCity}</p>
             </div>
             <p className='text-xs text-customBlack-200'>{toAirport} Airport</p>
           </div>

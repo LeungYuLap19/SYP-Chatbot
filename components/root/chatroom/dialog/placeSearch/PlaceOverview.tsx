@@ -3,6 +3,9 @@ import React from 'react'
 import PlaceCategory from './PlaceCategory'
 
 export default function PlaceOverview({ resultItem, selectedPlace, setSelectedPlace }: PlaceOverviewProps) {
+  const photo: Photo | undefined = resultItem.photos && resultItem.photos[1];
+  const photoUrl = photo && `${photo.prefix}${photo.width}x${photo.height}${photo.suffix}`
+
   return (
     <div className='p-2 pt-0'>
       <div 
@@ -11,8 +14,17 @@ export default function PlaceOverview({ resultItem, selectedPlace, setSelectedPl
           selectedPlace === resultItem.fsq_id ? setSelectedPlace(null) : setSelectedPlace(resultItem.fsq_id)
         }}
       >
-        <div className='w-full h-[180px] bg-slate-200 rounded-md'>
-          {/* <Image /> */}
+        <div className='w-full h-[180px] bg-slate-200 rounded-md relative overflow-hidden'>
+          {
+            photoUrl &&
+            <Image 
+              src={photoUrl}
+              alt={resultItem.name + 'photo'}
+              fill={true}
+              style={{objectFit: 'cover', objectPosition: 'center'}}
+            />
+          }
+          
         </div>
 
         <div className='w-full display flex justify-between items-center'>

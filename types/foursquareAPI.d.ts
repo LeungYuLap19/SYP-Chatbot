@@ -3,7 +3,16 @@ interface ResultItem {
   name: string;
   rating: number;
   categories: Category[];
-  photo?: string;
+  photos?: Photo[];
+}
+
+interface Photo {
+  id: string;
+  createAt: string;
+  prefix: string;
+  suffix: string;
+  width: number;
+  height: number;
 }
 
 interface Category {
