@@ -17,6 +17,7 @@ import { TEST_AUTOCOMPLETION, TEST_FLIGHT_ARRIVAL, TEST_FLIGHT_DATE, TEST_FLIGHT
 import { getFlightSearch } from '@/lib/actions/serpapi/flightSearch.action'
 import { getLocationDetails } from '@/lib/actions/google/geocoding.action'
 import { getPopularPlaces } from '@/lib/actions/foursquare/placeSearch.action'
+import { useGetAPIs } from '@/lib/hooks/useGetAPIs'
 
 export default function ExistedChatroom({ id, test }: { id: string; test?: boolean }) {
   const history = useGetHistory(id);
@@ -24,48 +25,12 @@ export default function ExistedChatroom({ id, test }: { id: string; test?: boole
   const { loading, handleSubmit, inputRef } = useChatroom(id);
 
   // test
-  const testFlightStatus: FlightStatus = flightStatusData.response_body[1];
-  const testFlightSearch: FlightResponse = flightSearchData;
-  const testPlaceSearch: ResultItem[] = PlaceSearchData.results;
+  // const testFlightStatus: FlightStatus = flightStatusData.response_body[1];
+  // const testFlightSearch: FlightResponse = flightSearchData;
+  // const testPlaceSearch: ResultItem[] = PlaceSearchData.results;
 
   // test api
-  // const [flightStatus, setFlightStatus] = useState<FlightStatus | null>(null);
-  const [flightResponse, setFlightResponse] = useState<FlightResponse | null>(null);
-  const [geoResponse, setGeoResponse] = useState<Geocoding[] | null>(null);
-  const [placeResponse, setPlaceResponse] = useState<ResultItem[] | null>(null);
-
-  const searchFlight = async () => {
-    const response = await getFlightSearch(TEST_FLIGHT_DEPARTURE, TEST_FLIGHT_ARRIVAL, TEST_FLIGHT_DEPARTURE_DATE);
-    if (response) {
-      setFlightResponse(response);
-    }
-  }
-
-  // const searchFlightStatus = async () => {
-  //   const response = await getFlightStatus(TEST_FLIGHT_NUMBER, TEST_FLIGHT_DATE);
-  //   if (response) {
-  //     setFlightStatus(response);
-  //   }
-  // }
-
-  const placeSearch = async () => {
-    const geoResult: Geocoding[] = await getLocationDetails(TEST_AUTOCOMPLETION);
-    if (geoResult) {
-      setGeoResponse(geoResult);
-      const ne: Northeast = geoResult[0].geometry.bounds.northeast;
-      const sw: Southwest = geoResult[0].geometry.bounds.southwest;
-      const response = await getPopularPlaces(ne, sw, TEST_SEARCH_LIMIT);
-      if (response) {
-        setPlaceResponse(response);
-      }
-    }
-  }
-
-  useEffect(() => {
-    // searchFlightStatus();
-    searchFlight();
-    placeSearch();
-  }, []);
+  const { flightStatus, flightResponse, geoResponse, placeResponse } = useGetAPIs(true);
 
   return (
     <>
@@ -84,7 +49,11 @@ export default function ExistedChatroom({ id, test }: { id: string; test?: boole
           <div className="flex flex-col-reverse gap-4 w-full overflow-auto flex-grow mt-[40px] pt-4">
             {chatroom &&
               chatroom.messages.map(message => (
-                <Message key={message.datetime} type={message.sender} text={message.text} />
+                <Message 
+                  key={message.datetime} 
+                  type={message.sender} 
+                  message={message} 
+                />
               ))
             }
 
@@ -92,8 +61,8 @@ export default function ExistedChatroom({ id, test }: { id: string; test?: boole
             {test && (
               <>
                 {
-                  testFlightStatus && 
-                  <FlightStatus flightStatus={testFlightStatus} />
+                  flightStatus && 
+                  <FlightStatus flightStatus={flightStatus} />
                 }
                 {
                   flightResponse &&

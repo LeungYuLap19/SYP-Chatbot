@@ -7,9 +7,6 @@ import PlaceDetailsData from '@/jsonTest/placeDetails.json'
 export default function PlaceSearch({ resultItem, geoResponse }: { resultItem: ResultItem[]; geoResponse: Geocoding }) {
   const [selectedPlace, setSelectedPlace] = useState<string | null>(null);
 
-  // testing
-  const testPlaceDetails: PlaceDetails = PlaceDetailsData;
-
   return (
     <div className='w-full flex'>
       <div className='w-[40%] max-2xl:w-[50%] max-xl:w-[60%] max-lg:w-[65%] max-md:w-full flex flex-col rounded-lg bg-white text-sm overflow-hidden'>
@@ -34,7 +31,7 @@ export default function PlaceSearch({ resultItem, geoResponse }: { resultItem: R
                 {
                   selectedPlace === item.fsq_id && 
                   <>
-                    <PlaceDetails placeDetails={testPlaceDetails} />
+                    <PlaceDetails resultItem={item} />
                     {
                       index != resultItem.length - 1 &&
                         <div className='flex px-2'>

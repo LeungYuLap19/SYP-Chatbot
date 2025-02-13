@@ -29,7 +29,8 @@ interface Chatroom {
 
 interface Message {
   sender: string;
-  text: string;
+  text?: string;
+  custom?: RasaCustom;
   datetime: string;
 }
 

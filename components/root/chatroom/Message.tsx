@@ -1,17 +1,55 @@
-import React from 'react'
+import { useGetAPIs } from '@/lib/hooks/useGetAPIs';
+import React, { useEffect } from 'react'
+import FlightStatus from './dialog/flightStatus/FlightStatus';
 
 export default function Message(
   // temp props
-  { type, text }: { type: string; text: string }
+  { type, message }: { type: string; message: Message }
 ) {
-  return (
-    <div className={`w-full flex ${type === 'user' && 'justify-end'}`}>
-      <div className={`w-[70%] max-lg:w-full flex ${type === 'user' && 'justify-end'}`}>
-        <p className='text-sm text-pretty bg-customBlue-100 py-3 px-5 rounded-2xl text-customWhite-100'>
-          {/* Lorem ipsum odor amet, consectetuer adipiscing elit. Metus tincidunt volutpat finibus; nisi nulla vivamus molestie non. Hendrerit accumsan praesent suscipit vulputate sociosqu urna aptent rhoncus. Mi dis suscipit ullamcorper neque dui. Massa ex fames vel urna eget. */}
-          { text }
-        </p>
+  const {
+    flightStatus,
+    flightResponse,
+    geoResponse,
+    placeResponse,
+    loading,
+    
+    searchFlightStatus,
+    searchFlight,
+    placeSearch
+  } = useGetAPIs(false);
+
+  const { custom, text } = message;
+  const userBotMessage = custom?.message || text;
+  const responseType = custom?.data?.response_type;
+
+  useEffect(() => {
+    if (!responseType || !custom?.data) return; // Ensure both exist before proceeding
+
+    switch (responseType) {
+      case "flightStatus":
+        searchFlightStatus(custom.data.flight_number, custom.data.date);
+        break;
+      // other types 
+    }
+  }, [responseType, custom]);
+
+  const responseComponents: Record<string, JSX.Element | null> = {
+    flightStatus: flightStatus ? <FlightStatus flightStatus={flightStatus} /> : null,
+  };
+
+  if (responseType) {
+    return responseComponents[responseType];
+  }
+
+  if (userBotMessage) {
+    return (
+      <div className={`w-full flex ${type === "user" && "justify-end"}`}>
+        <div className={`w-[70%] max-lg:w-full flex ${type === "user" && "justify-end"}`}>
+          <p className="text-sm text-pretty bg-customBlue-100 py-3 px-5 rounded-2xl text-customWhite-100">
+            {userBotMessage}
+          </p>
+        </div>
       </div>
-    </div>
-  )
+    );
+  }
 }

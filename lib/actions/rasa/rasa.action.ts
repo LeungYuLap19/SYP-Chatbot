@@ -3,17 +3,17 @@
 import axios from 'axios';
 import { getHttpError } from '../errors/apiErrorsHandler';
 
-export async function botResponse(message: Message): Promise<Result<string>> {
+export async function botResponse(message: Message): Promise<Result<null | RasaCustom>> {
   try {
     const response = await axios.post('http://localhost:5005/webhooks/rest/webhook', {
       sender: 'user',
       message: message.text
     });
     // console.log(response.data);
-    if (response.data[0]?.text) {
-      return { data: response.data[0].text };
+    if (response.data[0]?.custom) {
+      return { data: response.data[0].custom };
     }
-    return { data: '' };
+    return { data: null };
   } catch (error: any) {
     if (axios.isAxiosError(error) && error.response) {
       console.error('Send Message Error:', error.response.status, error.response.statusText);

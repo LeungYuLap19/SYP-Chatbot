@@ -51,7 +51,17 @@ export const weekDays: string[] = [
   'Sunday',
 ];
 
-export const placeSearchFields: string[] = ['fsq_id', 'name', 'rating', 'categories', 'photos'];
+export const placeSearchFields: string[] = [
+  'fsq_id', 'name', 'rating', 'categories', 'photos', 
+  'email',
+  'geocodes', 
+  'hours', 
+  'location', 
+  'popularity', 
+  'social_media', 
+  'tel', 
+  'website'
+];
 
 export const COOKIES_KEY_USERDATA = 'user_data';
 
@@ -61,14 +71,14 @@ export const ERROR_TOAST_TITLE = 'Something went wrong';
 
 // testing
 // flight status
-export const TEST_FLIGHT_NUMBER = 'CX270';
-export const TEST_FLIGHT_DATE = '2025-02-20';
+export const TEST_FLIGHT_NUMBER = 'CX348';
+export const TEST_FLIGHT_DATE = '2025-02-11';
 // flight search
-export const TEST_FLIGHT_DEPARTURE = 'HKG'; 
+export const TEST_FLIGHT_DEPARTURE = 'ICN'; 
 export const TEST_FLIGHT_ARRIVAL = 'AMS'; 
 export const TEST_FLIGHT_DEPARTURE_DATE = '2025-04-30';
 // auto completion 
-export const TEST_AUTOCOMPLETION = 'brussel';
+export const TEST_AUTOCOMPLETION = 'hongkong';
 // place search
 export const TEST_SEARCH_LIMIT = 5;
 // export const TEST_NE: GeoLocation = GeocodingData.results[0].geometry.bounds.northeast;

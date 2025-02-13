@@ -31,7 +31,7 @@ export function useChatroom(id?: string) {
     if (botResponseResult.data) {
       const botMessage: Message = {
         sender: "bot",
-        text: botResponseResult.data,
+        custom: botResponseResult.data,
         datetime: new Date().toISOString(),
       };
 

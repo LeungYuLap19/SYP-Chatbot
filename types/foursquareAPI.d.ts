@@ -4,6 +4,15 @@ interface ResultItem {
   rating: number;
   categories: Category[];
   photos?: Photo[];
+
+  email: string;
+  tel: string;
+  website: string;
+  location: PlaceLocation; 
+  geocodes: Geocodes;
+  hours: Hours;
+  popularity: number;
+  social_media: SocialMedia;
 }
 
 interface Photo {
@@ -35,17 +44,17 @@ interface PlacePhoto {
   height: number;
 }
 
-interface PlaceDetails {
-  fsq_id: string;
-  email: string;
-  tel: string;
-  website: string;
-  location: PlaceLocation; 
-  geocodes: Geocodes;
-  hours: Hours;
-  popularity: number;
-  social_media: SocialMedia;
-}
+// interface PlaceDetails {
+//   fsq_id: string;
+//   email: string;
+//   tel: string;
+//   website: string;
+//   location: PlaceLocation; 
+//   geocodes: Geocodes;
+//   hours: Hours;
+//   popularity: number;
+//   social_media: SocialMedia;
+// }
 
 interface Geocodes {
   main: LatLong;

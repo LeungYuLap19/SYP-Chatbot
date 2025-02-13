@@ -11,19 +11,7 @@ const nextConfig = {
       // allowing the following img url to be used in nextjs
       {
         protocol: 'https',
-        hostname: 'farm66.staticflickr.com',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'farm8.staticflickr.com',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'farm2.staticflickr.com',
+        hostname: 'farm*.staticflickr.com', // Matches farmANYNUMBER.staticflickr.com
         port: '',
         pathname: '/**',
       },
