@@ -3,7 +3,6 @@ import axios from "axios";
 
 // add return type later, include error handling
 export async function getFlightStatus(flightNumber: string, date: string) {
-  console.log(flightNumber, date);
   try {
     const response = await axios.get(`https://api.magicapi.dev/api/v1/aedbx/aerodatabox/flights/Number/${flightNumber}/${date}?withAircraftImage=true&withLocation=false`, {
       headers: {

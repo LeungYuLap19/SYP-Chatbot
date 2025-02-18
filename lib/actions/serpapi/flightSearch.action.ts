@@ -2,7 +2,7 @@
 import { sortFlightSearch } from "@/lib/utils";
 import axios from "axios";
 
-export async function getFlightSearch (depID: string, arrID: string, depDate: string) {
+export async function getFlightSearch(depID: string, arrID: string, depDate: string) {
   const params = {
     engine: 'google_flights',
     type: 2,
