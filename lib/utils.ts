@@ -152,3 +152,45 @@ export function sortFlightSearch(flightSearchResult: FlightResponse): FlightResp
     sortedFlights: sortedFlights
   };
 }
+
+export function get12HoursForecast(forecastday: ForecastDay[]): Hour[] {
+  const currentDate = new Date();
+  const currentHour = currentDate.getHours();
+  const currentDay = currentDate.getDate();
+
+  const allHours = forecastday.flatMap(day => day.hour);
+
+  const next12Hours = allHours.filter(hour => {
+    const hourDate = new Date(hour.time);
+    const hourDay = hourDate.getDate();
+    const hourHour = hourDate.getHours();
+
+    // Check if the hour is within the next 12 hours
+    return (
+      (hourDay === currentDay && hourHour >= currentHour) ||
+      (hourDay === currentDay + 1 && hourHour < currentHour)
+    );
+  }).slice(0, 12);
+
+  // Format the time to 12-hour format
+  const formattedNext12Hours = next12Hours.map((hour, index) => {
+    if (index == 0) {
+      return {
+        ...hour,
+        time: 'Now'
+      }
+    }
+    const hourDate = new Date(hour.time);
+    let hours = hourDate.getHours();
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12; 
+    const strTime = `${hours}${ampm}`;
+    return {
+      ...hour,
+      time: strTime,
+    };
+  });
+
+  return formattedNext12Hours;
+}

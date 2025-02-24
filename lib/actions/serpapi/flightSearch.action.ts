@@ -3,6 +3,7 @@ import { sortFlightSearch } from "@/lib/utils";
 import axios from "axios";
 
 export async function getFlightSearch(depID: string, arrID: string, depDate: string) {
+  // console.log(depDate);
   const params = {
     engine: 'google_flights',
     type: 2,

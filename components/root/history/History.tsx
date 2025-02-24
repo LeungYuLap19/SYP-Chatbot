@@ -17,7 +17,6 @@ export default function History() {
       </div>
       <div className='flex flex-col gap-2 overflow-auto mt-[56px] py-2 pt-4'>
         <HistoryChat key={-1} />
-        <HistoryChat key={-2} test={true} />
         {
           categories &&
           ['today', 'yesterday', 'previous7days'].map((key) => {

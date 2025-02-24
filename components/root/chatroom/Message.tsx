@@ -4,6 +4,7 @@ import FlightStatus from './dialog/flightStatus/FlightStatus';
 import { TEST_SEARCH_LIMIT } from '@/constants';
 import PlaceSearch from './dialog/placeSearch/PlaceSearch';
 import FlightSearch from './dialog/flightSearch/FlightSearch';
+import WeatherForecast from './dialog/weatherForecast/WeatherForecast';
 
 export default function Message(
   // temp props
@@ -14,11 +15,14 @@ export default function Message(
     flightResponse,
     geoResponse,
     placeResponse,
-    loading,
+    weatherResponse,
     
     searchFlightStatus,
     searchFlight,
-    placeSearch
+    placeSearch,
+    checkWeather,
+
+    loading
   } = useGetAPIs(false);
 
   const { custom, text } = message;
@@ -46,6 +50,12 @@ export default function Message(
           placeSearch(custom.data.location, TEST_SEARCH_LIMIT);
         }
         break;
+
+      case "weather":
+        if ("location" in custom.data) {
+          checkWeather(custom.data.location);
+        }
+        break;
   
       default:
         console.warn("Unknown response type:", responseType);
@@ -56,6 +66,7 @@ export default function Message(
     flightStatus: flightStatus ? <FlightStatus flightStatus={flightStatus} /> : null,
     popularPlaces: placeResponse && geoResponse ? <PlaceSearch resultItem={placeResponse} geoResponse={geoResponse[0]} /> : null,
     flightSearch: flightResponse ? <FlightSearch flightSearch={flightResponse} /> : null,
+    weather: weatherResponse ? <WeatherForecast weatherForecast={weatherResponse} /> : null,
   };
 
   if (responseType) {

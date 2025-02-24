@@ -9,7 +9,7 @@ export async function botResponse(message: Message): Promise<Result<null | RasaC
       sender: 'user',
       message: message.text
     });
-    // console.log(response.data);
+    console.log(response.data);
     if (response.data[0]?.custom) {
       return { data: response.data[0].custom };
     }

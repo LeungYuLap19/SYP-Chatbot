@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Subtitle from './Subtitle'
 import Image from 'next/image'
 import { socialMedia, weekDays } from '@/constants'
@@ -16,10 +16,6 @@ export default function PlaceDetails({ resultItem }: {resultItem: ResultItem}) {
       description: text,
     });
   };
-
-  useEffect(() => {
-    console.log(resultItem);
-  }, [resultItem]);
 
   return (
     <div className='p-2 pt-0 flex flex-col gap-4'>

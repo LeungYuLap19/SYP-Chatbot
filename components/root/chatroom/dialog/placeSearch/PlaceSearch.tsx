@@ -1,8 +1,7 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import PlaceOverview from './PlaceOverview'
 import PlaceDetails from './PlaceDetails'
-import PlaceDetailsData from '@/jsonTest/placeDetails.json'
 
 export default function PlaceSearch({ resultItem, geoResponse }: { resultItem: ResultItem[]; geoResponse: Geocoding }) {
   const [selectedPlace, setSelectedPlace] = useState<string | null>(null);

@@ -4,12 +4,14 @@ import { getFlightSearch } from "../actions/serpapi/flightSearch.action";
 import { getLocationDetails } from "../actions/google/geocoding.action";
 import { getPopularPlaces } from "../actions/foursquare/placeSearch.action";
 import { TEST_AUTOCOMPLETION, TEST_FLIGHT_ARRIVAL, TEST_FLIGHT_DATE, TEST_FLIGHT_DEPARTURE, TEST_FLIGHT_DEPARTURE_DATE, TEST_FLIGHT_NUMBER, TEST_SEARCH_LIMIT } from "@/constants";
+import { getWeatherForecast } from "../actions/weatherapi/weatherForecast.action";
 
 export function useGetAPIs(test: boolean) {
   const [flightStatus, setFlightStatus] = useState<FlightStatus | null>(null);
   const [flightResponse, setFlightResponse] = useState<FlightResponse | null>(null);
   const [geoResponse, setGeoResponse] = useState<Geocoding[] | null>(null);
   const [placeResponse, setPlaceResponse] = useState<ResultItem[] | null>(null);
+  const [weatherResponse, setWeatherResponse] = useState<WeatherForecast | null>(null);
 
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -46,6 +48,22 @@ export function useGetAPIs(test: boolean) {
     setLoading(false);
   }
 
+  const checkWeather = async (input: string) => {
+    setLoading(true);
+    const geoResult: Geocoding[] = await getLocationDetails(input);
+    if (geoResult) {
+      setGeoResponse(geoResult);
+      const lat = geoResult[0].geometry.location.lat;
+      const lng = geoResult[0].geometry.location.lng;
+      if (!lat || !lng) return;
+      const response = await getWeatherForecast(lat, lng);
+      if (response) {
+        setWeatherResponse(response);
+      }
+    }
+    setLoading(false);
+  }
+
   useEffect(() => {
     if (test) {
       searchFlightStatus(TEST_FLIGHT_NUMBER, TEST_FLIGHT_DATE);
@@ -59,10 +77,13 @@ export function useGetAPIs(test: boolean) {
     flightResponse,
     geoResponse,
     placeResponse,
-    loading,
+    weatherResponse,
     
     searchFlightStatus,
     searchFlight,
-    placeSearch
+    placeSearch,
+    checkWeather,
+
+    loading,
   }
 }

@@ -6,20 +6,14 @@ import Image from 'next/image';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { Suspense, useState } from 'react';
 
-function HistoryChatPage(
-  // temp props
-  { chatroom, test }: { chatroom?: Chatroom; test?: boolean }
-) {
+function HistoryChatPage({ chatroom }: { chatroom?: Chatroom; }) {
   const [loading, setLoading] = useState<boolean>(false);
   const path = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
   const id = searchParams.get('id');
   const handleOnClick = () => {
-    if (test) {
-      router.push('/chatroom?id=test');
-    }
-    else if (chatroom) {
+    if (chatroom) {
       const route = `/chatroom?id=${chatroom.cid}`;
       router.push(route);
     }
@@ -49,7 +43,6 @@ function HistoryChatPage(
       ${!id && !chatroom && path !== '/history' && 'bg-slate-300'}
     `}>
       {
-        test ? 'Test chat' :
         !chatroom ? 
         'Start a new chat':
         chatroom.chatroom_name
@@ -71,11 +64,9 @@ function HistoryChatPage(
   );
 }
 
-const HistoryChat = (
-  { chatroom, test }: { chatroom?: Chatroom; test?: boolean }
-) => (
+const HistoryChat = ({ chatroom }: { chatroom?: Chatroom; }) => (
   <Suspense fallback={<div>Loading...</div>}>
-    <HistoryChatPage chatroom={chatroom} test={test} />
+    <HistoryChatPage chatroom={chatroom} />
   </Suspense>
 )
 

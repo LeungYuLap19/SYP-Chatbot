@@ -13,8 +13,6 @@ function ChatroomPage() {
       h-full flex-grow bg-customWhite-100 flex flex-col gap-2 p-4 relative overflow-hidden
     '>
       {
-        id === 'test' ?
-        <ExistedChatroom id={id} test={true} /> :
         id ?
         <ExistedChatroom id={id} /> :
         <NewChatroom />
