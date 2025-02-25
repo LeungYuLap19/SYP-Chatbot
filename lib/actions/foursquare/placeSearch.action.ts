@@ -2,9 +2,9 @@
 import { placeSearchFields } from "@/constants";
 import axios from "axios"
 
-export async function getPopularPlaces(ne: Northeast, sw: Southwest, limit: number) {
+export async function getPopularPlaces(ne: Northeast, sw: Southwest, ids: number[], limit: number) {
   try {
-    const response = await axios.get(`https://api.foursquare.com/v3/places/search?ne=${ne.lat}%2C${ne.lng}&sw=${sw.lat}%2C${sw.lng}&sort=RELEVANCE&limit=${limit}&fields=${placeSearchFields.join(',')}`, {
+    const response = await axios.get(`https://api.foursquare.com/v3/places/search?ne=${ne.lat}%2C${ne.lng}&sw=${sw.lat}%2C${sw.lng}&sort=RELEVANCE&limit=${limit}&categories=${ids.join(',')}&fields=${placeSearchFields.join(',')}`, {
       headers: {
         accept: 'application/json',
         Authorization: 'fsq32n4d1KUF+Q1wTFubzkllNlz98R2t39y5rYq/jRL+ueY='

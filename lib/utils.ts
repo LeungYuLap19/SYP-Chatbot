@@ -4,6 +4,7 @@ import { z } from "zod";
 import qs from "query-string";
 import { toast } from "@/hooks/use-toast";
 import dayjs from 'dayjs';
+import { placeSearchCategories } from "@/constants";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -193,4 +194,17 @@ export function get12HoursForecast(forecastday: ForecastDay[]): Hour[] {
   });
 
   return formattedNext12Hours;
+}
+
+export function getIdsOrLabelByCategory(
+  categoryName: 
+  "popularPlaces" | "restaurantSearch" | "dessertSearch" | "cafeSearch" | "barSearch" | "nightMarketSearch" | "entertainmentSearch" | "shoppingSearch",
+  Ids: boolean
+): number[] | string | null {
+  const category = placeSearchCategories.find(cat => cat.category === categoryName);
+  if (Ids) {
+    return category ? category.ids ?? [] : [];  
+  } else {
+    return category?.label ?? null; 
+  }
 }

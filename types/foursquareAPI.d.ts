@@ -94,3 +94,9 @@ interface OpenClose {
   close: string;
   day: number;
 }
+
+interface PlaceSearchCategory {
+  category: "popularPlaces" | "restaurantSearch" | "dessertSearch" | "cafeSearch" | "barSearch" | "nightMarketSearch" | "entertainmentSearch" | "shoppingSearch";
+  ids: number[];
+  label: string;
+}

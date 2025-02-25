@@ -5,6 +5,8 @@ import { TEST_SEARCH_LIMIT } from '@/constants';
 import PlaceSearch from './dialog/placeSearch/PlaceSearch';
 import FlightSearch from './dialog/flightSearch/FlightSearch';
 import WeatherForecast from './dialog/weatherForecast/WeatherForecast';
+import { getIdsOrLabelByCategory } from '@/lib/utils';
+import Loading from './dialog/Loading';
 
 export default function Message(
   // temp props
@@ -45,11 +47,22 @@ export default function Message(
         }
         break;
   
-      case "popularPlaces":
-        if ("location" in custom.data) {
-          placeSearch(custom.data.location, TEST_SEARCH_LIMIT);
-        }
-        break;
+        case "popularPlaces":
+        case "restaurantSearch":
+        case "dessertSearch":
+        case "cafeSearch":
+        case "barSearch":
+        case "nightMarketSearch":
+        case "entertainmentSearch":
+        case "shoppingSearch":
+          if ("location" in custom.data) {
+            placeSearch(
+              custom.data.location, 
+              TEST_SEARCH_LIMIT, 
+              getIdsOrLabelByCategory(responseType, true) as number[] || []
+            );
+          }
+          break;
 
       case "weather":
         if ("location" in custom.data) {
@@ -62,15 +75,33 @@ export default function Message(
     }
   }, [responseType, custom]);  
 
+  const validPlaceSearchTypes = [
+    "popularPlaces", "restaurantSearch", "dessertSearch", 
+    "cafeSearch", "barSearch", "nightMarketSearch", 
+    "entertainmentSearch", "shoppingSearch"
+  ] as const; 
+
   const responseComponents: Record<string, JSX.Element | null> = {
     flightStatus: flightStatus ? <FlightStatus flightStatus={flightStatus} /> : null,
-    popularPlaces: placeResponse && geoResponse ? <PlaceSearch resultItem={placeResponse} geoResponse={geoResponse[0]} /> : null,
     flightSearch: flightResponse ? <FlightSearch flightSearch={flightResponse} /> : null,
     weather: weatherResponse ? <WeatherForecast weatherForecast={weatherResponse} /> : null,
+    
+    ...Object.fromEntries(
+      validPlaceSearchTypes.map((type) => [
+        type,
+        placeResponse && geoResponse 
+          ? <PlaceSearch resultItem={placeResponse} geoResponse={geoResponse[0]} responseType={type} />
+          : null
+      ])
+    )
   };
 
   if (responseType) {
     return responseComponents[responseType];
+  }
+
+  if (loading) {
+    return <Loading />
   }
 
   if (userBotMessage) {

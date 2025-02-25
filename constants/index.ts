@@ -63,6 +63,79 @@ export const placeSearchFields: string[] = [
   'website'
 ];
 
+export const placeSearchCategories: PlaceSearchCategory[] = [
+  {
+    category: 'popularPlaces',
+    ids: [
+      10001, 10002, 10004, 10024, 10027, 10068,
+      13003, 13065, 13028, 13040, 13062, 13032,
+      14005, 14004, 16000, 17000,
+
+      16020, 16031, 16041,
+      16034, 16035, 16036, 16037, 16039, 16017, 16008,
+      16004, 16019, 16027, 16028,
+      16002, 16003
+    ],
+    label: 'Popular Places'
+  },
+  {
+    category: 'restaurantSearch',
+    ids: [
+      13065
+    ],
+    label: 'Restaurants'
+  },
+
+  {
+    category: 'dessertSearch',
+    ids: [
+      13040
+    ],
+    label: 'Dessert Shops'
+  },
+  {
+    category: 'cafeSearch',
+    ids: [
+      13032
+    ],
+    label: 'Cafes'
+  },
+  {
+    category: 'barSearch',
+    ids: [
+      13003
+    ],
+    label: 'Bars'
+  },
+
+  {
+    category: 'nightMarketSearch',
+    ids: [
+      13062
+    ],
+    label: 'Night Markets'
+  },
+  {
+    category: 'entertainmentSearch',
+    ids: [
+      10002, 10001, 10056,
+      10024,
+      10027
+    ],
+    label: 'Entertainments'
+  },
+  {
+    category: 'shoppingSearch',
+    ids: [
+      17039, 17114, 17115,
+      17003,
+      17018,
+      17144
+    ],
+    label: 'Shopping Spots'
+  },
+]
+
 export const COOKIES_KEY_USERDATA = 'user_data';
 
 export const DAYS_TO_EXPIRE = 7;

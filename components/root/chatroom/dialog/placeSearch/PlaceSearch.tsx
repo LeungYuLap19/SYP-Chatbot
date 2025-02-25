@@ -2,8 +2,15 @@
 import React, { useState } from 'react'
 import PlaceOverview from './PlaceOverview'
 import PlaceDetails from './PlaceDetails'
+import { getIdsOrLabelByCategory } from '@/lib/utils';
 
-export default function PlaceSearch({ resultItem, geoResponse }: { resultItem: ResultItem[]; geoResponse: Geocoding }) {
+export default function PlaceSearch({ 
+  resultItem, geoResponse, responseType 
+}: { 
+  resultItem: ResultItem[]; 
+  geoResponse: Geocoding; 
+  responseType: "popularPlaces" | "restaurantSearch" | "dessertSearch" | "cafeSearch" | "barSearch" | "nightMarketSearch" | "entertainmentSearch" | "shoppingSearch";
+}) {
   const [selectedPlace, setSelectedPlace] = useState<string | null>(null);
 
   return (
@@ -11,8 +18,8 @@ export default function PlaceSearch({ resultItem, geoResponse }: { resultItem: R
       <div className='w-[40%] max-2xl:w-[50%] max-xl:w-[60%] max-lg:w-[65%] max-md:w-full flex flex-col rounded-lg bg-white text-sm overflow-hidden'>
         <div className='p-6 pb-4'>
           <p>
-            Here are some popular {' '}
-            <span className='text-customBlue-200 font-semibold'> attractions</span> {' '}
+            Here are some {' '}
+            <span className='text-customBlue-200 font-semibold'>{getIdsOrLabelByCategory(responseType, false)}</span> {' '}
             I found in {' '}
             <span className='text-customBlue-200 font-semibold'> {geoResponse.address_components[0].short_name}</span>:
           </p>

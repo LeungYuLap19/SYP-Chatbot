@@ -33,14 +33,15 @@ export function useGetAPIs(test: boolean) {
     setLoading(false);
   }
 
-  const placeSearch = async (input: string, limit: number) => {
+  const placeSearch = async (input: string, limit: number, ids: number[]) => {
     setLoading(true);
     const geoResult: Geocoding[] = await getLocationDetails(input);
     if (geoResult) {
       setGeoResponse(geoResult);
       const ne: Northeast = geoResult[0].geometry.bounds.northeast;
       const sw: Southwest = geoResult[0].geometry.bounds.southwest;
-      const response = await getPopularPlaces(ne, sw, limit);
+      const response = await getPopularPlaces(ne, sw, ids, limit);
+      console.log(response);
       if (response) {
         setPlaceResponse(response);
       }
@@ -64,13 +65,13 @@ export function useGetAPIs(test: boolean) {
     setLoading(false);
   }
 
-  useEffect(() => {
-    if (test) {
-      searchFlightStatus(TEST_FLIGHT_NUMBER, TEST_FLIGHT_DATE);
-      searchFlight(TEST_FLIGHT_DEPARTURE, TEST_FLIGHT_ARRIVAL, TEST_FLIGHT_DEPARTURE_DATE);
-      placeSearch(TEST_AUTOCOMPLETION, TEST_SEARCH_LIMIT);
-    }
-  }, [test]);
+  // useEffect(() => {
+  //   if (test) {
+  //     searchFlightStatus(TEST_FLIGHT_NUMBER, TEST_FLIGHT_DATE);
+  //     searchFlight(TEST_FLIGHT_DEPARTURE, TEST_FLIGHT_ARRIVAL, TEST_FLIGHT_DEPARTURE_DATE);
+  //     placeSearch(TEST_AUTOCOMPLETION, TEST_SEARCH_LIMIT, []);
+  //   }
+  // }, [test]);
 
   return {
     flightStatus,
