@@ -100,14 +100,10 @@ export default function Message(
     return responseComponents[responseType];
   }
 
-  if (loading) {
-    return <Loading />
-  }
-
   if (userBotMessage) {
     return (
       <div className={`w-full flex ${type === "user" && "justify-end"}`}>
-        <div className={`w-[70%] max-lg:w-full flex ${type === "user" && "justify-end"}`}>
+        <div className={`max-w-[70%] max-lg:w-full flex ${type === "user" && "justify-end"}`}>
           <p className="text-sm text-pretty bg-customBlue-100 py-3 px-5 rounded-2xl text-customWhite-100">
             {userBotMessage}
           </p>

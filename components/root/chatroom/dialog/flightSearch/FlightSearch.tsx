@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import DepArr from '../common/DepArr'
 import SearchResult from './SearchResult'
 import SearchResultTitle from './SearchResultTitle'
-import FlightOverview from './FlightOverview'
 
 export default function FlightSearch({ flightSearch }: { flightSearch: FlightResponse }) {
   const [showDetails, setShowDetails] = useState<number>(-1);

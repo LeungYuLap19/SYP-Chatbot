@@ -11,10 +11,10 @@ export default function HourlyForecast({ weatherForecast }: { weatherForecast: W
   }, [weatherForecast]);
 
   return (
-    <div className='flex flex-col gap-4'>
+    <div className='flex flex-col gap-4 relative pb-[100px]'>
       <p className='font-semibold text-xs text-customBlue-200'>Hourly Forecast</p>
 
-      <div className='flex overflow-auto gap-11 text-xs'>
+      <div className='flex overflow-auto max-w-full gap-11 text-xs absolute left-0 right-0 top-8'>
         {
           formattedHours &&
           formattedHours.map((hour: Hour) => (
