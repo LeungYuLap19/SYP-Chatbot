@@ -5,6 +5,7 @@ import { getLocationDetails } from "../actions/google/geocoding.action";
 import { getPopularPlaces } from "../actions/foursquare/placeSearch.action";
 import { TEST_AUTOCOMPLETION, TEST_FLIGHT_ARRIVAL, TEST_FLIGHT_DATE, TEST_FLIGHT_DEPARTURE, TEST_FLIGHT_DEPARTURE_DATE, TEST_FLIGHT_NUMBER, TEST_SEARCH_LIMIT } from "@/constants";
 import { getWeatherForecast } from "../actions/weatherapi/weatherForecast.action";
+import { getHotelSearch } from "../actions/serpapi/hotelSearch.action";
 
 export function useGetAPIs(test: boolean) {
   const [flightStatus, setFlightStatus] = useState<FlightStatus | null>(null);
@@ -12,6 +13,7 @@ export function useGetAPIs(test: boolean) {
   const [geoResponse, setGeoResponse] = useState<Geocoding[] | null>(null);
   const [placeResponse, setPlaceResponse] = useState<ResultItem[] | null>(null);
   const [weatherResponse, setWeatherResponse] = useState<WeatherForecast | null>(null);
+  const [hotelResponse, setHotelResponse] = useState<HotelSearchResponse | null>(null);
 
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -41,7 +43,6 @@ export function useGetAPIs(test: boolean) {
       const ne: Northeast = geoResult[0].geometry.bounds.northeast;
       const sw: Southwest = geoResult[0].geometry.bounds.southwest;
       const response = await getPopularPlaces(ne, sw, ids, limit);
-      console.log(response);
       if (response) {
         setPlaceResponse(response);
       }
@@ -65,6 +66,15 @@ export function useGetAPIs(test: boolean) {
     setLoading(false);
   }
 
+  const hotelSearch = async (input: string, checkIn: string, checkOut: string) => {
+    setLoading(true);
+    const response = await getHotelSearch(input, checkIn, checkOut);
+    if (response) {
+      setHotelResponse(response);
+    }
+    setLoading(false);
+  }
+
   // useEffect(() => {
   //   if (test) {
   //     searchFlightStatus(TEST_FLIGHT_NUMBER, TEST_FLIGHT_DATE);
@@ -79,11 +89,13 @@ export function useGetAPIs(test: boolean) {
     geoResponse,
     placeResponse,
     weatherResponse,
+    hotelResponse,
     
     searchFlightStatus,
     searchFlight,
     placeSearch,
     checkWeather,
+    hotelSearch,
 
     loading,
   }

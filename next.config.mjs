@@ -17,6 +17,11 @@ const nextConfig = {
       },
       {
         protocol: 'https',
+        hostname: '**', // Wildcard to match any host
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
         hostname: 'www.gstatic.com',
         port: '',
         pathname: '/**',

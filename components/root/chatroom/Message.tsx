@@ -6,10 +6,10 @@ import PlaceSearch from './dialog/placeSearch/PlaceSearch';
 import FlightSearch from './dialog/flightSearch/FlightSearch';
 import WeatherForecast from './dialog/weatherForecast/WeatherForecast';
 import { getIdsOrLabelByCategory } from '@/lib/utils';
-import Loading from './dialog/Loading';
+import Default from './dialog/Default';
+import HotelSearch from './dialog/hotelSearch/HotelSearch';
 
 export default function Message(
-  // temp props
   { type, message }: { type: string; message: Message }
 ) {
   const {
@@ -18,16 +18,18 @@ export default function Message(
     geoResponse,
     placeResponse,
     weatherResponse,
+    hotelResponse,
     
     searchFlightStatus,
     searchFlight,
     placeSearch,
     checkWeather,
+    hotelSearch,
 
     loading
   } = useGetAPIs(false);
 
-  const { custom, text } = message;
+  const { custom, text, botDefault } = message;
   const userBotMessage = custom?.message || text;
   const responseType = custom?.data?.response_type;
 
@@ -69,6 +71,12 @@ export default function Message(
           checkWeather(custom.data.location);
         }
         break;
+
+      case "hotelSearch":
+        if ("location" in custom.data && "check_in" in custom.data && "check_out" in custom.data) {
+          hotelSearch(custom.data.location, custom.data.check_in, custom.data.check_out);
+        }
+        break;
   
       default:
         console.warn("Unknown response type:", responseType);
@@ -85,6 +93,7 @@ export default function Message(
     flightStatus: flightStatus ? <FlightStatus flightStatus={flightStatus} /> : null,
     flightSearch: flightResponse ? <FlightSearch flightSearch={flightResponse} /> : null,
     weather: weatherResponse ? <WeatherForecast weatherForecast={weatherResponse} /> : null,
+    hotelSearch: hotelResponse ? <HotelSearch hotelSearch={hotelResponse} /> : null,
     
     ...Object.fromEntries(
       validPlaceSearchTypes.map((type) => [
@@ -98,6 +107,10 @@ export default function Message(
 
   if (responseType) {
     return responseComponents[responseType];
+  }
+
+  if (botDefault) {
+    return <Default />;
   }
 
   if (userBotMessage) {

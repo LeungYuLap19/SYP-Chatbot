@@ -5,11 +5,11 @@ interface RasaResponse {
 
 interface RasaCustom {
   message: string;
-  data?: RasaFlightStatusData | RasaPlaceData | RasaFlightsSearchData | RasaWeatherData;
+  data?: RasaFlightStatusData | RasaPlaceData | RasaFlightsSearchData | RasaWeatherData | RasaHotelSearchData;
 }
 
 interface RasaData {
-  response_type: "flightStatus" | "flightSearch" | "popularPlaces" | "weather" | "restaurantSearch" | "dessertSearch" | "cafeSearch" | "barSearch" | "nightMarketSearch" | "entertainmentSearch" | "shoppingSearch";
+  response_type: "flightStatus" | "flightSearch" | "hotelSearch" | "popularPlaces" | "weather" | "restaurantSearch" | "dessertSearch" | "cafeSearch" | "barSearch" | "nightMarketSearch" | "entertainmentSearch" | "shoppingSearch";
 }
 
 interface RasaFlightStatusData extends RasaData {
@@ -29,4 +29,10 @@ interface RasaFlightsSearchData extends RasaData {
 
 interface RasaWeatherData extends RasaData {
   location: string;
+}
+
+interface RasaHotelSearchData extends RasaData {
+  location: string;
+  check_in: string;
+  check_out: string;
 }

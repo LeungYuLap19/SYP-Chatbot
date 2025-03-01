@@ -51,6 +51,12 @@ export const weekDays: string[] = [
   'Sunday',
 ];
 
+export const hotelSearchParams = {
+  people: '/dialog/user.svg',
+  duration: '/dialog/calendar-clock.svg',
+  location: '/dialog/marker.svg',
+}
+
 export const placeSearchFields: string[] = [
   'fsq_id', 'name', 'rating', 'categories', 'photos', 
   'email',

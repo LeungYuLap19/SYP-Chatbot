@@ -31,6 +31,7 @@ interface Message {
   sender: string;
   text?: string;
   custom?: RasaCustom;
+  botDefault?: boolean;
   datetime: string;
 }
 

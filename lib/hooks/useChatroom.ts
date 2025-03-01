@@ -28,18 +28,33 @@ export function useChatroom(id?: string) {
       return;
     }
     // Step 3: Store bot response in Firestore if we received a response
-    if (botResponseResult.data) {
-      const botMessage: Message = {
-        sender: "bot",
-        custom: botResponseResult.data,
-        datetime: new Date().toISOString(),
-      };
-
-      const botStoreResult = await storeMessage({ cid, message: botMessage });
-      if (botStoreResult.error) {
-        showToast({ title: ERROR_TOAST_TITLE, description: botStoreResult.error.message });
-      }
+    let botMessage: Message = {
+      sender: "bot",
+      botDefault: true,
+      datetime: new Date().toISOString(),
     }
+
+    if (botResponseResult.data) {
+      botMessage.custom = botResponseResult.data;
+    }
+
+    const botStoreResult = await storeMessage({ cid, message: botMessage });
+    if (botStoreResult.error) {
+      showToast({ title: ERROR_TOAST_TITLE, description: botStoreResult.error.message });
+    }
+
+    // if (botResponseResult.data) {
+    //   const botMessage: Message = {
+    //     sender: "bot",
+    //     custom: botResponseResult.data,
+    //     datetime: new Date().toISOString(),
+    //   };
+
+    //   const botStoreResult = await storeMessage({ cid, message: botMessage });
+    //   if (botStoreResult.error) {
+    //     showToast({ title: ERROR_TOAST_TITLE, description: botStoreResult.error.message });
+    //   }
+    // }
   }
 
   const handleSubmit = async () => {
