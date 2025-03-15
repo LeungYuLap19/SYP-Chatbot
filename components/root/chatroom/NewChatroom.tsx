@@ -13,7 +13,7 @@ export default function NewChatroom() {
         <p className='text-[28px] font-semibold text-customBlack-100'>I am your travel assistance</p>
         <div className='flex gap-2 w-full'>
           <Input 
-            className='text-sm' 
+            className='bg-customWhite-100 border border-customBlack-100' 
             type="text"
             disabled={loading} 
             ref={inputRef}

@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import DepArr from '../common/DepArr'
 import SearchResult from './SearchResult'
 import SearchResultTitle from './SearchResultTitle'
+import CustomButton from '@/components/global/CustomButton'
 
 export default function FlightSearch({ flightSearch }: { flightSearch: FlightResponse }) {
   const [showDetails, setShowDetails] = useState<number>(-1);
@@ -66,9 +67,18 @@ export default function FlightSearch({ flightSearch }: { flightSearch: FlightRes
                       key={index}
                       flightOption={flightOption}
                     /> 
-                    <div className='px-6 flex'>
-                      <span className='w-full h-[1px] bg-slate-200 '></span>
+                    <div className='flex justify-end px-6 mb-4'>
+                      <CustomButton
+                        loading={false}
+                        label='Save Flight to Plan'
+                        type='button'
+                        onClick={() => {}}
+                        className='bg-transparent text-xs rounded-lg w-full'
+                      />
                     </div>
+                    {/* <div className='px-6 flex'>
+                      <span className='w-full h-[1px] bg-slate-200'></span>
+                    </div> */}
                   </>
                   
                   // :

@@ -12,7 +12,7 @@ export async function getFlightStatus(flightNumber: string, date: string) {
     });
     // console.log(response.data);
     if (response.data) {
-      return response.data[1];
+      return response.data[0];
     }
   } catch (error: any) {
     console.error('Get Flight Status Error:', error.message);

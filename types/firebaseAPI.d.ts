@@ -35,6 +35,33 @@ interface Message {
   datetime: string;
 }
 
+interface PlannerDetails {
+  pid?: string;
+  uid: string;
+  name: string;
+  from_datetime: string | null;
+  to_datetime: string | null;
+  created_datetime: string;
+  items: PlannerItem[];
+}
+
+interface PlannerItem {
+  from_datetime: string | null;
+  to_datetime: string | null;
+}
+
+interface FlightItem extends PlannerItem {
+  flight_number: string;
+}
+
+interface AccommodationItem extends PlannerItem {
+  property_token: string;
+}
+
+interface PlaceItem extends PlannerItem {
+  fsq_id: string;
+}
+
 // cookies api
 interface StoreToCookiesParams<T> {
   key: string;

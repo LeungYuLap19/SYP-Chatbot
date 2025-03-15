@@ -17,10 +17,11 @@ interface SocialMediaProps {
 }
 
 interface CustomButtonProps {
-  loading: boolean;
+  loading?: boolean;
   type: 'submit' | 'button';
   label: string;
   onClick?: () => void;
+  className?: string;
 }
 
 interface DepArrProps {

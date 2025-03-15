@@ -12,6 +12,11 @@ export const navLinks: NavigationTabProps[] = [
     imgUrl: '/nav/time-past.svg',
   },
   {
+    label: 'Planner',
+    route: '/planner',
+    imgUrl: '/nav/planner.png',
+  },
+  {
     label: 'Profile',
     route: '/profile',
     imgUrl: '/nav/user.svg',
