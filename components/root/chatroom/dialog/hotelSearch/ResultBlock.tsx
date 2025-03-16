@@ -1,20 +1,39 @@
+import CustomButton from '@/components/global/CustomButton';
+import SaveWindow from '@/components/root/planner/SaveWindow';
+import { randomUUID } from 'crypto';
 import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
 
-export default function ResultBlock({ hotelProperty }: { hotelProperty: HotelProperty }) {
+export default function ResultBlock(
+  { 
+    hotelProperty,
+    check_in_date,
+    check_out_date  
+  }: { 
+    hotelProperty: HotelProperty;
+    check_in_date: string;
+    check_out_date: string;
+  }
+) {
   const allItems = hotelProperty.hotel_class 
     ? [hotelProperty.hotel_class, ...hotelProperty.amenities]
     : [...hotelProperty.amenities];
 
+  const [showWindow, setShowWindow] = useState<boolean>(false);
+  const [selectedItem, setSelectedItem] = useState<FlightItem | AccommodationItem | PlaceItem>();
+
   return (
     <div className='flex gap-4'>
       <div className='flex-shrink-0 w-[20%] aspect-[5/8] bg-slate-200 rounded-md relative overflow-hidden'>
-        <Image 
-          src={hotelProperty.images[0].original_image}
-          alt='hotel image'
-          fill={true}
-          style={{ objectFit: 'cover', objectPosition: 'center' }}
-        />
+        {
+          hotelProperty.images?.length > 0 &&
+            <Image 
+              src={hotelProperty.images[0].original_image}
+              alt='hotel image'
+              fill={true}
+              style={{ objectFit: 'cover', objectPosition: 'center' }}
+            />
+        }
       </div>
 
       <div className='flex flex-col flex-1'>
@@ -48,12 +67,33 @@ export default function ResultBlock({ hotelProperty }: { hotelProperty: HotelPro
           </div>
         </div>
 
-        <p className='font-semibold w-full text-right underline'>
-          <a href={hotelProperty.link} target="_blank" rel="noopener noreferrer">
-            {hotelProperty.rate_per_night.lowest}
-          </a>
-        </p>
+        <div className='w-full flex justify-between items-center'>
+          <p className='font-semibold underline'>
+            <a href={hotelProperty.link} target="_blank" rel="noopener noreferrer">
+              {hotelProperty.rate_per_night.lowest}
+            </a>
+          </p>
+
+          <CustomButton 
+            label='Save to Planner'
+            type='button'
+            className='text-xs bg-transparent px-3 py-1 h-fit'
+            onClick={() => {
+              setShowWindow(true);
+              setSelectedItem({
+                piid: crypto.randomUUID(),
+                from_datetime: check_in_date,
+                to_datetime: check_out_date,
+                property_token: hotelProperty.property_token
+              })
+            }}
+          />
+        </div>
       </div>
+      {
+        showWindow && selectedItem &&
+        <SaveWindow setShowWindow={setShowWindow} selectedItem={selectedItem} />
+      }
     </div>
   )
 }

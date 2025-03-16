@@ -4,9 +4,13 @@ import DepArr from '../common/DepArr'
 import SearchResult from './SearchResult'
 import SearchResultTitle from './SearchResultTitle'
 import CustomButton from '@/components/global/CustomButton'
+import SaveWindow from '@/components/root/planner/SaveWindow'
+import { randomUUID } from 'crypto'
 
 export default function FlightSearch({ flightSearch }: { flightSearch: FlightResponse }) {
   const [showDetails, setShowDetails] = useState<number>(-1);
+  const [showWindow, setShowWindow] = useState<boolean>(false);
+  const [selectedItem, setSelectedItem] = useState<FlightItem | AccommodationItem | PlaceItem>();
 
   return (
     <div className='w-full flex'>
@@ -72,23 +76,35 @@ export default function FlightSearch({ flightSearch }: { flightSearch: FlightRes
                         loading={false}
                         label='Save Flight to Plan'
                         type='button'
-                        onClick={() => {}}
+                        onClick={() => 
+                          {
+                            setShowWindow(true);
+                            setSelectedItem({
+                              piid: crypto.randomUUID(),
+                              from_datetime: flightOption.flights[0].departure_airport.time || null,
+                              to_datetime: flightOption.flights[flightOption.flights.length - 1].arrival_airport.time || null,
+                              flights: flightOption.flights.map((flight) => ({
+                                flight_number: flight.flight_number,
+                                from_datetime: flight.departure_airport.time || null,
+                                to_datetime: flight.arrival_airport.time || null,
+                              }))
+                            });
+                          }
+                        }
                         className='bg-transparent text-xs rounded-lg w-full'
                       />
                     </div>
-                    {/* <div className='px-6 flex'>
-                      <span className='w-full h-[1px] bg-slate-200'></span>
-                    </div> */}
                   </>
-                  
-                  // :
-                  // <FlightOverview flightOption={flightOption} />
                 }
               </div>
             ))
           }
         </div>
       </div>
+      {
+        showWindow && selectedItem &&
+        <SaveWindow setShowWindow={setShowWindow} selectedItem={selectedItem} />
+      }
     </div>
   )
 }

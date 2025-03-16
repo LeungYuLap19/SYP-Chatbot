@@ -18,3 +18,21 @@ export async function getPopularPlaces(ne: Northeast, sw: Southwest, ids: number
     console.error('Google Place Search Error: ', error.message);
   }
 }
+
+export async function getPlaceDetails(fsq_id: string) {
+  try {
+    const response = await axios.get(`https://api.foursquare.com/v3/places/${fsq_id}?fields=${placeSearchFields.join(',')}`, {
+      headers: {
+        accept: 'application/json',
+        Authorization: 'fsq32n4d1KUF+Q1wTFubzkllNlz98R2t39y5rYq/jRL+ueY='
+      }
+    });
+    // console.log(response.data);
+    if (response.data) {
+      return response.data;
+    }
+  } catch (error) {
+    console.error('Place Details Error:', error);
+    return null;
+  }
+}

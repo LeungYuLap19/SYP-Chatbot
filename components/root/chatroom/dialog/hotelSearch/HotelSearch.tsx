@@ -21,6 +21,8 @@ export default function HotelSearch({ hotelSearch }: { hotelSearch: HotelSearchR
               <ResultBlock 
                 key={index} 
                 hotelProperty={hotelProperty} 
+                check_in_date={hotelSearch.search_parameters.check_in_date}
+                check_out_date={hotelSearch.search_parameters.check_out_date}
               />
             ))
           }

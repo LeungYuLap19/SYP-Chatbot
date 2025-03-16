@@ -42,16 +42,23 @@ interface PlannerDetails {
   from_datetime: string | null;
   to_datetime: string | null;
   created_datetime: string;
-  items: PlannerItem[];
+  items: (FlightItem | AccommodationItem | PlaceItem)[];
 }
 
 interface PlannerItem {
+  piid: string;
   from_datetime: string | null;
   to_datetime: string | null;
 }
 
 interface FlightItem extends PlannerItem {
+  flights: Flight[];
+}
+
+interface Flight {
   flight_number: string;
+  from_datetime: string | null;
+  to_datetime: string | null;
 }
 
 interface AccommodationItem extends PlannerItem {

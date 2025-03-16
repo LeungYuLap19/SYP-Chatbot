@@ -22,6 +22,8 @@ interface CustomButtonProps {
   label: string;
   onClick?: () => void;
   className?: string;
+  iconUrl?: string;
+  imageClassName?: string;
 }
 
 interface DepArrProps {

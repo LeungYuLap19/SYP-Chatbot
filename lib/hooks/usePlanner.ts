@@ -11,7 +11,6 @@ export function usePlanner(id?: string) {
   const router = useRouter();
 
   const processCreate = async (toChatroom: boolean) => {
-    console.log(toChatroom)
     const inputText = inputRef.current?.value || '';
     if (!inputText.trim()) {
       setLoading(false);

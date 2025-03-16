@@ -10,7 +10,7 @@ function PlannerDetailsPage() {
   const id = searchParams.get('id');
 
   return (
-    <div className='h-full flex-grow bg-customWhite-100 flex flex-col gap-2 p-4 relative overflow-hidden'>
+    <div className='h-full flex-grow bg-customWhite-100 flex flex-col gap-2 p-4 relative overflow-auto'>
       {
         id ?
         <ExistedPlanner id={id} /> :

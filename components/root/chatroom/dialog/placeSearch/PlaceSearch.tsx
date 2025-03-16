@@ -36,15 +36,7 @@ export default function PlaceSearch({
                 />
                 {
                   selectedPlace === item.fsq_id && 
-                  <>
-                    <PlaceDetails resultItem={item} />
-                    {
-                      index != resultItem.length - 1 &&
-                        <div className='flex px-2'>
-                          <span className='w-full h-[1px] bg-slate-200'></span>
-                        </div>
-                    }
-                  </>
+                  <PlaceDetails resultItem={item} />
                 }
               </div>
             ))

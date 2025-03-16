@@ -1,12 +1,19 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Subtitle from './Subtitle'
 import Image from 'next/image'
 import { socialMedia, weekDays } from '@/constants'
 import { showToast } from '@/lib/utils';
+import CustomButton from '@/components/global/CustomButton'
+import SaveWindow from '@/components/root/planner/SaveWindow'
 
-export default function PlaceDetails({ resultItem }: {resultItem: ResultItem}) {
+export default function PlaceDetails({ resultItem, isSaved = false }: {resultItem: ResultItem; isSaved?: boolean}) {
   const [hoursDisplay, setHoursDisplay] = useState<boolean>(false);
+  const [showWindow, setShowWindow] = useState<boolean>(false);
+  const [selectedItem, setSelectedItem] = useState<FlightItem | AccommodationItem | PlaceItem>();
+  const [fromDate, setFromDate] = useState<Date | undefined>();
+  const [toDate, setToDate] = useState<Date | undefined>();
+  
   const googleMapsUrl = `https://www.google.com/maps?q=${resultItem.geocodes.main.latitude},${resultItem.geocodes.main.longitude}`;
 
   const handleCopy = (text: string) => {
@@ -16,6 +23,15 @@ export default function PlaceDetails({ resultItem }: {resultItem: ResultItem}) {
       description: text,
     });
   };
+
+  useEffect(() => {
+    setSelectedItem({
+      piid: crypto.randomUUID(),
+      from_datetime: fromDate?.toISOString() || null,
+      to_datetime: toDate?.toISOString() || null,
+      fsq_id: resultItem.fsq_id
+    });
+  }, [fromDate, toDate, resultItem.fsq_id]);
 
   return (
     <div className='p-2 pt-0 flex flex-col gap-4'>
@@ -157,6 +173,27 @@ export default function PlaceDetails({ resultItem }: {resultItem: ResultItem}) {
             </a>
           </div>
         </div>
+      }
+      {
+        !isSaved &&
+        <CustomButton 
+          label='Save to Planner'
+          type='button'
+          className='bg-transparent'
+          onClick={() => setShowWindow(true)}
+        />
+      }
+      {
+        showWindow && selectedItem &&
+        <SaveWindow 
+          setShowWindow={setShowWindow} 
+          selectedItem={selectedItem} 
+          isPlace={true} 
+          fromDate={fromDate}
+          setFromDate={setFromDate}
+          toDate={toDate}
+          setToDate={setToDate}
+        />
       }
     </div>
   )
