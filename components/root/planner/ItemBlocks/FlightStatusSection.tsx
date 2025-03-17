@@ -2,6 +2,7 @@ import { useGetAPIs } from '@/lib/hooks/useGetAPIs'
 import { format } from 'date-fns';
 import React, { useEffect } from 'react'
 import FromTo from '../../chatroom/dialog/common/FromTo';
+import InformationBlock from '../../chatroom/dialog/flightStatus/InformationBlock';
 
 export default function FlightStatusSection(
   { flight, layover, needToSet, setDepArrProps }: 
@@ -68,6 +69,13 @@ export default function FlightStatusSection(
           <p className='text-xs text-customBlack-200'>
             {flightStatus.number.replace(' ', '')} {' - '} {flightStatus.aircraft.model}
           </p>
+
+          <div className='flex justify-between'>
+            <InformationBlock className='!text-sm' label='Terminal' value={`${flightStatus.departure.terminal && 'T' + flightStatus.departure.terminal}`} />
+            <InformationBlock className='!text-sm' label='Check-In' value={flightStatus.departure.checkInDesk} />
+            <InformationBlock className='!text-sm' label='Gate' value={flightStatus.departure.gate} />
+            <InformationBlock className='!text-sm' label='Status' value={flightStatus.status} />
+          </div>
 
           {
             layover &&

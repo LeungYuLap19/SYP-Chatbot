@@ -39,17 +39,27 @@ export default function ModifyWindow(
   }
 
   useEffect(() => {
-      if (fromDate) {
-        if (!toDate || toDate < fromDate) {
-          if (toDate && toDate < fromDate) {
-            showToast({ title: 'Change Your Date Time', description: 'End time cannot be earlier than start time.' })
-          }
-          const newToDate = new Date(fromDate);
-          newToDate.setHours(newToDate.getHours() + 1); 
-          setToDate!(newToDate);
-        }
-      }
-    }, [fromDate, toDate]);
+    if (fromDate) {
+      setToDate!(prevToDate => {
+        const newToDate = new Date(fromDate);
+        newToDate.setHours(newToDate.getHours() + 1);
+        return newToDate;
+      });
+    }
+  }, [fromDate]);
+  
+  useEffect(() => {
+    if (fromDate && toDate && toDate < fromDate) {
+      showToast({ 
+        title: 'Change Your Date Time', 
+        description: 'End time cannot be earlier than start time.' 
+      });
+  
+      const newToDate = new Date(fromDate);
+      newToDate.setHours(newToDate.getHours() + 1);
+      setToDate!(newToDate);
+    }
+  }, [toDate]);
 
   return (
     <div className='z-50 w-screen h-screen bg-black bg-opacity-50 fixed top-0 left-0 flex justify-center items-center'>

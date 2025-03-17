@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FlightBlock from './FlightBlock';
 import PropertyBlock from './PropertyBlock';
 import PlaceBlock from './PlaceBlock';
@@ -9,9 +9,9 @@ import { deleteItemFromPlanner } from '@/lib/actions/firestore/planner.action';
 import { showToast } from '@/lib/utils';
 import ModifyWindow from '../ModifyWindow';
 
-export default function ItemBlock({ item, plannerId, showDate = true }: { 
+export default function ItemBlock({ item, planner, showDate = true }: { 
   item: FlightItem | AccommodationItem | PlaceItem; 
-  plannerId: string;
+  planner: PlannerDetails;
   showDate?: boolean;
 }) {
   // if ('fsq_id' in item && !item.from_datetime && !item.to_datetime) return null;
@@ -27,7 +27,7 @@ export default function ItemBlock({ item, plannerId, showDate = true }: {
 
   const handleDelete = async () => {
     setLoading(true);
-    const result = await deleteItemFromPlanner(plannerId, item.piid);
+    const result = await deleteItemFromPlanner(planner.pid!, item.piid);
     if (result.error) {
       showToast({ title: 'Error', description: result.error.message });
     } else {
@@ -35,6 +35,13 @@ export default function ItemBlock({ item, plannerId, showDate = true }: {
     }
     setLoading(false);
   };
+
+  useEffect(() => {
+    if (planner.from_datetime && planner.to_datetime) {
+      setFromDate(new Date(planner.from_datetime));
+      setToDate(new Date(planner.to_datetime));
+    }
+  }, [planner]);
 
   return (
     <div className={`flex flex-col gap-4 w-full group ${unassigned && '!w-fit'}`}>
@@ -127,7 +134,7 @@ export default function ItemBlock({ item, plannerId, showDate = true }: {
           setFromDate={setFromDate}
           toDate={toDate}
           setToDate={setToDate}
-          pid={plannerId}
+          pid={planner.pid!}
           piid={item.piid}
         />
       }

@@ -17,10 +17,12 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 export function CustomDatetimePicker({
   date,
   setDate,
+  defaultMonth,
   className
 }: {
   date: Date | undefined;
   setDate: React.Dispatch<React.SetStateAction<Date | undefined>>;
+  defaultMonth?: Date | undefined;
   className?: string
 }) {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -74,6 +76,7 @@ export function CustomDatetimePicker({
             mode="single"
             selected={date}
             onSelect={handleDateSelect}
+            defaultMonth={defaultMonth || date}
             initialFocus
           />
           <div className="flex flex-col sm:flex-row sm:h-[300px] divide-y sm:divide-y-0 sm:divide-x">

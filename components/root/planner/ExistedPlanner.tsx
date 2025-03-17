@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import CustomButton from '@/components/global/CustomButton';
 import { useGetPlanner } from '@/lib/hooks/useGetPlanner';
 import { useRouter } from 'next/navigation';
@@ -15,29 +15,22 @@ export default function ExistedPlanner({ id }: { id: string }) {
 
   if (!selected) return;
 
-  // Group items
-  const groupedPlaceItems: Record<string, PlaceItem[]> = {};
-  const otherItems: (FlightItem | AccommodationItem)[] = [];
-  const unscheduledPlaceItems: PlaceItem[] = []; // Ensure only PlaceItems are grouped here
+  const unscheduledPlaceItems: PlaceItem[] = [];
+  const scheduledItems: (FlightItem | AccommodationItem | PlaceItem)[] = [];
 
+  // Iterate through selected items
   selected.items.forEach((item) => {
-    // Group items with valid from_datetime for PlaceItems
-    if ('fsq_id' in item && item.from_datetime && item.to_datetime) {
-      const dateKey = format(new Date(item.from_datetime), 'yyyy-MM-dd');
-      if (!groupedPlaceItems[dateKey]) {
-        groupedPlaceItems[dateKey] = [];
-      }
-      groupedPlaceItems[dateKey].push(item);
+    // If item has valid from_datetime, add to scheduledItems
+    if (item.from_datetime && item.to_datetime) {
+      scheduledItems.push(item);
     } 
-    // Include Flight and Accommodation items in otherItems
-    else if ('property_token' in item || 'flights' in item) {
-      otherItems.push(item);
-    } 
-    // Group PlaceItems without from_datetime and to_datetime in unscheduledPlaceItems
+    // If item is a PlaceItem without from_datetime and to_datetime, push it to unscheduledPlaceItems
     else if ('fsq_id' in item) {
       unscheduledPlaceItems.push(item);
     }
   });
+
+  let currentDate: string = '';
 
   return (
     <div className='w-full flex flex-col gap-8'>
@@ -91,7 +84,7 @@ export default function ExistedPlanner({ id }: { id: string }) {
           <div className="absolute top-10 left-11 right-0 overflow-x-auto">
             <div className="flex gap-2 w-max">
               {unscheduledPlaceItems.map((item, index) => (
-                <ItemBlock key={index} plannerId={id} item={item} showDate={false} />
+                <ItemBlock key={index} planner={selected} item={item} showDate={false} />
               ))}
             </div>
           </div>
@@ -99,32 +92,39 @@ export default function ExistedPlanner({ id }: { id: string }) {
       }
 
       <div className='flex flex-col gap-4 pl-11 pb-11'>
-        {otherItems.map((item, index) => (
-          <ItemBlock key={index} plannerId={id} item={item} />
-        ))}
+        {
+          scheduledItems.map((item, index) => {
+            if ('fsq_id' in item && item.from_datetime?.substring(0, 10) !== currentDate.substring(0, 10)) {
+              currentDate = item.from_datetime || '';
+              return (
+                <>
+                  <div className='flex gap-2 items-center'>
+                    <div className='w-6 h-6 rounded-full bg-customBlue-200 flex justify-center items-center'>
+                      <Image 
+                        src={'/dialog/calendar-clock.svg'}
+                        alt='calendar'
+                        width={14} height={14}
+                        className='invert'
+                      />
+                    </div>
+                    <p className='text-sm font-semibold text-customBlue-200'>
+                      Planned on {currentDate.substring(0, 10)}
+                    </p>
+                  </div>
 
-        {/* Grouped Place Items */}
-        {Object.entries(groupedPlaceItems).map(([date, items]) => (
-          <div key={date} className="flex flex-col gap-4">
-            <div className='flex gap-2 items-center'>
-              <div className='w-6 h-6 rounded-full bg-customBlue-200 flex justify-center items-center'>
-                <Image 
-                  src={'/dialog/calendar-clock.svg'}
-                  alt='calendar'
-                  width={14} height={14}
-                  className='invert'
-                />
-              </div>
-              <p className='text-sm font-semibold text-customBlue-200'>
-                Planned on {date}
-              </p>
-            </div>
-
-            {items.map((item, index) => (
-              <ItemBlock key={index} plannerId={id} item={item} showDate={false} />
-            ))}
-          </div>
-        ))}
+                  <ItemBlock key={index} planner={selected} item={item} showDate={false} />
+                </>
+              )
+            }
+            if ('fsq_id' in item && item.from_datetime?.substring(0, 10) === currentDate.substring(0, 10)) {
+              currentDate = item.from_datetime || '';
+              return <ItemBlock key={index} planner={selected} item={item} showDate={false} />;
+            }
+            else {
+              return <ItemBlock key={index} planner={selected} item={item} />;
+            }
+          })
+        }
       </div>
     </div>
   );

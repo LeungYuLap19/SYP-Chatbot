@@ -27,20 +27,39 @@ export default function SaveWindow(
   }
 ) {
   const { planners } = useGetPlanner();
-  const { loading, saveToPlanner, setSelectedID } = useSaveToPlanner();
+  const { loading, saveToPlanner, selectedID, setSelectedID } = useSaveToPlanner();
+  const [defaultMonth, setDefaultMonth] = useState<Date | undefined>();
 
   useEffect(() => {
     if (fromDate) {
-      if (!toDate || toDate < fromDate) {
-        if (toDate && toDate < fromDate) {
-          showToast({ title: 'Change Your Date Time', description: 'End time cannot be earlier than start time.' })
-        }
+      setToDate!(prevToDate => {
         const newToDate = new Date(fromDate);
-        newToDate.setHours(newToDate.getHours() + 1); 
-        setToDate!(newToDate);
-      }
+        newToDate.setHours(newToDate.getHours() + 1);
+        return newToDate;
+      });
     }
-  }, [fromDate, toDate]);
+  }, [fromDate]);
+  
+  useEffect(() => {
+    if (fromDate && toDate && toDate < fromDate) {
+      showToast({ 
+        title: 'Change Your Date Time', 
+        description: 'End time cannot be earlier than start time.' 
+      });
+  
+      const newToDate = new Date(fromDate);
+      newToDate.setHours(newToDate.getHours() + 1);
+      setToDate!(newToDate);
+    }
+  }, [toDate]);
+
+  useEffect(() => {
+    const selectedPlanner = planners?.find(planner => planner.pid === selectedID);
+  
+    if (selectedPlanner?.from_datetime && selectedPlanner?.to_datetime) {
+      setDefaultMonth?.(new Date(selectedPlanner.from_datetime));
+    }
+  }, [selectedID, planners]);  
   
   return (
     <div className='z-50 w-screen h-screen bg-black bg-opacity-50 fixed top-0 left-0 flex justify-center items-center'>
@@ -52,6 +71,7 @@ export default function SaveWindow(
         <Select
           onValueChange={(value) => {
             setSelectedID(value);
+
           }}  
         >
           <SelectTrigger className="w-full min-w-[400px]">
@@ -75,9 +95,9 @@ export default function SaveWindow(
         {
           isPlace && 
           <div className='flex gap-4 items-center'>
-            <CustomDatetimePicker date={fromDate} setDate={setFromDate!} />
+            <CustomDatetimePicker date={fromDate} setDate={setFromDate!} defaultMonth={defaultMonth} />
             <p>to</p>
-            <CustomDatetimePicker date={toDate} setDate={setToDate!} />
+            <CustomDatetimePicker date={toDate} setDate={setToDate!} defaultMonth={defaultMonth} />
           </div>
         }
 
