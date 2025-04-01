@@ -10,7 +10,7 @@ import Default from './dialog/Default';
 import HotelSearch from './dialog/hotelSearch/HotelSearch';
 
 export default function Message(
-  { type, message }: { type: string; message: Message }
+  { type, message, className }: { type: string; message: Message; className?: string; }
 ) {
   const {
     flightStatus,
@@ -117,7 +117,7 @@ export default function Message(
     return (
       <div className={`w-full flex ${type === "user" && "justify-end"}`}>
         <div className={`max-w-[70%] max-lg:w-full flex ${type === "user" && "justify-end"}`}>
-          <p className="text-sm text-pretty bg-customBlue-100 py-3 px-5 rounded-2xl text-customWhite-100">
+          <p className={`text-sm text-pretty bg-customBlue-100 py-3 px-5 rounded-2xl text-customWhite-100 ${className}`}>
             {userBotMessage}
           </p>
         </div>

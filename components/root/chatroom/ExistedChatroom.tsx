@@ -24,14 +24,29 @@ export default function ExistedChatroom({ id }: { id: string; }) {
         chatroom &&
         <>
           <div className="flex flex-col-reverse gap-4 w-full overflow-auto flex-grow mt-[40px] pt-4">
-            {chatroom &&
-              chatroom.messages.map(message => (
-                <Message 
-                  key={message.datetime} 
-                  type={message.sender} 
-                  message={message} 
-                />
-              ))
+            {
+              loading && 
+              <Message 
+                type={'bot'}
+                message={
+                  {
+                    sender: 'bot',
+                    text: 'Thinking...',
+                    datetime: new Date().toISOString(),
+                  }
+                }
+                className='!bg-customBlack-100 !text-customWhite-100'
+              />
+            }
+            {
+              chatroom &&
+                chatroom.messages.map(message => (
+                  <Message 
+                    key={message.datetime} 
+                    type={message.sender} 
+                    message={message} 
+                  />
+                ))
             }
           </div>
           <div className='flex gap-2'>

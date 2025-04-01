@@ -2,14 +2,19 @@ import { getHotelByToken } from '@/lib/actions/serpapi/hotelSearch.action';
 import React, { useEffect, useState } from 'react'
 import ParamBlock from '../../chatroom/dialog/hotelSearch/ParamBlock';
 import Image from 'next/image';
+import { showToast } from '@/lib/utils';
+import { ERROR_TOAST_TITLE } from '@/constants';
 
 export default function PropertyBlock({ accommodationItem }: { accommodationItem: AccommodationItem }) {
   const [hotelDetails, setHotelDetails] = useState<HotelDetails | null>(null);
 
   const getHotel = async (propertyToken: string, checkIn: string, checkOut: string) => {
     const response = await getHotelByToken(propertyToken, checkIn, checkOut);
-    if (response) {
-      setHotelDetails(response);
+    if (response.data) {
+      setHotelDetails(response.data);
+    }
+    else if (response.error) {
+      showToast({ title: ERROR_TOAST_TITLE, description: response.error.message });
     }
   }
   
@@ -45,9 +50,14 @@ export default function PropertyBlock({ accommodationItem }: { accommodationItem
                 <p className='text-xs text-customBlack-200'>
                   Near {' '}
                   {hotelDetails.nearby_places[0].name} {' '}
-                  ({hotelDetails.nearby_places[0].transportations[0].duration} {' '}
-                  by {' '}
-                  {hotelDetails.nearby_places[0].transportations[0].type.toLowerCase()})
+                  {
+                    hotelDetails.nearby_places[0].transportations &&
+                    <>
+                      ({hotelDetails.nearby_places[0].transportations[0].duration} {' '}
+                      by {' '}
+                      {hotelDetails.nearby_places[0].transportations[0].type.toLowerCase()})
+                    </>
+                  }
                 </p>
                 <div className='flex gap-1 items-center text-xs'>
                   <p>

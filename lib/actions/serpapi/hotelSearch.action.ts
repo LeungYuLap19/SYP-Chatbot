@@ -1,7 +1,8 @@
 'use server'
 import axios from "axios";
+import { getSerpApiError } from "../errors/apiErrorsHandler";
 
-export async function getHotelSearch(location: string, checkIn: string, checkOut: string) {
+export async function getHotelSearch(location: string, checkIn: string, checkOut: string): Promise<Result<HotelSearchResponse>> {
   const params = {
     engine: "google_hotels",
     q: location,
@@ -18,15 +19,14 @@ export async function getHotelSearch(location: string, checkIn: string, checkOut
       params 
     });
     // console.log(response.data);
-    if (response.data) {
-      return response.data;
-    }
+    return { data: response.data };
   } catch (error: any) {
     console.error('Search Hotel Error:', error);
+    return { error: getSerpApiError(error.code) };
   }
 }
 
-export async function getHotelByToken(propertyToken: string, checkIn: string, checkOut: string) {
+export async function getHotelByToken(propertyToken: string, checkIn: string, checkOut: string): Promise<Result<HotelDetails>> {
   const params = {
     engine: "google_hotels",
     q: 'hotel',
@@ -44,10 +44,9 @@ export async function getHotelByToken(propertyToken: string, checkIn: string, ch
       params 
     });
     // console.log(response.data);
-    if (response.data) {
-      return response.data;
-    }
+    return { data: response.data };
   } catch (error: any) {
     console.error('Search Hotel Error:', error);
+    return { error: getSerpApiError(error.code) };
   }
 }

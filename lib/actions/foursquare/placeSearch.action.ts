@@ -1,8 +1,9 @@
 'use server'
 import { placeSearchFields } from "@/constants";
 import axios from "axios"
+import { getFoursquareApiError } from "../errors/apiErrorsHandler";
 
-export async function getPopularPlaces(ne: Northeast, sw: Southwest, ids: number[], limit: number) {
+export async function getPopularPlaces(ne: Northeast, sw: Southwest, ids: number[], limit: number): Promise<Result<ResultItem[]>> {
   try {
     const response = await axios.get(`https://api.foursquare.com/v3/places/search?ne=${ne.lat}%2C${ne.lng}&sw=${sw.lat}%2C${sw.lng}&sort=RELEVANCE&limit=${limit}&categories=${ids.join(',')}&fields=${placeSearchFields.join(',')}`, {
       headers: {
@@ -11,15 +12,14 @@ export async function getPopularPlaces(ne: Northeast, sw: Southwest, ids: number
       }
     });
     // console.log(response.data.results[0]);
-    if (response.data) {
-      return response.data.results;
-    }
+    return { data: response.data.results };
   } catch (error: any) {
     console.error('Google Place Search Error: ', error.message);
+    return { error: getFoursquareApiError(error.code) };
   }
 }
 
-export async function getPlaceDetails(fsq_id: string) {
+export async function getPlaceDetails(fsq_id: string): Promise<Result<ResultItem>> {
   try {
     const response = await axios.get(`https://api.foursquare.com/v3/places/${fsq_id}?fields=${placeSearchFields.join(',')}`, {
       headers: {
@@ -28,11 +28,9 @@ export async function getPlaceDetails(fsq_id: string) {
       }
     });
     // console.log(response.data);
-    if (response.data) {
-      return response.data;
-    }
-  } catch (error) {
+    return { data: response.data };
+  } catch (error: any) {
     console.error('Place Details Error:', error);
-    return null;
+    return { error: getFoursquareApiError(error.code) };
   }
 }

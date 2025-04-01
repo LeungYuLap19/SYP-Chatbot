@@ -1,10 +1,9 @@
 'use server'
 import { sortFlightSearch } from "@/lib/utils";
 import axios from "axios";
-import fs from "fs";
-import path from "path";
+import { getSerpApiError } from "../errors/apiErrorsHandler";
 
-export async function getFlightSearch(depID: string, arrID: string, depDate: string) {
+export async function getFlightSearch(depID: string, arrID: string, depDate: string): Promise<Result<FlightResponse>> {
   const params = {
     engine: 'google_flights',
     type: 2,
@@ -20,18 +19,9 @@ export async function getFlightSearch(depID: string, arrID: string, depDate: str
     });
 
     // console.log(response.data);
-
-    if (response.data) {
-      // // Define the file path
-      // const filePath = path.join("C:\\Users\\ASUS\\Documents\\vscode\\syp-chatbot\\jsonTest\\apiResponses", "flightSearchResponse.json");
-
-      // // Write data to the file
-      // fs.writeFileSync(filePath, JSON.stringify(response.data, null, 2), "utf-8");
-      // console.log("Response saved to JSON file:", filePath);
-
-      return sortFlightSearch(response.data);
-    }
+    return { data: sortFlightSearch(response.data) };
   } catch (error: any) {
     console.error('Search Flight Error:', error);
+    return { error: getSerpApiError(error.code) };
   }
 }
