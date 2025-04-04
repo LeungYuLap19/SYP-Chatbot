@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import FlightStatusSection from './FlightStatusSection'
 import DepArr from '../../chatroom/dialog/common/DepArr';
+import DirectionButton from './DirectionButton';
 
 export default function FlightBlock({ flightItem }: { flightItem: FlightItem }) {
   const [depArrProps, setDepArrProps] = useState<DepArrProps>({
@@ -10,11 +11,13 @@ export default function FlightBlock({ flightItem }: { flightItem: FlightItem }) 
     fromAirport: '',
     toIATA: '',
     toCity: '',
-    toAirport: ''
+    toAirport: '',
+    address: '',
   });
 
   return (
-    <div className='p-3 rounded-lg bg-white text-sm'>
+    <div className='p-3 rounded-lg bg-white text-sm relative'>
+      <DirectionButton address={depArrProps.address!} />
       <DepArr 
         localTime={depArrProps.localTime} 
         fromIATA={depArrProps.fromIATA} 

@@ -14,7 +14,7 @@ export default function PlaceDetails({ resultItem, isSaved = false }: {resultIte
   const [fromDate, setFromDate] = useState<Date | undefined>();
   const [toDate, setToDate] = useState<Date | undefined>();
   
-  const googleMapsUrl = `https://www.google.com/maps?q=${resultItem.geocodes.main.latitude},${resultItem.geocodes.main.longitude}`;
+  const googleMapsUrl = `https://www.google.com/maps?q=${resultItem.name.replaceAll(' ', '%')}`;
 
   const handleCopy = (text: string) => {
     navigator.clipboard.writeText(text);

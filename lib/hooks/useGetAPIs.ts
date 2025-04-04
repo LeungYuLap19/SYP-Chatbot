@@ -7,6 +7,7 @@ import { ERROR_TOAST_TITLE, TEST_AUTOCOMPLETION, TEST_FLIGHT_ARRIVAL, TEST_FLIGH
 import { getWeatherForecast } from "../actions/weatherapi/weatherForecast.action";
 import { getHotelSearch } from "../actions/serpapi/hotelSearch.action";
 import { showToast } from "../utils";
+import { getDirection } from "../actions/serpapi/direction.action";
 
 export function useGetAPIs(test: boolean) {
   const [flightStatus, setFlightStatus] = useState<FlightStatus | null>(null);
@@ -15,6 +16,7 @@ export function useGetAPIs(test: boolean) {
   const [placeResponse, setPlaceResponse] = useState<ResultItem[] | null>(null);
   const [weatherResponse, setWeatherResponse] = useState<WeatherForecast | null>(null);
   const [hotelResponse, setHotelResponse] = useState<HotelSearchResponse | null>(null);
+  const [directionResponse, setDirectionResponse] = useState<DirectionResponse | null>(null);
 
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -97,6 +99,35 @@ export function useGetAPIs(test: boolean) {
     setLoading(false);
   }
 
+  const checkDirection = async (end_addr: string, start_addr?: string) => {
+    let start_lat: number | undefined;
+    let start_lng: number | undefined;
+
+    if (!start_addr) {
+      try {
+        const position = await new Promise<GeolocationPosition>((resolve, reject) => {
+          navigator.geolocation.getCurrentPosition(resolve, reject);
+        });
+  
+        start_lat = position.coords.latitude;
+        start_lng = position.coords.longitude;
+      } catch (error) {
+        showToast({ title: ERROR_TOAST_TITLE, description: "Unable to get current location." });
+        return;
+      }
+    }
+
+    setLoading(true);
+    const response = await getDirection(end_addr, start_addr, start_lat, start_lng);
+    if (response.data) {
+      setDirectionResponse(response.data);
+    }
+    else if (response.error) {
+      showToast({ title: ERROR_TOAST_TITLE, description: response.error.message });
+    }
+    setLoading(false);
+  }
+
   // useEffect(() => {
   //   if (test) {
   //     searchFlightStatus(TEST_FLIGHT_NUMBER, TEST_FLIGHT_DATE);
@@ -112,12 +143,14 @@ export function useGetAPIs(test: boolean) {
     placeResponse,
     weatherResponse,
     hotelResponse,
+    directionResponse,
     
     searchFlightStatus,
     searchFlight,
     placeSearch,
     checkWeather,
     hotelSearch,
+    checkDirection,
 
     loading,
   }

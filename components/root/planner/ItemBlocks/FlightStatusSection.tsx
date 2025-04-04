@@ -3,6 +3,7 @@ import { format } from 'date-fns';
 import React, { useEffect } from 'react'
 import FromTo from '../../chatroom/dialog/common/FromTo';
 import InformationBlock from '../../chatroom/dialog/flightStatus/InformationBlock';
+import { getAirportForDirection } from '@/lib/utils';
 
 export default function FlightStatusSection(
   { flight, layover, needToSet, setDepArrProps }: 
@@ -32,6 +33,13 @@ export default function FlightStatusSection(
           fromCity: flightStatus.departure.airport.municipalityName,
           fromAirport: flightStatus.departure.airport.name,
         }));
+
+        if (getAirportForDirection(flightStatus) === 'departure') {
+          setDepArrProps((prev) => ({
+            ...prev,
+            address: flightStatus.departure.airport.name,
+          }));
+        }
       }
       if (needToSet === 1) {
         setDepArrProps((prev) => ({
@@ -40,9 +48,18 @@ export default function FlightStatusSection(
           toCity: flightStatus.arrival.airport.municipalityName,
           toAirport: flightStatus.arrival.airport.name,
         }));
+
+        if (getAirportForDirection(flightStatus) === 'arrival') {
+          setDepArrProps((prev) => ({
+            ...prev,
+            address: flightStatus.arrival.airport.name,
+          }));
+        }
       }
     }
   }, [flightStatus, setDepArrProps, needToSet]);
+
+
 
   return (
     <div className='flex flex-col gap-4'>
@@ -67,7 +84,7 @@ export default function FlightStatusSection(
           
 
           <p className='text-xs text-customBlack-200'>
-            {flightStatus.number.replace(' ', '')} {' - '} {flightStatus.aircraft.model}
+            {flightStatus.number.replace(' ', '')} {' - '} {flightStatus.aircraft?.model && flightStatus.aircraft.model} {' - '}
           </p>
 
           <div className='flex justify-between'>

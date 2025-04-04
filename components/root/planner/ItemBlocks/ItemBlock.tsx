@@ -92,11 +92,11 @@ export default function ItemBlock({ item, planner, showDate = true }: {
           <span className='h-full w-[5px] bg-customBlue-200 opacity-70 rounded-full'></span>
         }
 
-        <div className={`w-2/3 max-xl:w-full p-4 rounded-lg bg-white ${unassigned && 'h-72 !w-72 !p-3 overflow-auto'}`}>
+        <div className={`w-2/3 max-xl:w-full rounded-tr-none p-4 rounded-lg bg-white ${unassigned && 'h-72 !w-72 !p-3 overflow-auto'}`}>
           {
             'flights' in item ? <FlightBlock flightItem={item} /> :
             'property_token' in item ? <PropertyBlock accommodationItem={item} /> :
-            ('fsq_id' in item) ? <PlaceBlock placeItem={item} /> : null
+            'fsq_id' in item ? <PlaceBlock placeItem={item} /> : null
           }
         </div>
 
@@ -110,6 +110,7 @@ export default function ItemBlock({ item, planner, showDate = true }: {
               transition-opacity duration-500 ease-in-out opacity-0 group-hover:opacity-100'
             imageClassName='invert'
             onClick={handleDelete}
+            title='Delete Item from Planner'
           />
           {
             'fsq_id' in item &&
@@ -122,6 +123,7 @@ export default function ItemBlock({ item, planner, showDate = true }: {
                 transition-opacity duration-500 ease-in-out opacity-0 group-hover:opacity-100'
               imageClassName='invert'
               onClick={() => setShowWindow(true)}
+              title='Edit Datetimes'
             />
           }
         </div>

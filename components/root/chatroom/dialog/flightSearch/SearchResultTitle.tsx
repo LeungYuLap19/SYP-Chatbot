@@ -1,10 +1,30 @@
-import { getDurationWithMinutes } from '@/lib/utils'
+import { COOKIES_KEY_CURRENCY, ERROR_TOAST_TITLE } from '@/constants';
+import { getFromCookies } from '@/lib/actions/cookies/cookies.action';
+import { getDurationWithMinutes, showToast } from '@/lib/utils'
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 export default function SearchResultTitle({
   index, totalDuration, airline, airlineLogo, price, showDetails, setShowDetails
 }: SearchResultTitleProps) {
+  const [currency, setCurrency] = React.useState('');
+
+  const getCurrencyFromCookies = async () => {
+    const cookiesResult = await getFromCookies<string>({ key: COOKIES_KEY_CURRENCY });
+    if (cookiesResult.data) {
+      setCurrency(cookiesResult.data);
+    } else if (cookiesResult.error) {
+      showToast({ 
+        title: ERROR_TOAST_TITLE, 
+        description: cookiesResult.error.message 
+      });
+    }
+  }
+
+  useEffect(() => {
+    getCurrencyFromCookies();
+  }, []);
+
   return (
     <>
       <div 
@@ -27,7 +47,7 @@ export default function SearchResultTitle({
           <p className='text-sm'>{getDurationWithMinutes(totalDuration)}</p>
         </div>
         
-        <p className='text-sm text-customBlue-200 font-semibold'>{Math.floor(price * 7.8)}{' '}HKD</p>
+        <p className='text-sm text-customBlue-200 font-semibold'>{Math.floor(price).toLocaleString()}{' '}{currency}</p>
       </div>
     </>
     

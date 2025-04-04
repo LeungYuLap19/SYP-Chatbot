@@ -4,6 +4,7 @@ import ParamBlock from '../../chatroom/dialog/hotelSearch/ParamBlock';
 import Image from 'next/image';
 import { showToast } from '@/lib/utils';
 import { ERROR_TOAST_TITLE } from '@/constants';
+import DirectionButton from './DirectionButton';
 
 export default function PropertyBlock({ accommodationItem }: { accommodationItem: AccommodationItem }) {
   const [hotelDetails, setHotelDetails] = useState<HotelDetails | null>(null);
@@ -24,7 +25,11 @@ export default function PropertyBlock({ accommodationItem }: { accommodationItem
   }, [accommodationItem]);
 
   return (
-    <div className='p-1 pt-3 rounded-lg bg-white flex flex-col gap-4'>
+    <div className='p-1 pt-3 rounded-lg bg-white flex flex-col gap-4 relative'>
+      {
+        hotelDetails &&
+        <DirectionButton address={hotelDetails.address} />
+      }      
       {
         hotelDetails &&
         <>

@@ -4,6 +4,7 @@ import PlaceOverview from '../../chatroom/dialog/placeSearch/PlaceOverview';
 import PlaceDetails from '../../chatroom/dialog/placeSearch/PlaceDetails';
 import { showToast } from '@/lib/utils';
 import { ERROR_TOAST_TITLE } from '@/constants';
+import DirectionButton from './DirectionButton';
 
 export default function PlaceBlock({ placeItem }: { placeItem: PlaceItem }) {
   const [placeDetails, setPlaceDetails] = useState<ResultItem | null>(null);
@@ -24,7 +25,11 @@ export default function PlaceBlock({ placeItem }: { placeItem: PlaceItem }) {
   }, [placeItem]);
 
   return (
-    <div className=' rounded-lg bg-white text-sm'>
+    <div className=' rounded-lg bg-white text-sm relative'>
+      {
+        placeDetails &&
+        <DirectionButton address={placeDetails.location.address} />
+      }
       {
         placeDetails &&
         <div className='flex flex-col ml-[-8px] mr-[-8px]'>

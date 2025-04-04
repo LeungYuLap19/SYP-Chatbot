@@ -3,7 +3,7 @@ import { Button } from '../ui/button'
 import Image from 'next/image'
 
 export default function CustomButton({ 
-  loading, type, label, onClick, className, iconUrl, imageClassName
+  loading, type, label, onClick, className, iconUrl, imageClassName, title
 }: CustomButtonProps) {
   return (
     <Button
@@ -15,6 +15,7 @@ export default function CustomButton({
         ${loading && 'bg-customBlack-100 !opacity-100'}
         ${className}
       `}
+      title={title}
     >
       {
         !loading && iconUrl &&

@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import {
   Select,
@@ -71,7 +70,6 @@ export default function SaveWindow(
         <Select
           onValueChange={(value) => {
             setSelectedID(value);
-
           }}  
         >
           <SelectTrigger className="w-full min-w-[400px]">

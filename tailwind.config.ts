@@ -28,10 +28,11 @@ const config: Config = {
 				},
 				customBlue: {
 					100: '#8d99ae',
-					200: '#328CA5'
+					200: '#328CA5',
 				},
 				customWhite: {
-					100: '#edf2f4'
+					100: '#f4f8fb',
+					200: '#f8fcff',
 				},
 				customGreen: {
 					100: '#618685'

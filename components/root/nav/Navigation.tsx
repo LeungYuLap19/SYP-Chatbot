@@ -2,6 +2,7 @@ import { navLinks } from '@/constants'
 import React from 'react'
 import NavigationTab from './NavigationTab'
 import Logo from '@/components/global/Logo'
+import CurrencySelector from '@/components/global/CurrencySelector'
 
 export default function Navigation() {
   return (
@@ -23,6 +24,9 @@ export default function Navigation() {
             />
           ))
         }
+      </div>
+      <div className='max-sm:hidden mt-auto'>
+        <CurrencySelector /> 
       </div>
     </div>
   )

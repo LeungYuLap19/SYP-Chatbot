@@ -24,6 +24,7 @@ interface CustomButtonProps {
   className?: string;
   iconUrl?: string;
   imageClassName?: string;
+  title?: string;
 }
 
 interface DepArrProps {
@@ -35,6 +36,7 @@ interface DepArrProps {
   toCity: string;
   toAirport: string;
   className?: string;
+  address?: string;
 }
 
 interface FromToProps {
@@ -64,4 +66,9 @@ interface PlaceOverviewProps {
   resultItem: ResultItem;
   selectedPlace: string | null;
   setSelectedPlace: React.Dispatch<React.SetStateAction<string | null>>;
+}
+
+interface CurrencyProps {
+  name: string;
+  symbol: string; 
 }

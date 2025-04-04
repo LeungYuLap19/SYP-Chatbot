@@ -13,7 +13,7 @@ export default function ExistedChatroom({ id }: { id: string; }) {
 
   return (
     <>
-      <div className='w-full absolute top-0 left-0 bg-customWhite-100 p-4 drop-shadow-default'>
+      <div className='w-full absolute top-0 left-0 bg-customWhite-200 p-4 drop-shadow-default'>
         {
           chatroom ?
           chatroom.chatroom_name :

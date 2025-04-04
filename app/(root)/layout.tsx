@@ -1,3 +1,4 @@
+import CurrencySelector from '@/components/global/CurrencySelector'
 import Navigation from '@/components/root/nav/Navigation'
 import React from 'react'
 
@@ -6,7 +7,7 @@ export default function RootLayout({ children }: Readonly<{children: React.React
     <main className='
       flex h-screen w-screen bg-customBlack-100
       max-sm:flex-col-reverse
-      overflow-auto
+      overflow-auto relative
     '>
       <div className='flex-shrink-0'>
         <Navigation />
@@ -17,6 +18,10 @@ export default function RootLayout({ children }: Readonly<{children: React.React
         max-sm:h-page-custom max-sm:p-0
       '>
         {children}
+      </div>
+
+      <div className='sm:hidden'>
+        <CurrencySelector />
       </div>
     </main>
   )

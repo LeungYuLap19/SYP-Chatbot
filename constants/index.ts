@@ -17,11 +17,6 @@ export const navLinks: NavigationTabProps[] = [
     imgUrl: '/nav/planner.png',
   },
   {
-    label: 'Profile',
-    route: '/profile',
-    imgUrl: '/nav/user.svg',
-  },
-  {
     label: 'Sign out',
     route: '/sign-in',
     imgUrl: '/nav/exit.svg',
@@ -147,7 +142,48 @@ export const placeSearchCategories: PlaceSearchCategory[] = [
   },
 ]
 
+export const currencyList: CurrencyProps[] = [
+  {
+    name: 'USD',
+    symbol: '$'
+  },
+  {
+    name: 'EUR',
+    symbol: '€'
+  },
+  {
+    name: 'GBP',
+    symbol: '£'
+  },
+  {
+    name: 'JPY',
+    symbol: '¥'
+  },
+  {
+    name: 'KRW',
+    symbol: '₩'
+  },
+  {
+    name: 'CNY',
+    symbol: '¥'
+  },
+  {
+    name: 'HKD',
+    symbol: 'HK$'
+  },
+  {
+    name: 'TWD',
+    symbol: 'NT$'
+  },
+  {
+    name: 'SGD',
+    symbol: 'S$'
+  }
+]
+
 export const COOKIES_KEY_USERDATA = 'user_data';
+
+export const COOKIES_KEY_CURRENCY = 'currency';
 
 export const DAYS_TO_EXPIRE = 7;
 

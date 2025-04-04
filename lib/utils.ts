@@ -208,3 +208,28 @@ export function getIdsOrLabelByCategory(
     return category?.label ?? null; 
   }
 }
+
+export function getAirportForDirection(flightStatus: FlightStatus) {
+  const status = flightStatus.status;
+
+  // If flight hasn't left yet, go to departure airport
+  if (["Unknown", "Expected", "CheckIn", "Boarding", "GateClosed", "Delayed"].includes(status)) {
+    return 'departure'; // Placeholder for departure airport
+  }
+
+  // If flight is in progress or has landed, go to arrival airport
+  if (["Departed", "EnRoute", "Approaching", "Arrived"].includes(status)) {
+    return 'arrival';
+  }
+
+  // If flight is canceled or diverted, handle accordingly
+  if (["Canceled", "CanceledUncertain"].includes(status)) {
+    return null; // No direction needed
+  }
+
+  if (status === "Diverted") {
+    return 'arrival'; // ⚠️ Need to check actual diverted location
+  }
+
+  return null;
+};
