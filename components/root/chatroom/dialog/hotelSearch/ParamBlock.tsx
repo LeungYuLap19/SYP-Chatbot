@@ -9,6 +9,7 @@ export default function ParamBlock({ label, type }: { label: string | number, ty
         src={hotelSearchParams[type]}
         alt={type}
         width={12} height={12}
+        loading='lazy'
       />
 
       <p className='text-xs'>{label}</p>

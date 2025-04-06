@@ -13,6 +13,7 @@ export default function RootLayout({ children }: Readonly<{children: React.React
           style={{objectFit: 'cover', objectPosition: 'left'}}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           priority={true}
+          loading='lazy'
         />
       </div>
     </main>

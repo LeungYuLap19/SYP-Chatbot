@@ -9,6 +9,7 @@ export default function PlaceCategory({ category }: { category: Category }) {
           src={`${category.icon.prefix}64${category.icon.suffix}`}
           alt='category'
           width={20} height={20}
+          loading='lazy'
         />
       </div>
       <p className='mt-[-1px]'>{category.name}</p>

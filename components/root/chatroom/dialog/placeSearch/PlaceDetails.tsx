@@ -54,6 +54,7 @@ export default function PlaceDetails({ resultItem, isSaved = false }: {resultIte
               src={'/dialog/down-arrow-backup-2-svgrepo-com.svg'}
               alt='down-arrow'
               width={14} height={14}
+              loading='lazy'
             />
           </div>
         </div>
@@ -99,6 +100,7 @@ export default function PlaceDetails({ resultItem, isSaved = false }: {resultIte
                     src={`/dialog/${key}.svg`}
                     alt={key}
                     width={16} height={16}
+                    loading='lazy'
                   />
                   {value}
                 </a>
@@ -137,7 +139,7 @@ export default function PlaceDetails({ resultItem, isSaved = false }: {resultIte
                   onClick={() => handleCopy(resultItem.tel)}
                   className="relative p-1 rounded-md hover:bg-gray-200 transition"
                 >
-                  <Image src={'/dialog/copy-svgrepo-com.svg'} alt='copy' width={16} height={16} />
+                  <Image src={'/dialog/copy-svgrepo-com.svg'} alt='copy' width={16} height={16} loading='lazy' />
                 </button>
               </div>
             }
@@ -150,7 +152,7 @@ export default function PlaceDetails({ resultItem, isSaved = false }: {resultIte
                   onClick={() => handleCopy(resultItem.email)}
                   className="relative p-1 rounded-md hover:bg-gray-200 transition"
                 >
-                  <Image src={'/dialog/copy-svgrepo-com.svg'} alt='copy' width={16} height={16} />
+                  <Image src={'/dialog/copy-svgrepo-com.svg'} alt='copy' width={16} height={16} loading='lazy' />
                 </button>
               </div>
             }

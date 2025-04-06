@@ -25,6 +25,8 @@ interface CustomButtonProps {
   iconUrl?: string;
   imageClassName?: string;
   title?: string;
+  disableHover?: boolean;
+  disableActive?: boolean;
 }
 
 interface DepArrProps {
@@ -71,4 +73,10 @@ interface PlaceOverviewProps {
 interface CurrencyProps {
   name: string;
   symbol: string; 
+}
+
+interface TravelModeProps {
+  mode: string;
+  icon: string;
+  value: number;
 }

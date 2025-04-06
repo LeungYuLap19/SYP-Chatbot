@@ -99,7 +99,7 @@ export function useGetAPIs(test: boolean) {
     setLoading(false);
   }
 
-  const checkDirection = async (end_addr: string, start_addr?: string) => {
+  const checkDirection = async (end_addr: string, mode: number, start_addr?: string) => {
     let start_lat: number | undefined;
     let start_lng: number | undefined;
 
@@ -118,7 +118,7 @@ export function useGetAPIs(test: boolean) {
     }
 
     setLoading(true);
-    const response = await getDirection(end_addr, start_addr, start_lat, start_lng);
+    const response = await getDirection(end_addr, mode, start_addr, start_lat, start_lng);
     if (response.data) {
       setDirectionResponse(response.data);
     }

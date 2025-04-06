@@ -35,6 +35,7 @@ export default function NavigationTab({ label, route, index, imgUrl }: Navigatio
           src={imgUrl}
           alt={label + ' icon'}
           width={16} height={16}
+          loading='lazy'
         />
       </div>
       <p className='max-sm:hidden text-customBlue-100 text-base font-semibold'>{label}</p>

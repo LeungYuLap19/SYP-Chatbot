@@ -11,6 +11,7 @@ export default function CloseWindow({ setShowWindow }: { setShowWindow: React.Di
         src={'/planner/cross.svg'}
         alt='close'
         width={12} height={12}
+        loading='lazy'
       />
     </div>
   )

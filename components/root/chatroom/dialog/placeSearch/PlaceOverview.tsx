@@ -22,6 +22,7 @@ export default function PlaceOverview({ resultItem, selectedPlace, setSelectedPl
               alt={resultItem.name + 'photo'}
               fill={true}
               style={{objectFit: 'cover', objectPosition: 'center'}}
+              loading='lazy'
             />
           }
           
@@ -40,6 +41,7 @@ export default function PlaceOverview({ resultItem, selectedPlace, setSelectedPl
                 src={'/dialog/star.png'}
                 alt='star'
                 width={16} height={16}
+                loading='lazy'
               />
             </div>
           </div>

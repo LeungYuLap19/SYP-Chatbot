@@ -56,6 +56,7 @@ function PlannerPage({ planner }: { planner?: PlannerDetails }) {
           width={14} height={14}
           className='cursor-pointer'
           onClick={handleDelete}
+          loading='lazy'
         /> :
         planner && id === planner.pid && loading ? 
         <span className="loader"></span> :

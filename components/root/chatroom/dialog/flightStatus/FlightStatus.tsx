@@ -58,6 +58,7 @@ export default function FlightStatus({ flightStatus }: { flightStatus: FlightSta
               alt='aircraft image'
               fill={true}
               style={{ objectFit: 'cover', objectPosition: 'center' }}
+              loading='lazy'
             />
           </div>
         </div>

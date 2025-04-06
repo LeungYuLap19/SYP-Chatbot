@@ -10,6 +10,7 @@ export default function Logo({ className }: { className?: string }) {
           alt='logo'
           width={24} height={24}
           className={`flex-shrink-0 invert`}
+          loading='lazy'
         />
       </div>
       <p className={`text-customWhite-100 tracking-wider py-4 px-2 font-bold text-lg ${className}`}>

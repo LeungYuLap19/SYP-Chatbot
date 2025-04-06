@@ -28,7 +28,7 @@ export default function PlaceBlock({ placeItem }: { placeItem: PlaceItem }) {
     <div className=' rounded-lg bg-white text-sm relative'>
       {
         placeDetails &&
-        <DirectionButton address={placeDetails.location.address} />
+        <DirectionButton address={placeDetails.location.formatted_address} />
       }
       {
         placeDetails &&

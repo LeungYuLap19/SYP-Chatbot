@@ -25,6 +25,7 @@ export default function HourlyForecast({ weatherForecast }: { weatherForecast: W
                 alt={hour.condition.text}
                 height={30} width={30}
                 className='flex-shrink-0'
+                loading='lazy'
               />
               <p className='text-lg font-semibold mr-[-4px]'>{Math.floor(hour.temp_c)}°</p>
             </div>

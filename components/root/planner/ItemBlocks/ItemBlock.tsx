@@ -55,9 +55,10 @@ export default function ItemBlock({ item, planner, showDate = true }: {
                   alt='calendar'
                   width={14} height={14}
                   className='invert'
+                  loading='lazy'
                 />
               </div>
-              <p className='text-sm font-semibold text-customBlue-200'>
+              <p className='text-xs font-semibold text-customBlue-200'>
                 {
                   item.from_datetime &&
                   (
@@ -76,6 +77,7 @@ export default function ItemBlock({ item, planner, showDate = true }: {
                   alt='clock'
                   width={14} height={14}
                   className='invert'
+                  loading='lazy'
                 />
               </div>
               <p className='text-sm font-semibold text-customBlue-200 opacity-80'>

@@ -33,6 +33,7 @@ export default function FlightOverview({ flightOption }: { flightOption: FlightO
                       alt={airline}
                       width={25}
                       height={25}
+                      loading='lazy'
                     />
                   )
                 }

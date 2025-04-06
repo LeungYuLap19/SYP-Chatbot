@@ -2,11 +2,12 @@
 import axios from "axios";
 import { getSerpApiError } from "../errors/apiErrorsHandler";
 
-export async function getDirection(end_addr: string, start_addr?: string, start_lat?: number, start_lng?: number): Promise<Result<DirectionResponse>> {
+export async function getDirection(end_addr: string, mode: number, start_addr?: string, start_lat?: number, start_lng?: number): Promise<Result<DirectionResponse>> {
   const isAddress = start_addr && (!start_lat && !start_lng);
 
   const params: any = {
     engine: "google_maps_directions",
+    travel_mode: mode,
     end_addr,
     api_key: process.env.NEXT_PUBLIC_SERPAPI_API_KEY
   }
@@ -23,7 +24,7 @@ export async function getDirection(end_addr: string, start_addr?: string, start_
       params 
     });
 
-    // console.log(response.data);
+    // console.log(response.data, mode); 
     return { data: response.data };
   } catch (error: any) {
     console.error('Search Flight Error:', error);

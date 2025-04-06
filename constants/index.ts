@@ -181,6 +181,34 @@ export const currencyList: CurrencyProps[] = [
   }
 ]
 
+export const travelModes: TravelModeProps[] = [
+  {
+    mode: 'best',
+    icon: '/planner/best.svg',
+    value: 6
+  },
+  {
+    mode: 'driving',
+    icon: '/planner/driving.svg',
+    value: 0
+  },
+  {
+    mode: 'transit',
+    icon: '/planner/transit.svg',
+    value: 3
+  },
+  {
+    mode: 'walking',
+    icon: '/planner/walking.svg',
+    value: 2
+  },
+  {
+    mode: 'cycling',
+    icon: '/planner/cycling.svg',
+    value: 1
+  },
+]
+
 export const COOKIES_KEY_USERDATA = 'user_data';
 
 export const COOKIES_KEY_CURRENCY = 'currency';

@@ -55,6 +55,7 @@ function HistoryChatPage({ chatroom }: { chatroom?: Chatroom; }) {
           width={14} height={14}
           className='cursor-pointer'
           onClick={handleDelete}
+          loading='lazy'
         /> :
         chatroom && id === chatroom.cid && loading ? 
         <span className="loader"></span> :

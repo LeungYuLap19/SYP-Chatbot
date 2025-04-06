@@ -26,6 +26,7 @@ export default function DepArr({
               src={'/dialog/right-arrow-svgrepo-com.svg'}
               alt='right arrow'
               width={24} height={24}
+              loading='lazy'
             />
           </div>
 

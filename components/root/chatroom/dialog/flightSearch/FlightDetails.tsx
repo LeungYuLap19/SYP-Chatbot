@@ -12,6 +12,7 @@ export default function FlightDetails({ flightDetails }: { flightDetails: Flight
               src={flightDetails.airline_logo}
               alt={flightDetails.airline}
               width={24} height={24}
+              loading='lazy'
             />
           ) :
           (

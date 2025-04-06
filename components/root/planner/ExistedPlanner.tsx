@@ -55,6 +55,7 @@ export default function ExistedPlanner({ id }: { id: string }) {
           src={'/dialog/calendar-clock.svg'}
           alt='calendar'
           width={16} height={16}
+          loading='lazy'
         />
         <p className='font-semibold text-customBlack-100'>
           {selected.from_datetime ? format(new Date(selected.from_datetime), 'yyyy/MM/dd') : 'N/A'}
@@ -75,6 +76,7 @@ export default function ExistedPlanner({ id }: { id: string }) {
                 alt='wait-icon'
                 width={14} height={14}
                 className='invert'
+                loading='lazy'
               />
             </div>
             
@@ -91,7 +93,7 @@ export default function ExistedPlanner({ id }: { id: string }) {
         </div>
       }
 
-      <div className='flex flex-col gap-4 pl-11 pb-11'>
+      <div className='flex flex-col gap-4 pl-11 pb-11 max-sm:pl-4'>
         {
           scheduledItems.map((item, index) => {
             if ('fsq_id' in item && item.from_datetime?.substring(0, 10) !== currentDate.substring(0, 10)) {
@@ -105,6 +107,7 @@ export default function ExistedPlanner({ id }: { id: string }) {
                         alt='calendar'
                         width={14} height={14}
                         className='invert'
+                        loading='lazy'
                       />
                     </div>
                     <p className='text-sm font-semibold text-customBlue-200'>

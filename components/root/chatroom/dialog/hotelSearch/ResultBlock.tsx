@@ -32,6 +32,7 @@ export default function ResultBlock(
               alt='hotel image'
               fill={true}
               style={{ objectFit: 'cover', objectPosition: 'center' }}
+              loading='lazy'
             />
         }
       </div>
@@ -56,6 +57,7 @@ export default function ResultBlock(
               src={'/dialog/star.png'}
               alt='star'
               width={16} height={16}
+              loading='lazy'
             />
             <p>({hotelProperty.reviews})</p>
           </div>

@@ -13,7 +13,7 @@ interface SearchMetadata {
 interface SearchParameters {
   engine: string;
   hl: string;
-  start_addr: string;
+  start_coords: string;
   end_addr: string;
 }
 

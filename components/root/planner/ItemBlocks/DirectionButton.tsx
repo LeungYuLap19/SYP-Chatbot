@@ -1,29 +1,25 @@
 import CustomButton from '@/components/global/CustomButton'
 import { useGetAPIs } from '@/lib/hooks/useGetAPIs'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import ETAWindow from '../ETAWindow';
 
 export default function DirectionButton({ address }: { address: string }) {
-  const { directionResponse, checkDirection, loading } = useGetAPIs(false);
-
-  useEffect(() => {
-    if (directionResponse) {
-      const directionsUrl = directionResponse.search_metadata.google_maps_directions_url;
-
-      if (directionsUrl) {
-        window.open(directionsUrl, '_blank');
-      }
-    }
-  }, [directionResponse]);
+  const [showWindow, setShowWindow] = useState(false);
 
   return (
-    <div className='absolute top-[-52px] right-[-16px]'>
+    <div className='absolute top-[-52px] right-[-16px] max-sm:top-[-44px]'>
       <CustomButton 
         type={'button'} 
-        label={'Get Direction on Google Map'}   
-        loading={loading}
-        className='text-xs bg-white !h-9 border-none rounded-b-none'
-        onClick={() => checkDirection(address)}
+        label={'Show ETA'}  
+        className='text-xs bg-white !h-9 border-none rounded-b-none max-sm:!h-7'
+        onClick={() => {
+          setShowWindow(true);
+        }}
       />
+      {
+        showWindow && 
+        <ETAWindow setShowWindow={setShowWindow} address={address} />
+      }
     </div>
   )
 }

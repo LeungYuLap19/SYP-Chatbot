@@ -41,6 +41,7 @@ export default function SearchResultTitle({
               src={airlineLogo}
               alt='Airline Logo'
               width={25} height={25}
+              loading='lazy'
             />
             <p className='text-sm'>{airline || 'Multi-Airlines'}</p>
           </div>
