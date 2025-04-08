@@ -33,3 +33,14 @@ interface Hour {
   condition: Condition;
   temp_c: number;
 }
+
+declare interface FormattedDaysForecast {
+  weekday: string;
+  condition: Condition;
+  maxtemp_c: number;
+  mintemp_c: number;
+  hottestHours: {
+    hour: number;
+    temp_c: number;
+  }[];
+}

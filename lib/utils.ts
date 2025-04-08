@@ -4,7 +4,7 @@ import { z } from "zod";
 import qs from "query-string";
 import { toast } from "@/hooks/use-toast";
 import dayjs from 'dayjs';
-import { placeSearchCategories } from "@/constants";
+import { placeSearchCategories, weekdays } from "@/constants";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -233,3 +233,34 @@ export function getAirportForDirection(flightStatus: FlightStatus) {
 
   return null;
 };
+
+export function get7DaysForecast(forecastday: ForecastDay[], currentDayIndex: number): FormattedDaysForecast[] {
+  return forecastday.map((day, index) => {
+    const weekdayIndex = (currentDayIndex + index) % 7;
+    
+    // Sort hours by temperature in descending order
+    const sortedHours = [...day.hour].sort((a, b) => b.temp_c - a.temp_c);
+    
+    // Calculate the number of hours to include in the top 25%
+    const top25PercentCount = Math.ceil(sortedHours.length * 0.25);
+    
+    // Get the hottest 25% hours
+    const hottestHours = sortedHours.slice(0, top25PercentCount);
+    
+    // Sort the hottest hours by hour and format them
+    const formattedHottestHours = hottestHours
+      .sort((a, b) => new Date(a.time).getHours() - new Date(b.time).getHours())
+      .map(hour => ({
+        hour: new Date(hour.time).getHours(),
+        temp_c: hour.temp_c,
+      }));
+
+    return {
+      weekday: index === 0 ? 'Today' : weekdays[weekdayIndex],
+      condition: day.day.condition,
+      maxtemp_c: day.day.maxtemp_c,
+      mintemp_c: day.day.mintemp_c,
+      hottestHours: formattedHottestHours,
+    };
+  });
+}

@@ -207,7 +207,11 @@ export const travelModes: TravelModeProps[] = [
     icon: '/planner/cycling.svg',
     value: 1
   },
-]
+];
+
+export const weekdays: string[] = [
+  'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'
+];
 
 export const COOKIES_KEY_USERDATA = 'user_data';
 
