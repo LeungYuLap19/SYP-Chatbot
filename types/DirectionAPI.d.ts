@@ -95,4 +95,5 @@ interface DirectionResponse {
   places_info: PlaceInfo[];
   directions: DirectionExtension[];
   durations: Duration[];
+  error: string;
 }

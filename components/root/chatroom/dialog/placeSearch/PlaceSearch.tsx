@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 import PlaceOverview from './PlaceOverview'
 import PlaceDetails from './PlaceDetails'
 import { getIdsOrLabelByCategory } from '@/lib/utils';
+import BotIcon from '../BotIcon';
+import BotDialogLayout from '../BotDialogLayout';
 
 export default function PlaceSearch({ 
   resultItem, geoResponse, responseType 
@@ -14,35 +16,33 @@ export default function PlaceSearch({
   const [selectedPlace, setSelectedPlace] = useState<string | null>(null);
 
   return (
-    <div className='w-full flex'>
-      <div className='w-[40%] max-2xl:w-[50%] max-xl:w-[60%] max-lg:w-[65%] max-md:w-full flex flex-col rounded-lg bg-white text-sm overflow-hidden'>
-        <div className='p-6 pb-4'>
-          <p>
-            Here are some {' '}
-            <span className='text-customBlue-200 font-semibold'>{getIdsOrLabelByCategory(responseType, false)}</span> {' '}
-            I found in {' '}
-            <span className='text-customBlue-200 font-semibold'> {geoResponse.address_components[0].short_name}</span>:
-          </p>
-        </div>
-
-        <div className='flex flex-col gap-4'>
-          {
-            resultItem.map((item, index) => (
-              <div className='flex flex-col' key={item.fsq_id}>
-                <PlaceOverview
-                  resultItem={item}
-                  selectedPlace={selectedPlace}
-                  setSelectedPlace={setSelectedPlace}
-                />
-                {
-                  selectedPlace === item.fsq_id && 
-                  <PlaceDetails resultItem={item} />
-                }
-              </div>
-            ))
-          }
-        </div>
+    <BotDialogLayout widthClassName='w-[40%] max-2xl:w-[50%] max-xl:w-[60%] max-lg:w-[65%] max-md:w-full'>
+      <div className='p-6 pb-4'>
+        <p>
+          Here are some {' '}
+          <span className='text-customBlue-200 font-semibold'>{getIdsOrLabelByCategory(responseType, false)}</span> {' '}
+          I found in {' '}
+          <span className='text-customBlue-200 font-semibold'> {geoResponse.address_components[0].short_name}</span>:
+        </p>
       </div>
-    </div>
+
+      <div className='flex flex-col gap-4'>
+        {
+          resultItem.map((item, index) => (
+            <div className='flex flex-col' key={item.fsq_id}>
+              <PlaceOverview
+                resultItem={item}
+                selectedPlace={selectedPlace}
+                setSelectedPlace={setSelectedPlace}
+              />
+              {
+                selectedPlace === item.fsq_id && 
+                <PlaceDetails resultItem={item} />
+              }
+            </div>
+          ))
+        }
+      </div>
+    </BotDialogLayout>
   )
 }

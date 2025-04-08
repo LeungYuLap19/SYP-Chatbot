@@ -80,3 +80,8 @@ interface TravelModeProps {
   icon: string;
   value: number;
 }
+
+interface BotDialogLayoutProps {
+  widthClassName?: string;
+  children: ReactNode;
+}

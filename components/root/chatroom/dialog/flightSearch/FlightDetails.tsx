@@ -36,7 +36,7 @@ export default function FlightDetails({ flightDetails }: { flightDetails: Flight
       </div>
       
       <div className='flex flex-col gap-2'>
-        <p className='text-xs text-customBlack-200'>
+        <p className='text-xs text-gray-400'>
           {flightDetails.airplane} {' - '} {flightDetails.flight_number.replace(' ', '')}
         </p>
         <div className='flex flex-wrap gap-2'>
@@ -47,7 +47,7 @@ export default function FlightDetails({ flightDetails }: { flightDetails: Flight
                   index !== 0 &&
                   <span className='h-4 w-[2px] bg-slate-200'></span>
                 }
-                <p className='text-xs text-customBlack-200'>{value}</p>
+                <p className='text-xs text-gray-400'>{value}</p>
               </>
             ))
           }

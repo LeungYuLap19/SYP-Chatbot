@@ -18,7 +18,7 @@ export default function DepArr({
               <span className='font-bold max-sm:hidden'>{fromIATA}</span>
               <p className='max-sm:font-bold'>{fromCity}</p>
             </div>
-            <p className='text-xs text-customBlack-200'>{fromAirport} Airport</p>
+            <p className='text-xs text-gray-400'>{fromAirport} Airport</p>
           </div>
 
           <div className='relative'>
@@ -35,7 +35,7 @@ export default function DepArr({
               <span className='font-bold max-sm:hidden'>{toIATA}</span>
               <p className='max-sm:font-bold'>{toCity}</p>
             </div>
-            <p className='text-xs text-customBlack-200'>{toAirport} Airport</p>
+            <p className='text-xs text-gray-400'>{toAirport} Airport</p>
           </div>
         </div>
       </div>

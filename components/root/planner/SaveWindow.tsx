@@ -62,7 +62,7 @@ export default function SaveWindow(
   
   return (
     <div className='z-50 w-screen h-screen bg-black bg-opacity-50 fixed top-0 left-0 flex justify-center items-center'>
-      <div className='p-8 pt-10 bg-white rounded-lg flex flex-col gap-4 justify-center relative'>
+      <div className='p-8 pt-10 bg-white rounded-2xl flex flex-col gap-4 justify-center relative'>
         <CloseWindow setShowWindow={setShowWindow} />
 
         <p className='font-semibold'>Save To Planner</p>
@@ -103,7 +103,7 @@ export default function SaveWindow(
           loading={loading}
           type='button'
           label='Save'
-          className='bg-transparent'
+          className='rounded-lg'
           onClick={
             async () => {
               await saveToPlanner(selectedItem);

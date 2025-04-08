@@ -11,7 +11,7 @@ export default function DirectionButton({ address }: { address: string }) {
       <CustomButton 
         type={'button'} 
         label={'Show ETA'}  
-        className='text-xs bg-white !h-9 border-none rounded-b-none max-sm:!h-7'
+        className='text-xs bg-gray-50 !h-9 border-none rounded-b-none max-sm:!h-7'
         onClick={() => {
           setShowWindow(true);
         }}

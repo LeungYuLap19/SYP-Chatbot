@@ -83,7 +83,7 @@ export default function FlightStatusSection(
           </div>
           
 
-          <p className='text-xs text-customBlack-200'>
+          <p className='text-xs text-gray-400'>
             {flightStatus.number.replace(' ', '')} {' - '} {flightStatus.aircraft?.model && flightStatus.aircraft.model} {' - '}
           </p>
 
@@ -98,7 +98,7 @@ export default function FlightStatusSection(
             layover &&
             <div className='flex flex-row gap-2 justify-center items-center'>
               <span className='w-[5%] h-[2px] bg-slate-200'></span>
-              <p className='text-xs text-customBlack-200 flex-shrink-0'>
+              <p className='text-xs text-gray-400 flex-shrink-0'>
                 layover {' - '}
                 {flightStatus.arrival.airport.iata} {' - '}
                 {flightStatus.arrival.airport.name} Airport 

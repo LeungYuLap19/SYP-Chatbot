@@ -11,7 +11,8 @@ export default function CustomButton({
       type={type}
       onClick={onClick}
       className={`
-        bg-customWhite-100 text-customBlack-100 border border-customBlack-100 shadow-none min-w-[78px] flex gap-2 items-center
+        py-3 px-4 rounded-2xl bg-gray-100 placeholder-gray-400
+      text-customBlack-100 shadow-none min-w-[78px] flex gap-2 items-center border border-gray-200
         ${loading && 'bg-customBlack-100 !opacity-100'}
         ${!disableHover && 'transition-colors duration-500 hover:bg-customBlack-100 hover:text-customWhite-100'}
         ${className}

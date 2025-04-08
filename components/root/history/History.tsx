@@ -9,11 +9,11 @@ export default function History() {
   const categories = history.categories;
 
   return (
-    <div className='h-full flex flex-col gap-2 px-4 bg-customWhite-100 relative overflow-hidden'>
-      <div className='w-full bg-customWhite-200 absolute top-0 left-0 p-4 drop-shadow-default'>
+    <div className='h-full flex flex-col gap-2 bg-gray-50 relative overflow-hidden'>
+      <div className='w-full absolute top-0 left-0 p-4 font-medium'>
         History
       </div>
-      <div className='flex flex-col gap-2 overflow-auto mt-[56px] py-2 pt-4'>
+      <div className='flex flex-col gap-2 overflow-auto mt-[56px] py-2 pt-4 items-center'>
         <HistoryChat key={-1} />
         {
           categories &&

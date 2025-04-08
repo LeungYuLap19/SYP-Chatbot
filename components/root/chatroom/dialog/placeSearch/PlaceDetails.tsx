@@ -34,11 +34,11 @@ export default function PlaceDetails({ resultItem, isSaved = false }: {resultIte
   }, [fromDate, toDate, resultItem.fsq_id]);
 
   return (
-    <div className='p-2 pt-0 flex flex-col gap-4'>
+    <div className='p-3 pt-0 flex flex-col gap-4'>
       <div className='flex flex-col gap-2'>
         <Subtitle text='Opening Hours' />
         <div 
-          className='flex items-center gap-2 p-2 py-1 hover:bg-gray-100 hover:drop-shadow-sm rounded-lg cursor-pointer'
+          className='flex items-center gap-2 p-3 py-1 hover:bg-white hover:drop-shadow-default rounded-lg cursor-pointer'
           onClick={() => setHoursDisplay(!hoursDisplay)}
         >
           <p className={`font-semibold ${resultItem.hours.open_now ? 'text-green-500' : 'text-red-500'}`}>
@@ -94,7 +94,7 @@ export default function PlaceDetails({ resultItem, isSaved = false }: {resultIte
                   href={socialMedia.find((media) => media.name === key)?.url + value} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className='flex items-center gap-2 p-2 py-1 hover:bg-gray-100 hover:drop-shadow-sm rounded-lg cursor-pointer'
+                  className='flex items-center gap-2 p-3 py-1 hover:bg-white hover:drop-shadow-default rounded-lg cursor-pointer'
                 >
                   <Image 
                     src={`/dialog/${key}.svg`}
@@ -118,7 +118,7 @@ export default function PlaceDetails({ resultItem, isSaved = false }: {resultIte
             href={resultItem.website} 
             target="_blank" 
             rel="noopener noreferrer" 
-            className='p-2 py-1 text-blue-500 hover:bg-gray-100 hover:drop-shadow-sm rounded-lg cursor-pointer'
+            className='p-3 py-1 text-blue-500 hover:bg-white hover:drop-shadow-default rounded-lg cursor-pointer'
           >
             {resultItem.website}
           </a>
@@ -164,7 +164,7 @@ export default function PlaceDetails({ resultItem, isSaved = false }: {resultIte
         resultItem.location.formatted_address &&
         <div className='flex flex-col gap-2'>
           <Subtitle text='Address' />
-          <div className='flex items-center gap-2 p-2 py-1 hover:bg-gray-100 hover:drop-shadow-sm rounded-lg cursor-pointer'>
+          <div className='flex items-center gap-2 p-3 py-1 hover:bg-white hover:drop-shadow-default rounded-lg cursor-pointer'>
             <a 
               href={googleMapsUrl} 
               target="_blank" 
@@ -181,7 +181,7 @@ export default function PlaceDetails({ resultItem, isSaved = false }: {resultIte
         <CustomButton 
           label='Save to Planner'
           type='button'
-          className='bg-transparent'
+          className='rounded-lg text-xs w-full bg-gray-200'
           onClick={() => setShowWindow(true)}
         />
       }

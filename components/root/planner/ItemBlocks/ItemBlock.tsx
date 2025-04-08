@@ -94,7 +94,7 @@ export default function ItemBlock({ item, planner, showDate = true }: {
           <span className='h-full w-[5px] bg-customBlue-200 opacity-70 rounded-full'></span>
         }
 
-        <div className={`w-2/3 max-xl:w-full rounded-tr-none p-4 rounded-lg bg-white ${unassigned && 'h-72 !w-72 !p-3 overflow-auto'}`}>
+        <div className={`w-2/3 max-xl:w-full rounded-tr-none p-4 rounded-2xl bg-gray-50 ${unassigned && 'h-72 !w-72 !p-3 overflow-auto'}`}>
           {
             'flights' in item ? <FlightBlock flightItem={item} /> :
             'property_token' in item ? <PropertyBlock accommodationItem={item} /> :
@@ -108,7 +108,7 @@ export default function ItemBlock({ item, planner, showDate = true }: {
             loading={loading}
             label={''}    
             iconUrl='/history/trash.svg'
-            className='!h-9 !w-9 !rounded-full bg-customBlack-200 !p-0 !min-w-0 hover:bg-customBlack-100 border-none 
+            className='!h-9 !w-9 !rounded-full bg-gray-400 !p-0 !min-w-0 hover:bg-customBlack-100 border-none 
               transition-opacity duration-500 ease-in-out opacity-0 group-hover:opacity-100'
             imageClassName='invert'
             onClick={handleDelete}
@@ -121,8 +121,8 @@ export default function ItemBlock({ item, planner, showDate = true }: {
               loading={loading}
               label={''}    
               iconUrl='/planner/edit.svg'
-              className='!h-9 !w-9 !rounded-full bg-customBlack-200 !p-0 !min-w-0 hover:bg-customBlack-100 border-none 
-                transition-opacity duration-500 ease-in-out opacity-0 group-hover:opacity-100'
+              className='!h-9 !w-9 !rounded-full bg-gray-400 !p-0 !min-w-0 transition-all duration-500 hover:bg-customBlack-100 border-none 
+                ease-in-out opacity-0 group-hover:opacity-100'
               imageClassName='invert'
               onClick={() => setShowWindow(true)}
               title='Edit Datetimes'

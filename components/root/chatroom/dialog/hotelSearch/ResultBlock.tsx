@@ -40,7 +40,7 @@ export default function ResultBlock(
       <div className='flex flex-col flex-1'>
         <div className="flex-grow flex flex-col gap-2">
           <p className='font-semibold'>{hotelProperty.name}</p>
-          <p className='text-xs text-customBlack-200'>
+          <p className='text-xs text-gray-400'>
             Near {' '}
             {hotelProperty.nearby_places[0].name} {' '}
             ({hotelProperty.nearby_places[0].transportations[0].duration} {' '}
@@ -79,7 +79,7 @@ export default function ResultBlock(
           <CustomButton 
             label='Save to Planner'
             type='button'
-            className='text-xs bg-transparent px-3 py-1 h-fit'
+            className='rounded-lg text-xs bg-gray-200 px-3 py-[6px] h-fit'
             onClick={() => {
               setShowWindow(true);
               setSelectedItem({

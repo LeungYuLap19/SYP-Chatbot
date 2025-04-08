@@ -29,7 +29,7 @@ export default function FromTo({
           }
         </div>
 
-        <div className='text-customBlack-200 text-xs'>
+        <div className='text-gray-400 text-xs'>
           {getDuration(fromUTCTime, toUTCTime)}
         </div>
 

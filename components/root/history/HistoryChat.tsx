@@ -38,9 +38,10 @@ function HistoryChatPage({ chatroom }: { chatroom?: Chatroom; }) {
 
   return (
     <div onClick={handleOnClick} className={`
-      cursor-pointer text-customBlack-100 text-sm p-2 rounded-lg flex justify-between items-center
-      ${chatroom && id === chatroom.cid && 'bg-slate-300 cursor-default font-semibold'}
-      ${!id && !chatroom && path !== '/history' && 'bg-slate-300'}
+      w-[90%]
+      cursor-pointer text-customBlack-100 text-sm p-2 px-4 rounded-2xl flex justify-between items-center transition-colors duration-500 hover:bg-white
+      ${chatroom && id === chatroom.cid && 'bg-white cursor-default drop-shadow-default'}
+      ${!id && !chatroom && path !== '/history' && 'bg-white drop-shadow-default'}
     `}>
       {
         !chatroom ? 

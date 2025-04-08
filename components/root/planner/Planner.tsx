@@ -39,13 +39,14 @@ function PlannerPage({ planner }: { planner?: PlannerDetails }) {
 
   return (
     <div onClick={handleOnClick} className={`
-      cursor-pointer text-customBlack-100 text-sm p-2 rounded-lg flex justify-between items-center
-      ${planner && id === planner.pid && 'bg-slate-300 cursor-default font-semibold'}
-      ${!id && !planner && path == '/planner' && 'bg-slate-300'}
+      w-[90%]
+      cursor-pointer text-customBlack-100 text-sm p-2 px-4 rounded-2xl flex justify-between transition-colors duration-500 hover:bg-white
+      ${planner && id === planner.pid && 'bg-white cursor-default drop-shadow-default'}
+      ${!id && !planner && path == '/planner' && 'bg-white drop-shadow-default'}
     `}>
       {
         !planner ? 
-        'New planner':
+        'Create planner':
         planner.name
       }
       {

@@ -29,8 +29,8 @@ export default function SearchResultTitle({
     <>
       <div 
         className={`flex justify-between items-center w-full
-        cursor-pointer hover:bg-gray-100 hover:drop-shadow-sm p-3 py-2 rounded-lg
-        ${index === showDetails && 'bg-gray-100'}`}
+        cursor-pointer duration-500 hover:bg-white hover:drop-shadow-default p-3 py-2 rounded-lg
+        ${index === showDetails && 'bg-white drop-shadow-default'}`}
         onClick={() => {
           index === showDetails ? setShowDetails(-1) : setShowDetails(index)
         }}

@@ -17,7 +17,7 @@ export default function SearchResult({ flightOption }: { flightOption: FlightOpt
               index < flightOption.flights.length - 1 && (
                 <div className='flex flex-row gap-2 justify-center items-center'>
                   <span className='w-[5%] h-[2px] bg-slate-200'></span>
-                  <p className='text-xs text-customBlack-200 flex-shrink-0'>
+                  <p className='text-xs text-gray-400 flex-shrink-0'>
                     { getDurationWithMinutes(flightOption.layovers[index].duration) } {' '}
                     layover {' - '}
                     { flightOption.layovers[index].id }

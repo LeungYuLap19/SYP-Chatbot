@@ -19,7 +19,6 @@ export default function NewPlanner() {
             disabled={loading} 
             ref={inputRef}
             onKeyDown={(event) => handleKeyDown({event, func: handleEnter})}
-            className="bg-customWhite-100 border border-customBlack-100"
           />
           <CustomButton 
             type='button'
@@ -29,7 +28,7 @@ export default function NewPlanner() {
           />
         </div>
         <Link
-          className='font-semibold underline text-sm text-customBlack-200'
+          className='font-semibold underline text-sm text-gray-400'
           href={'/chatroom'}
           onClick={() => handleEnter(true)}
         >

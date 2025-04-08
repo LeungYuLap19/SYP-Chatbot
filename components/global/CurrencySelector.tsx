@@ -50,15 +50,15 @@ export default function CurrencySelector() {
   }, []);
 
   return (
-    <div className='max-sm:absolute max-sm:top-2 max-sm:right-2'>
+    <div className='max-sm:absolute max-sm:top-2 max-sm:right-2 z-[99]'>
       <Select
         onValueChange={handleCurrencyChange}
         value={currency}
       >
-        <SelectTrigger className="bg-transparent sm:text-white sm:border-customBlack-200">
+        <SelectTrigger className="bg-transparent sm:text-white sm:border-customBlack-200 rounded-2xl">
           <SelectValue placeholder="Select a Currency" />
         </SelectTrigger>
-        <SelectContent className='bg-transparent sm:text-white sm:border-customBlack-200 w-[100px]'>
+        <SelectContent className='sm:bg-transparent bg-white sm:text-white sm:border-customBlack-200 w-[100px] rounded-2xl'>
           {currencyList.map((currency, index) => (
             <SelectItem 
               key={index} 

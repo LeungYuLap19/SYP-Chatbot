@@ -24,7 +24,7 @@ export default function CustomInput({ control, name, label, placeholder }: Custo
       control={control}
       name={name}
       render={({field}) => (
-        <div className=''>
+        <div className='flex flex-col gap-4'>
           <FormLabel className=''>
             {label}
           </FormLabel>
@@ -35,8 +35,8 @@ export default function CustomInput({ control, name, label, placeholder }: Custo
                   id={label}
                   placeholder={placeholder}
                   type={name === 'password' ? 'password' : 'text'}
-                  className='bg-customWhite-100 border border-customBlack-100 placeholder:text-customBlack-100'
                   {...field}
+                  className='bg-transparent rounded-md !broder-none shadow-none'
               />
             </FormControl>
             <FormMessage className='text-red-600 mt-2' />

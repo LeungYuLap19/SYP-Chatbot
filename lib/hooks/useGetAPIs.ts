@@ -3,7 +3,7 @@ import { getFlightStatus } from "../actions/aerobox/flightStatus.action";
 import { getFlightSearch } from "../actions/serpapi/flightSearch.action";
 import { getLocationDetails } from "../actions/google/geocoding.action";
 import { getPopularPlaces } from "../actions/foursquare/placeSearch.action";
-import { ERROR_TOAST_TITLE, TEST_AUTOCOMPLETION, TEST_FLIGHT_ARRIVAL, TEST_FLIGHT_DATE, TEST_FLIGHT_DEPARTURE, TEST_FLIGHT_DEPARTURE_DATE, TEST_FLIGHT_NUMBER, TEST_SEARCH_LIMIT } from "@/constants";
+import { ERROR_TOAST_TITLE, TEST_AUTOCOMPLETION, TEST_FLIGHT_ARRIVAL, TEST_FLIGHT_DATE, TEST_FLIGHT_DEPARTURE, TEST_FLIGHT_DEPARTURE_DATE, TEST_FLIGHT_NUMBER, TEST_SEARCH_LIMIT, TEST_START_LAT, TEST_START_LNG } from "@/constants";
 import { getWeatherForecast } from "../actions/weatherapi/weatherForecast.action";
 import { getHotelSearch } from "../actions/serpapi/hotelSearch.action";
 import { showToast } from "../utils";
@@ -101,25 +101,25 @@ export function useGetAPIs(test: boolean) {
   }
 
   const checkDirection = async (end_addr: string, mode: number, start_addr?: string) => {
-    let start_lat: number | undefined;
-    let start_lng: number | undefined;
+    // let start_lat: number | undefined;
+    // let start_lng: number | undefined;
 
-    if (!start_addr) {
-      try {
-        const position = await new Promise<GeolocationPosition>((resolve, reject) => {
-          navigator.geolocation.getCurrentPosition(resolve, reject);
-        });
+    // if (!start_addr) {
+    //   try {
+    //     const position = await new Promise<GeolocationPosition>((resolve, reject) => {
+    //       navigator.geolocation.getCurrentPosition(resolve, reject);
+    //     });
   
-        start_lat = position.coords.latitude;
-        start_lng = position.coords.longitude;
-      } catch (error) {
-        showToast({ title: ERROR_TOAST_TITLE, description: "Unable to get current location." });
-        return;
-      }
-    }
+    //     start_lat = position.coords.latitude;
+    //     start_lng = position.coords.longitude;
+    //   } catch (error) {
+    //     showToast({ title: ERROR_TOAST_TITLE, description: "Unable to get current location." });
+    //     return;
+    //   }
+    // }
 
     setLoading(true);
-    const response = await getDirection(end_addr, mode, start_addr, start_lat, start_lng);
+    const response = await getDirection(end_addr, mode, start_addr, TEST_START_LAT, TEST_START_LNG);
     if (response.data) {
       setDirectionResponse(response.data);
     }

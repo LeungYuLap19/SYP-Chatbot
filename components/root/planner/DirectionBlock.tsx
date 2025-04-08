@@ -15,8 +15,8 @@ export default function DirectionBlock({ direction }: { direction: DirectionExte
         <p>{direction.travel_mode}</p>
       </div>
       
-      <div className='flex items-center justify-between w-[100px]'>
-        <p className='text-xs text-customBlack-200'>{direction.formatted_distance}</p>
+      <div className='flex items-center justify-between w-[120px]'>
+        <p className='text-xs text-gray-400'>{direction.formatted_distance}</p>
         <p className='text-green-600 font-semibold'>{direction.formatted_duration}</p>
       </div>
     </div>

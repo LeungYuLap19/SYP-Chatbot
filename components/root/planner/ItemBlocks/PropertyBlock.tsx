@@ -25,7 +25,7 @@ export default function PropertyBlock({ accommodationItem }: { accommodationItem
   }, [accommodationItem]);
 
   return (
-    <div className='p-1 pt-3 rounded-lg bg-white flex flex-col gap-4 relative'>
+    <div className='p-1 pt-3 rounded-lg flex flex-col gap-4 relative'>
       {
         hotelDetails &&
         <DirectionButton address={hotelDetails.address} />
@@ -53,7 +53,7 @@ export default function PropertyBlock({ accommodationItem }: { accommodationItem
             <div className='flex flex-col flex-1'>
               <div className="flex-grow flex flex-col gap-2">
                 <p className='font-semibold'>{hotelDetails.name}</p>
-                <p className='text-xs text-customBlack-200'>
+                <p className='text-xs text-gray-400'>
                   Near {' '}
                   {hotelDetails.nearby_places[0].name} {' '}
                   {

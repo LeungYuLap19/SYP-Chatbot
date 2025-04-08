@@ -28,10 +28,10 @@ const config: Config = {
 				},
 				customBlue: {
 					100: '#8d99ae',
-					200: '#328CA5',
+					200: '#2171a3',
 				},
 				customWhite: {
-					100: '#f4f8fb',
+					100: '#FAF9F9',
 					200: '#f8fcff',
 				},
 				customGreen: {
@@ -39,7 +39,7 @@ const config: Config = {
 				},
 			},
 			dropShadow: {
-        default: '0px 0px 8px rgba(0, 0, 0, 0.10)'
+        default: '0px 0px 4px rgba(0, 0, 0, 0.05)'
       },
   	}
   },

@@ -6,7 +6,7 @@ import CurrencySelector from '@/components/global/CurrencySelector'
 
 export default function Navigation() {
   return (
-    <div className='flex flex-col gap-2 p-4 h-full sm:w-[200px]'>
+    <div className='flex flex-col gap-4 p-4 sm:pt-6 h-full sm:w-[200px] bg-gray-900'>
       <Logo className='max-sm:hidden' />
 
       <div className='

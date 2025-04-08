@@ -16,7 +16,7 @@ export default function FlightBlock({ flightItem }: { flightItem: FlightItem }) 
   });
 
   return (
-    <div className='p-3 rounded-lg bg-white text-sm relative'>
+    <div className='p-3 rounded-lg text-sm relative'>
       <DirectionButton address={depArrProps.address!} />
       <DepArr 
         localTime={depArrProps.localTime} 

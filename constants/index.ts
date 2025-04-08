@@ -219,7 +219,7 @@ export const COOKIES_KEY_CURRENCY = 'currency';
 
 export const DAYS_TO_EXPIRE = 7;
 
-export const ERROR_TOAST_TITLE = 'Something went wrong';
+export const ERROR_TOAST_TITLE = '⚠️ Something went wrong';
 
 // testing
 // flight status
@@ -235,3 +235,7 @@ export const TEST_AUTOCOMPLETION = 'hongkong';
 export const TEST_SEARCH_LIMIT = 5;
 // export const TEST_NE: GeoLocation = GeocodingData.results[0].geometry.bounds.northeast;
 // export const TEST_SW: GeoLocation = GeocodingData.results[0].geometry.bounds.southwest;
+
+// demo 
+export const TEST_START_LAT = 51.505957;
+export const TEST_START_LNG = -0.109573;

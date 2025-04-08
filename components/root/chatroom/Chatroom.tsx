@@ -10,7 +10,7 @@ function ChatroomPage() {
 
   return (
     <div className='
-      h-full flex-grow bg-customWhite-100 flex flex-col gap-2 p-4 relative overflow-hidden
+      h-full flex-grow bg-white flex flex-col gap-2 p-4 relative overflow-hidden
     '>
       {
         id ?

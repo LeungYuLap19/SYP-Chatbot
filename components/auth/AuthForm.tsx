@@ -61,8 +61,8 @@ export default function AuthForm({ type }: AuthFormProps) {
   } 
 
   return (
-    <div className='w-[70%] flex flex-col max-sm:w-[80%]'>
-      <Logo className='!text-customBlack-100 invert'/>
+    <div className='w-[70%] flex flex-col gap-4 max-sm:w-[80%]'>
+      <Logo />
 
       <div className='flex flex-col gap-2 mb-4'>
         <p className='text-2xl font-semibold'>
@@ -104,6 +104,7 @@ export default function AuthForm({ type }: AuthFormProps) {
               loading={loading} 
               type={'submit'} 
               label={type === 'sign-in' ? 'Sign In' : 'Sign Up'} 
+              className='rounded-md bg-gray-200'
             />
 					</form>
 				</Form>

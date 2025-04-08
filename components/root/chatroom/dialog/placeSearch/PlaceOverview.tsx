@@ -7,9 +7,9 @@ export default function PlaceOverview({ resultItem, selectedPlace, setSelectedPl
   const photoUrl = photo && `${photo.prefix}${photo.width}x${photo.height}${photo.suffix}`
 
   return (
-    <div className='p-2 pt-0'>
+    <div className='p-3 pt-0'>
       <div 
-        className='p-2 hover:bg-gray-100 hover:drop-shadow-sm rounded-lg cursor-pointer flex flex-col gap-2'
+        className='p-3 hover:bg-white hover:drop-shadow-default rounded-lg cursor-pointer flex flex-col gap-2'
         onClick={() => {
           selectedPlace === resultItem.fsq_id ? setSelectedPlace(null) : setSelectedPlace(resultItem.fsq_id)
         }}

@@ -13,17 +13,21 @@ export default function ExistedChatroom({ id }: { id: string; }) {
 
   return (
     <>
-      <div className='w-full absolute top-0 left-0 bg-customWhite-200 p-4 drop-shadow-default'>
-        {
-          chatroom ?
-          chatroom.chatroom_name :
-          'No chat selected'
-        }
+      <div className='w-full absolute top-0 left-0 bg-white p-4 flex flex-col gap-1 z-50'>
+        <p className='font-medium'>
+          {
+            chatroom ?
+            chatroom.chatroom_name :
+            'No chat selected'
+          }
+        </p>
+        
+        <p className='text-sm text-gray-400'>Conversational Based Chatbot</p>
       </div>
       {
         chatroom &&
         <>
-          <div className="flex flex-col-reverse gap-4 w-full overflow-auto flex-grow mt-[40px] pt-4">
+          <div className="flex flex-col-reverse gap-4 w-full overflow-auto flex-grow mt-[52px] py-4">
             {
               loading && 
               <Message 
