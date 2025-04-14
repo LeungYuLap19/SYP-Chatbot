@@ -1,21 +1,21 @@
 import CustomButton from '@/components/global/CustomButton';
-import SaveWindow from '@/components/root/planner/SaveWindow';
+import SaveWindow from '@/components/root/planner/windows/SaveWindow';
 import { randomUUID } from 'crypto';
 import Image from 'next/image'
 import React, { useState } from 'react'
 
 export default function ResultBlock(
-  { 
+  {
     hotelProperty,
     check_in_date,
-    check_out_date  
-  }: { 
+    check_out_date
+  }: {
     hotelProperty: HotelProperty;
     check_in_date: string;
     check_out_date: string;
   }
 ) {
-  const allItems = hotelProperty.hotel_class 
+  const allItems = hotelProperty.hotel_class
     ? [hotelProperty.hotel_class, ...hotelProperty.amenities]
     : [...hotelProperty.amenities];
 
@@ -27,13 +27,13 @@ export default function ResultBlock(
       <div className='flex-shrink-0 w-[20%] aspect-[5/8] bg-slate-200 rounded-md relative overflow-hidden'>
         {
           hotelProperty.images?.length > 0 &&
-            <Image 
-              src={hotelProperty.images[0].original_image}
-              alt='hotel image'
-              fill={true}
-              style={{ objectFit: 'cover', objectPosition: 'center' }}
-              loading='lazy'
-            />
+          <Image
+            src={hotelProperty.images[0].original_image}
+            alt='hotel image'
+            fill={true}
+            style={{ objectFit: 'cover', objectPosition: 'center' }}
+            loading='lazy'
+          />
         }
       </div>
 
@@ -43,9 +43,9 @@ export default function ResultBlock(
           <p className='text-xs text-gray-400'>
             Near {' '}
             {hotelProperty.nearby_places[0].name} {' '}
-            ({hotelProperty.nearby_places[0].transportations[0].duration} {' '}
+            {hotelProperty.nearby_places[0].transportations[0].duration} {' '}
             by {' '}
-            {hotelProperty.nearby_places[0].transportations[0].type.toLowerCase()})
+            {hotelProperty.nearby_places[0].transportations[0].type.toLowerCase()}
           </p>
           <div className='flex gap-1 items-center text-xs'>
             <p>
@@ -53,7 +53,7 @@ export default function ResultBlock(
                 {(Math.ceil((hotelProperty.overall_rating) * 10) / 10).toFixed(1)}
               </span>/5
             </p>
-            <Image 
+            <Image
               src={'/dialog/star.png'}
               alt='star'
               width={16} height={16}
@@ -76,7 +76,7 @@ export default function ResultBlock(
             </a>
           </p>
 
-          <CustomButton 
+          <CustomButton
             label='Save to Planner'
             type='button'
             className='rounded-lg text-xs bg-gray-200 px-3 py-[6px] h-fit'

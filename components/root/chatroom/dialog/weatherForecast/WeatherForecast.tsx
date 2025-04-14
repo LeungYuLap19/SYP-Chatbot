@@ -3,7 +3,6 @@ import WeatherOverview from './WeatherOverview'
 import HourlyForecast from './HourlyForecast'
 import DayForecast from './DayForecast'
 import { get7DaysForecast } from '@/lib/utils';
-import BotIcon from '../BotIcon';
 import BotDialogLayout from '../BotDialogLayout';
 
 export default function WeatherForecast({ weatherForecast }: { weatherForecast: WeatherForecast }) {
@@ -34,6 +33,7 @@ export default function WeatherForecast({ weatherForecast }: { weatherForecast: 
             ))
         }
       </div>
+      
     </BotDialogLayout>
   )
 }

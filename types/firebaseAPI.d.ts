@@ -69,6 +69,10 @@ interface PlaceItem extends PlannerItem {
   fsq_id: string;
 }
 
+// interface WeatherItem extends PlannerItem {
+//   location: string;
+// }
+
 // cookies api
 interface StoreToCookiesParams<T> {
   key: string;

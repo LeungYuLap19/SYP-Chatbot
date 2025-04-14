@@ -5,15 +5,15 @@ import Image from 'next/image'
 import { socialMedia, weekDays } from '@/constants'
 import { showToast } from '@/lib/utils';
 import CustomButton from '@/components/global/CustomButton'
-import SaveWindow from '@/components/root/planner/SaveWindow'
+import SaveWindow from '@/components/root/planner/windows/SaveWindow'
 
-export default function PlaceDetails({ resultItem, isSaved = false }: {resultItem: ResultItem; isSaved?: boolean}) {
+export default function PlaceDetails({ resultItem, isSaved = false }: { resultItem: ResultItem; isSaved?: boolean }) {
   const [hoursDisplay, setHoursDisplay] = useState<boolean>(false);
   const [showWindow, setShowWindow] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState<FlightItem | AccommodationItem | PlaceItem>();
   const [fromDate, setFromDate] = useState<Date | undefined>();
   const [toDate, setToDate] = useState<Date | undefined>();
-  
+
   const googleMapsUrl = `https://www.google.com/maps?q=${resultItem.name.replaceAll(' ', '%')}`;
 
   const handleCopy = (text: string) => {
@@ -37,7 +37,7 @@ export default function PlaceDetails({ resultItem, isSaved = false }: {resultIte
     <div className='p-3 pt-0 flex flex-col gap-4'>
       <div className='flex flex-col gap-2'>
         <Subtitle text='Opening Hours' />
-        <div 
+        <div
           className='flex items-center gap-2 p-3 py-1 hover:bg-white hover:drop-shadow-default rounded-lg cursor-pointer'
           onClick={() => setHoursDisplay(!hoursDisplay)}
         >
@@ -47,10 +47,10 @@ export default function PlaceDetails({ resultItem, isSaved = false }: {resultIte
           <p>⋅</p>
           <p>{resultItem.hours.display}</p>
           <div
-            className='relative mt-[1px] transition-transform duration-200' 
+            className='relative mt-[1px] transition-transform duration-200'
             style={{ transform: hoursDisplay ? 'rotate(180deg)' : 'rotate(0deg)' }}
           >
-            <Image 
+            <Image
               src={'/dialog/down-arrow-backup-2-svgrepo-com.svg'}
               alt='down-arrow'
               width={14} height={14}
@@ -89,14 +89,14 @@ export default function PlaceDetails({ resultItem, isSaved = false }: {resultIte
           <div className='flex flex-col gap-2'>
             {
               Object.entries(resultItem.social_media).map(([key, value]) => value ? (
-                <a 
+                <a
                   key={key}
-                  href={socialMedia.find((media) => media.name === key)?.url + value} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
+                  href={socialMedia.find((media) => media.name === key)?.url + value}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className='flex items-center gap-2 p-3 py-1 hover:bg-white hover:drop-shadow-default rounded-lg cursor-pointer'
                 >
-                  <Image 
+                  <Image
                     src={`/dialog/${key}.svg`}
                     alt={key}
                     width={16} height={16}
@@ -109,15 +109,15 @@ export default function PlaceDetails({ resultItem, isSaved = false }: {resultIte
           </div>
         </div>
       }
-      
+
       {
         resultItem.website &&
         <div className='flex flex-col gap-2'>
           <Subtitle text='Website' />
-          <a 
-            href={resultItem.website} 
-            target="_blank" 
-            rel="noopener noreferrer" 
+          <a
+            href={resultItem.website}
+            target="_blank"
+            rel="noopener noreferrer"
             className='p-3 py-1 text-blue-500 hover:bg-white hover:drop-shadow-default rounded-lg cursor-pointer'
           >
             {resultItem.website}
@@ -135,7 +135,7 @@ export default function PlaceDetails({ resultItem, isSaved = false }: {resultIte
               resultItem.tel &&
               <div className="flex items-center justify-between gap-2">
                 <p className="text-sm">{resultItem.tel}</p>
-                <button 
+                <button
                   onClick={() => handleCopy(resultItem.tel)}
                   className="relative p-1 rounded-md hover:bg-gray-200 transition"
                 >
@@ -148,7 +148,7 @@ export default function PlaceDetails({ resultItem, isSaved = false }: {resultIte
               resultItem.email &&
               <div className="flex items-center justify-between gap-2">
                 <p className="text-sm">{resultItem.email}</p>
-                <button 
+                <button
                   onClick={() => handleCopy(resultItem.email)}
                   className="relative p-1 rounded-md hover:bg-gray-200 transition"
                 >
@@ -165,10 +165,10 @@ export default function PlaceDetails({ resultItem, isSaved = false }: {resultIte
         <div className='flex flex-col gap-2'>
           <Subtitle text='Address' />
           <div className='flex items-center gap-2 p-3 py-1 hover:bg-white hover:drop-shadow-default rounded-lg cursor-pointer'>
-            <a 
-              href={googleMapsUrl} 
-              target="_blank" 
-              rel="noopener noreferrer" 
+            <a
+              href={googleMapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-blue-500 underline"
             >
               {resultItem.location.formatted_address}
@@ -178,7 +178,7 @@ export default function PlaceDetails({ resultItem, isSaved = false }: {resultIte
       }
       {
         !isSaved &&
-        <CustomButton 
+        <CustomButton
           label='Save to Planner'
           type='button'
           className='rounded-lg text-xs w-full bg-gray-200'
@@ -187,10 +187,10 @@ export default function PlaceDetails({ resultItem, isSaved = false }: {resultIte
       }
       {
         showWindow && selectedItem &&
-        <SaveWindow 
-          setShowWindow={setShowWindow} 
-          selectedItem={selectedItem} 
-          isPlace={true} 
+        <SaveWindow
+          setShowWindow={setShowWindow}
+          selectedItem={selectedItem}
+          isPlace={true}
           fromDate={fromDate}
           setFromDate={setFromDate}
           toDate={toDate}

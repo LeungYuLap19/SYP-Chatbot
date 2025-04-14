@@ -84,7 +84,7 @@ export default function PropertyBlock({ accommodationItem }: { accommodationItem
               <div className='w-full flex justify-between items-center'>
                 <p className='font-semibold underline'>
                   <a href={hotelDetails.link} target="_blank" rel="noopener noreferrer">
-                    {hotelDetails.rate_per_night.lowest}
+                    {hotelDetails.rate_per_night?.lowest || 'NaN'}
                   </a>
                 </p>
               </div>

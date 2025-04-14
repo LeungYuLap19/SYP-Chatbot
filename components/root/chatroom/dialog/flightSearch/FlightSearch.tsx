@@ -4,7 +4,7 @@ import DepArr from '../common/DepArr'
 import SearchResult from './SearchResult'
 import SearchResultTitle from './SearchResultTitle'
 import CustomButton from '@/components/global/CustomButton'
-import SaveWindow from '@/components/root/planner/SaveWindow'
+import SaveWindow from '@/components/root/planner/windows/SaveWindow'
 import BotDialogLayout from '../BotDialogLayout'
 
 export default function FlightSearch({ flightSearch }: { flightSearch: FlightResponse }) {
@@ -42,14 +42,14 @@ export default function FlightSearch({ flightSearch }: { flightSearch: FlightRes
               <div className='flex px-6'>
                 {
                   index == 0 && !flightOption.layovers ?
-                  <p className='text-xs text-customBlue-200 font-semibold'>
-                    Non-Stop Flights
-                  </p> :
-                  index === flightSearch.sortedFlights?.findIndex(f => f.layovers) && flightOption.layovers ?
-                  <p className={`text-xs text-customBlue-200 font-semibold ${index !== 0 && 'mt-4'}`}>
-                    Flights With Layovers
-                  </p> :
-                  <></>
+                    <p className='text-xs text-customBlue-200 font-semibold'>
+                      Non-Stop Flights
+                    </p> :
+                    index === flightSearch.sortedFlights?.findIndex(f => f.layovers) && flightOption.layovers ?
+                      <p className={`text-xs text-customBlue-200 font-semibold ${index !== 0 && 'mt-4'}`}>
+                        Flights With Layovers
+                      </p> :
+                      <></>
                 }
               </div>
               <div className='px-4'>
@@ -69,26 +69,25 @@ export default function FlightSearch({ flightSearch }: { flightSearch: FlightRes
                   <SearchResult
                     key={index}
                     flightOption={flightOption}
-                  /> 
+                  />
                   <div className='flex justify-end px-6 mb-4'>
                     <CustomButton
                       loading={false}
                       label='Save Flight to Plan'
                       type='button'
-                      onClick={() => 
-                        {
-                          setShowWindow(true);
-                          setSelectedItem({
-                            piid: crypto.randomUUID(),
-                            from_datetime: flightOption.flights[0].departure_airport.time || null,
-                            to_datetime: flightOption.flights[flightOption.flights.length - 1].arrival_airport.time || null,
-                            flights: flightOption.flights.map((flight) => ({
-                              flight_number: flight.flight_number,
-                              from_datetime: flight.departure_airport.time || null,
-                              to_datetime: flight.arrival_airport.time || null,
-                            }))
-                          });
-                        }
+                      onClick={() => {
+                        setShowWindow(true);
+                        setSelectedItem({
+                          piid: crypto.randomUUID(),
+                          from_datetime: flightOption.flights[0].departure_airport.time || null,
+                          to_datetime: flightOption.flights[flightOption.flights.length - 1].arrival_airport.time || null,
+                          flights: flightOption.flights.map((flight) => ({
+                            flight_number: flight.flight_number,
+                            from_datetime: flight.departure_airport.time || null,
+                            to_datetime: flight.arrival_airport.time || null,
+                          }))
+                        });
+                      }
                       }
                       className='rounded-lg text-xs w-full bg-gray-200'
                     />
