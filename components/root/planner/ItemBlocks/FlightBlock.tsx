@@ -42,7 +42,6 @@ export default function FlightBlock({ flightItem }: { flightItem: FlightItem }) 
           ))
         }
       </div>
-      
     </div>
   )
 }

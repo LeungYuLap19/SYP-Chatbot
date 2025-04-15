@@ -41,7 +41,7 @@ export default function FlightStatusSection(
           }));
         }
       }
-      if (needToSet === 1) {
+      if (needToSet === 1 || !layover) {
         setDepArrProps((prev) => ({
           ...prev,
           toIATA: flightStatus.arrival.airport.iata,
@@ -58,8 +58,6 @@ export default function FlightStatusSection(
       }
     }
   }, [flightStatus, setDepArrProps, needToSet]);
-
-
 
   return (
     <div className='flex flex-col gap-4'>
