@@ -5,12 +5,36 @@ import { showToast } from "../utils";
 import { COOKIES_KEY_USERDATA, ERROR_TOAST_TITLE } from "@/constants";
 import { botResponse } from "../actions/rasa/rasa.action";
 import { getFromCookies } from "../actions/cookies/cookies.action";
-import { createChatroom } from "../actions/firestore/chatroom.action";
+import { createChatroom, renameChatroom } from "../actions/firestore/chatroom.action";
 
 export function useChatroom(id?: string) {
   const [loading, setLoading] = useState(false);
+  const [renameLoad, setRenameLoad] = useState(false);
+  const [isRename, setIsRename] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const renameRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
+
+  const renameExistedChatroom = async () => {
+    const name = renameRef.current?.value.trim();
+
+    setRenameLoad(true);
+    if (!id || !name) {
+      setIsRename(false);
+      setRenameLoad(false);
+      return;
+    }
+    const firestoreResult = await renameChatroom(id!, name!)
+    if (firestoreResult.error) {
+      showToast({ title: ERROR_TOAST_TITLE, description: firestoreResult.error.message });
+      setRenameLoad(false);
+      return;
+    }
+    showToast({ title: `Chatroom ${name!} renamed`, description: '' });
+    if (renameRef.current) renameRef.current.value = '';
+    setIsRename(false);
+    setRenameLoad(false);
+  }
 
   const processMessage = async (cid: string, message: Message) => {
     // Step 1: Store the user message in Firestore
@@ -126,5 +150,10 @@ export function useChatroom(id?: string) {
     // setLoading(false);
   }
 
-  return { loading, inputRef, handleSubmit, handleEnter }
+  return { 
+    loading, renameLoad, isRename, setIsRename,
+    inputRef, renameRef, 
+    renameExistedChatroom, 
+    handleSubmit, handleEnter 
+  }
 }
