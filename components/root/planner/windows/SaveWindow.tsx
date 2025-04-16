@@ -14,16 +14,16 @@ import { showToast } from '@/lib/utils';
 import CloseWindow from './CloseWindow';
 
 export default function SaveWindow(
-  { setShowWindow, selectedItem, isPlace = false, fromDate, setFromDate, toDate, setToDate }: 
-  { 
-    setShowWindow: React.Dispatch<React.SetStateAction<boolean>>; 
-    selectedItem: FlightItem | AccommodationItem | PlaceItem ;
-    isPlace?: boolean;
-    fromDate?: Date;
-    setFromDate?: React.Dispatch<React.SetStateAction<Date | undefined>>
-    toDate?: Date;
-    setToDate?: React.Dispatch<React.SetStateAction<Date | undefined>>
-  }
+  { setShowWindow, selectedItem, isPlace = false, fromDate, setFromDate, toDate, setToDate }:
+    {
+      setShowWindow: React.Dispatch<React.SetStateAction<boolean>>;
+      selectedItem: FlightItem | AccommodationItem | PlaceItem | WeatherItem;
+      isPlace?: boolean;
+      fromDate?: Date;
+      setFromDate?: React.Dispatch<React.SetStateAction<Date | undefined>>
+      toDate?: Date;
+      setToDate?: React.Dispatch<React.SetStateAction<Date | undefined>>
+    }
 ) {
   const { planners } = useGetPlanner();
   const { loading, saveToPlanner, selectedID, setSelectedID } = useSaveToPlanner();
@@ -38,14 +38,14 @@ export default function SaveWindow(
       });
     }
   }, [fromDate]);
-  
+
   useEffect(() => {
     if (fromDate && toDate && toDate < fromDate) {
-      showToast({ 
-        title: 'Change Your Date Time', 
-        description: 'End time cannot be earlier than start time.' 
+      showToast({
+        title: 'Change Your Date Time',
+        description: 'End time cannot be earlier than start time.'
       });
-  
+
       const newToDate = new Date(fromDate);
       newToDate.setHours(newToDate.getHours() + 1);
       setToDate!(newToDate);
@@ -54,12 +54,12 @@ export default function SaveWindow(
 
   useEffect(() => {
     const selectedPlanner = planners?.find(planner => planner.pid === selectedID);
-  
+
     if (selectedPlanner?.from_datetime && selectedPlanner?.to_datetime) {
       setDefaultMonth?.(new Date(selectedPlanner.from_datetime));
     }
-  }, [selectedID, planners]);  
-  
+  }, [selectedID, planners]);
+
   return (
     <div className='z-50 w-screen h-screen bg-black bg-opacity-50 fixed top-0 left-0 flex justify-center items-center'>
       <div className='p-8 pt-10 bg-white rounded-2xl flex flex-col gap-4 justify-center relative'>
@@ -70,7 +70,7 @@ export default function SaveWindow(
         <Select
           onValueChange={(value) => {
             setSelectedID(value);
-          }}  
+          }}
         >
           <SelectTrigger className="w-full min-w-[400px]">
             <SelectValue placeholder="Select Planner" />
@@ -78,8 +78,8 @@ export default function SaveWindow(
           <SelectContent className='bg-white'>
             {
               planners?.map((planner, index) => (
-                <SelectItem 
-                  key={index} 
+                <SelectItem
+                  key={index}
                   value={planner.pid!}
                   className='cursor-pointer'
                 >
@@ -91,7 +91,7 @@ export default function SaveWindow(
         </Select>
 
         {
-          isPlace && 
+          isPlace &&
           <div className='flex gap-4 items-center'>
             <CustomDatetimePicker date={fromDate} setDate={setFromDate!} defaultMonth={defaultMonth} />
             <p>to</p>
@@ -99,7 +99,7 @@ export default function SaveWindow(
           </div>
         }
 
-        <CustomButton 
+        <CustomButton
           loading={loading}
           type='button'
           label='Save'

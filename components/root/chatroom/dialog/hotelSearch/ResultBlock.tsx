@@ -1,6 +1,5 @@
 import CustomButton from '@/components/global/CustomButton';
 import SaveWindow from '@/components/root/planner/windows/SaveWindow';
-import { randomUUID } from 'crypto';
 import Image from 'next/image'
 import React, { useState } from 'react'
 
@@ -20,7 +19,7 @@ export default function ResultBlock(
     : [...hotelProperty.amenities];
 
   const [showWindow, setShowWindow] = useState<boolean>(false);
-  const [selectedItem, setSelectedItem] = useState<FlightItem | AccommodationItem | PlaceItem>();
+  const [selectedItem, setSelectedItem] = useState<AccommodationItem>();
 
   return (
     <div className='flex gap-4'>
@@ -40,13 +39,16 @@ export default function ResultBlock(
       <div className='flex flex-col flex-1'>
         <div className="flex-grow flex flex-col gap-2">
           <p className='font-semibold'>{hotelProperty.name}</p>
-          <p className='text-xs text-gray-400'>
-            Near {' '}
-            {hotelProperty.nearby_places[0].name} {' '}
-            {hotelProperty.nearby_places[0].transportations[0].duration} {' '}
-            by {' '}
-            {hotelProperty.nearby_places[0].transportations[0].type.toLowerCase()}
-          </p>
+          {
+            hotelProperty.nearby_places[0].transportations &&
+            <p className='text-xs text-gray-400'>
+              Near {' '}
+              {hotelProperty.nearby_places[0].name} {' '}
+              {hotelProperty.nearby_places[0].transportations[0].duration} {' '}
+              by {' '}
+              {hotelProperty.nearby_places[0].transportations[0].type.toLowerCase()}
+            </p>
+          }
           <div className='flex gap-1 items-center text-xs'>
             <p>
               <span className='text-customBlue-200 font-semibold'>

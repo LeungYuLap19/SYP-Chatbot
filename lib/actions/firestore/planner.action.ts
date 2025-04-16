@@ -13,7 +13,7 @@ export async function createPlanner(planner: PlannerDetails): Promise<Result<str
   }
 }
 
-export async function deletePlanner(pid: string): Promise<Result<boolean>> {  
+export async function deletePlanner(pid: string): Promise<Result<boolean>> {
   try {
     const plannerRef = doc(db, 'planners', pid);
     await deleteDoc(plannerRef);
@@ -26,7 +26,7 @@ export async function deletePlanner(pid: string): Promise<Result<boolean>> {
 
 export async function updatePlanner(
   pid: string,
-  item: FlightItem | AccommodationItem | PlaceItem
+  item: FlightItem | AccommodationItem | PlaceItem | WeatherItem | WeatherItem
 ): Promise<Result<boolean>> {
   try {
     const plannerRef = doc(db, "planners", pid);
@@ -37,7 +37,7 @@ export async function updatePlanner(
     }
 
     const plannerData = plannerSnap.data() as PlannerDetails;
-    const updatedItems = [...plannerData.items, item]; 
+    const updatedItems = [...plannerData.items, item];
 
     const { from_datetime, to_datetime } = calculatePlannerDateRange(updatedItems);
 
@@ -85,7 +85,7 @@ export async function deleteItemFromPlanner(
     await updateDoc(plannerRef, {
       from_datetime,
       to_datetime,
-      items: updatedItems, 
+      items: updatedItems,
     });
 
     return { data: true };
@@ -112,7 +112,7 @@ export async function updateItemDatetimeInPlanner(
     const plannerData = plannerSnap.data() as PlannerDetails;
 
     // Find and update the item
-    const updatedItems = plannerData.items.map((item) => 
+    const updatedItems = plannerData.items.map((item) =>
       item.piid === piid ? { ...item, from_datetime, to_datetime } : item
     );
 
@@ -122,7 +122,7 @@ export async function updateItemDatetimeInPlanner(
     }
 
     // Recalculate planner date range
-    const { from_datetime: newFromDatetime, to_datetime: newToDatetime } = 
+    const { from_datetime: newFromDatetime, to_datetime: newToDatetime } =
       calculatePlannerDateRange(updatedItems);
 
     // Update Firestore with modified item and recalculated date range
@@ -139,7 +139,7 @@ export async function updateItemDatetimeInPlanner(
   }
 }
 
-function calculatePlannerDateRange(items: (FlightItem | AccommodationItem | PlaceItem)[]): {
+function calculatePlannerDateRange(items: (FlightItem | AccommodationItem | PlaceItem | WeatherItem | WeatherItem)[]): {
   from_datetime: string | null;
   to_datetime: string | null;
 } {
@@ -153,14 +153,14 @@ function calculatePlannerDateRange(items: (FlightItem | AccommodationItem | Plac
     const itemToTime = getTimestamp(item.to_datetime);
 
     if (itemFromTime !== null) {
-      newFromDatetime = !newFromDatetime || itemFromTime < getTimestamp(newFromDatetime)! 
-        ? item.from_datetime 
+      newFromDatetime = !newFromDatetime || itemFromTime < getTimestamp(newFromDatetime)!
+        ? item.from_datetime
         : newFromDatetime;
     }
 
     if (itemToTime !== null) {
-      newToDatetime = !newToDatetime || itemToTime > getTimestamp(newToDatetime)! 
-        ? item.to_datetime 
+      newToDatetime = !newToDatetime || itemToTime > getTimestamp(newToDatetime)!
+        ? item.to_datetime
         : newToDatetime;
     }
   });

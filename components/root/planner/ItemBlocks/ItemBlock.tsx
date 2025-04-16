@@ -10,7 +10,7 @@ import { showToast } from '@/lib/utils';
 import ModifyWindow from '../windows/ModifyWindow';
 
 export default function ItemBlock({ item, planner, showDate = true }: {
-  item: FlightItem | AccommodationItem | PlaceItem;
+  item: FlightItem | AccommodationItem | PlaceItem | WeatherItem;
   planner: PlannerDetails;
   showDate?: boolean;
 }) {
@@ -97,8 +97,8 @@ export default function ItemBlock({ item, planner, showDate = true }: {
         <div className={`w-2/3 max-xl:w-full rounded-tr-none p-4 rounded-2xl bg-gray-50 ${unassigned && 'h-72 !w-72 !p-3 overflow-auto'}`}>
           {
             'flights' in item ? <FlightBlock flightItem={item} /> :
-              'property_token' in item ? <PropertyBlock accommodationItem={item} /> :
-                'fsq_id' in item ? <PlaceBlock placeItem={item} /> : null
+            'property_token' in item ? <PropertyBlock accommodationItem={item} /> :
+            'fsq_id' in item ? <PlaceBlock placeItem={item} /> : null
           }
         </div>
 

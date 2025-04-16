@@ -15,18 +15,23 @@ export default function ExistedPlanner({ id }: { id: string }) {
 
   if (!selected) return;
 
+  const weatherItems: WeatherItem[] = [];
   const unscheduledPlaceItems: PlaceItem[] = [];
-  const scheduledItems: (FlightItem | AccommodationItem | PlaceItem)[] = [];
+  const scheduledItems: (FlightItem | AccommodationItem | PlaceItem | WeatherItem)[] = [];
 
   // Iterate through selected items
   selected.items.forEach((item) => {
     // If item has valid from_datetime, add to scheduledItems
     if (item.from_datetime && item.to_datetime) {
       scheduledItems.push(item);
-    } 
+    }
     // If item is a PlaceItem without from_datetime and to_datetime, push it to unscheduledPlaceItems
     else if ('fsq_id' in item) {
       unscheduledPlaceItems.push(item);
+    }
+    // If item is a WeatherItem, push it to weatherItems
+    else if ('location' in item) {
+      weatherItems.push(item);
     }
   });
 
@@ -35,7 +40,7 @@ export default function ExistedPlanner({ id }: { id: string }) {
   return (
     <div className='w-full flex flex-col gap-8'>
       <div className='flex justify-between items-center p-11 pb-0 lg:pr-28 max-lg:p-4'>
-        <CustomButton 
+        <CustomButton
           label=''
           type='button'
           className='lg:hidden h-fit p-1 min-w-0 w-fit border-none hover:bg-transparent'
@@ -51,7 +56,7 @@ export default function ExistedPlanner({ id }: { id: string }) {
       </div>
 
       <div className='flex gap-3 items-center max-lg:justify-center text-sm pl-11 max-lg:pl-0'>
-        <Image 
+        <Image
           src={'/dialog/calendar-clock.svg'}
           alt='calendar'
           width={16} height={16}
@@ -67,11 +72,38 @@ export default function ExistedPlanner({ id }: { id: string }) {
       </div>
 
       {
+        weatherItems.length > 0 &&
+        <div className='flex flex-col gap-2 pl-11 relative pb-[360px] max-lg:pl-0'>
+          <div className='flex gap-2 items-center'>
+            <div className='w-6 h-6 rounded-full bg-customBlue-200 flex justify-center items-center'>
+              <Image
+                src={'/planner/clouds-sun.svg'}
+                alt='wait-icon'
+                width={14} height={14}
+                className='invert'
+                loading='lazy'
+              />
+            </div>
+
+            <p className='font-semibold text-sm text-customBlue-200'>Weathers</p>
+          </div>
+
+          <div className="absolute top-10 left-11 max-lg:left-0 right-0 overflow-x-auto">
+            <div className="flex gap-2 w-max">
+              {weatherItems.map((item, index) => (
+                <ItemBlock key={index} planner={selected} item={item} showDate={false} />
+              ))}
+            </div>
+          </div>
+        </div>
+      }
+
+      {
         unscheduledPlaceItems.length > 0 &&
         <div className='flex flex-col gap-2 pl-11 relative pb-[360px] max-lg:pl-0'>
           <div className='flex gap-2 items-center'>
             <div className='w-6 h-6 rounded-full bg-customBlue-200 flex justify-center items-center'>
-              <Image 
+              <Image
                 src={'/planner/hourglass-end.svg'}
                 alt='wait-icon'
                 width={14} height={14}
@@ -79,7 +111,7 @@ export default function ExistedPlanner({ id }: { id: string }) {
                 loading='lazy'
               />
             </div>
-            
+
             <p className='font-semibold text-sm text-customBlue-200'>Unplanned Items</p>
           </div>
 
@@ -102,7 +134,7 @@ export default function ExistedPlanner({ id }: { id: string }) {
                 <>
                   <div className='flex gap-2 items-center'>
                     <div className='w-6 h-6 rounded-full bg-customBlue-200 flex justify-center items-center'>
-                      <Image 
+                      <Image
                         src={'/dialog/calendar-clock.svg'}
                         alt='calendar'
                         width={14} height={14}

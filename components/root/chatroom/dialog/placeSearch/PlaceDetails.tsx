@@ -10,7 +10,7 @@ import SaveWindow from '@/components/root/planner/windows/SaveWindow'
 export default function PlaceDetails({ resultItem, isSaved = false }: { resultItem: ResultItem; isSaved?: boolean }) {
   const [hoursDisplay, setHoursDisplay] = useState<boolean>(false);
   const [showWindow, setShowWindow] = useState<boolean>(false);
-  const [selectedItem, setSelectedItem] = useState<FlightItem | AccommodationItem | PlaceItem>();
+  const [selectedItem, setSelectedItem] = useState<PlaceItem>();
   const [fromDate, setFromDate] = useState<Date | undefined>();
   const [toDate, setToDate] = useState<Date | undefined>();
 

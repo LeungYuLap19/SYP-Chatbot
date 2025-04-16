@@ -5,7 +5,7 @@ interface CreateAccountParams {
   password: string;
 }
 
-interface SignInAccountParams extends CreateAccountParams {}
+interface SignInAccountParams extends CreateAccountParams { }
 
 interface CreateUserParams {
   uid: string;
@@ -15,7 +15,7 @@ interface CreateUserParams {
 
 interface GetUserByUIDParams { uid: string }
 
-interface UserData extends CreateUserParams {}
+interface UserData extends CreateUserParams { }
 
 // firestore api
 // items / objects
@@ -42,7 +42,7 @@ interface PlannerDetails {
   from_datetime: string | null;
   to_datetime: string | null;
   created_datetime: string;
-  items: (FlightItem | AccommodationItem | PlaceItem)[];
+  items: (FlightItem | AccommodationItem | PlaceItem | WeatherItem | WeatherItem)[];
 }
 
 interface PlannerItem {
@@ -69,20 +69,20 @@ interface PlaceItem extends PlannerItem {
   fsq_id: string;
 }
 
-// interface WeatherItem extends PlannerItem {
-//   location: string;
-// }
+interface WeatherItem extends PlannerItem {
+  location: string;
+}
 
 // cookies api
 interface StoreToCookiesParams<T> {
   key: string;
   data: T;
-  daysToExpire: number; 
+  daysToExpire: number;
 }
 
 interface GetFromCookiesParams { key: string }
 
-interface RemoveFromCookiesParams extends GetFromCookiesParams {}
+interface RemoveFromCookiesParams extends GetFromCookiesParams { }
 
 // global api
 interface Result<T> {

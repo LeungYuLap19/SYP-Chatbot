@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import PlaceOverview from './PlaceOverview'
 import PlaceDetails from './PlaceDetails'
 import { getIdsOrLabelByCategory } from '@/lib/utils';
-import BotIcon from '../BotIcon';
 import BotDialogLayout from '../BotDialogLayout';
 
 export default function PlaceSearch({ 

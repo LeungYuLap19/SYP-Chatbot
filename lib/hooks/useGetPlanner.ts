@@ -51,7 +51,7 @@ export function useGetPlanner(id?: string) {
             if (dateOnlyA !== dateOnlyB) return dateOnlyA - dateOnlyB;
 
             // 2️⃣ If same date, prioritize Flights > Accommodations > Places
-            const getTypePriority = (item: FlightItem | AccommodationItem | PlaceItem) => {
+            const getTypePriority = (item: FlightItem | AccommodationItem | PlaceItem | WeatherItem) => {
               if ("flights" in item) return 1; // FlightItem
               if ("property_token" in item) return 2; // AccommodationItem
               if ("fsq_id" in item) return 3; // PlaceItem

@@ -7,7 +7,7 @@ export function useSaveToPlanner() {
   const [loading, setLoading] = useState<boolean>(false);
   const [selectedID, setSelectedID] = useState<string>();
 
-  const saveToPlanner = async (selectedItem: FlightItem | AccommodationItem | PlaceItem) => {
+  const saveToPlanner = async (selectedItem: FlightItem | AccommodationItem | PlaceItem | WeatherItem) => {
     setLoading(true);
     if (!selectedID) {
       showToast({ title: ERROR_TOAST_TITLE, description: 'Please select a planner' });
@@ -26,15 +26,15 @@ export function useSaveToPlanner() {
       setLoading(false);
       return;
     }
-    
+
     showToast({ title: 'Success', description: 'Item saved to planner' });
     setLoading(false);
   }
 
-  return { 
-    loading, 
-    saveToPlanner, 
+  return {
+    loading,
+    saveToPlanner,
     selectedID,
-    setSelectedID,  
-  }; 
+    setSelectedID,
+  };
 }

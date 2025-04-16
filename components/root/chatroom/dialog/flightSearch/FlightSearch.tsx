@@ -10,7 +10,7 @@ import BotDialogLayout from '../BotDialogLayout'
 export default function FlightSearch({ flightSearch }: { flightSearch: FlightResponse }) {
   const [showDetails, setShowDetails] = useState<number>(-1);
   const [showWindow, setShowWindow] = useState<boolean>(false);
-  const [selectedItem, setSelectedItem] = useState<FlightItem | AccommodationItem | PlaceItem>();
+  const [selectedItem, setSelectedItem] = useState<FlightItem>();
 
   return (
     <BotDialogLayout widthClassName='w-[50%] max-2xl:w-[60%] max-xl:w-[80%] max-lg:w-full'>
