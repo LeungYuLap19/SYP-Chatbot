@@ -13,7 +13,7 @@ export default function FlightSearch({ flightSearch }: { flightSearch: FlightRes
   const [selectedItem, setSelectedItem] = useState<FlightItem>();
 
   return (
-    <BotDialogLayout widthClassName='w-[50%] max-2xl:w-[60%] max-xl:w-[80%] max-lg:w-full'>
+    <BotDialogLayout className='w-[50%] max-2xl:w-[60%] max-xl:w-[80%] max-lg:w-full'>
       <div className='p-6'>
         <p>
           Here are some scheduled flights I found:

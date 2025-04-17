@@ -1,18 +1,20 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CustomButton from '@/components/global/CustomButton';
 import { useGetPlanner } from '@/lib/hooks/useGetPlanner';
 import { useRouter } from 'next/navigation';
-import { format } from 'date-fns';
-import Image from 'next/image';
-import ItemBlock from './ItemBlocks/ItemBlock';
+import UnplannedBlock from './plannerBlocks/UnplannedBlock';
+import DurationBlock from './plannerBlocks/DurationBlock';
+import PlannedBlock from './plannerBlocks/PlannedBlock';
+import WeatherItemBlock from './plannerBlocks/WeatherItemBlock';
 
 export default function ExistedPlanner({ id }: { id: string }) {
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const router = useRouter();
   const handleOnClick = () => {
     router.push('/planner');
   };
+  
   const { selected } = useGetPlanner(id);
-
   if (!selected) return;
 
   const weatherItems: WeatherItem[] = [];
@@ -55,112 +57,45 @@ export default function ExistedPlanner({ id }: { id: string }) {
         <span className='w-[14px] h-[14px] p-1 lg:hidden'></span>
       </div>
 
-      <div className='flex gap-3 items-center max-lg:justify-center text-sm pl-11 max-lg:pl-0'>
-        <Image
-          src={'/dialog/calendar-clock.svg'}
-          alt='calendar'
-          width={16} height={16}
-          loading='lazy'
+      <DurationBlock selected={selected} />
+
+      <div className='w-full flex flex-col gap-12'>
+        {
+          weatherItems.length > 0 &&
+          <WeatherItemBlock
+            weatherItems={weatherItems}
+            selected={selected}
+            selectedIndex={selectedIndex}
+            setSelectedIndex={setSelectedIndex}
+          />
+        }
+
+        <PlannedBlock 
+          scheduledItems={scheduledItems}
+          currentDate={currentDate}
+          selected={selected}
         />
-        <p className='font-semibold text-customBlack-100'>
-          {selected.from_datetime ? format(new Date(selected.from_datetime), 'yyyy/MM/dd') : 'N/A'}
-        </p>
-        <p>to</p>
-        <p className='font-semibold text-customBlack-100'>
-          {selected.to_datetime ? format(new Date(selected.to_datetime), 'yyyy/MM/dd') : 'N/A'}
-        </p>
+
+        {
+          unscheduledPlaceItems.length > 0 &&
+          <UnplannedBlock
+            unscheduledPlaceItems={unscheduledPlaceItems}
+            selected={selected}
+          />
+        }
       </div>
-
-      {
-        weatherItems.length > 0 &&
-        <div className='flex flex-col gap-2 pl-11 relative pb-[360px] max-lg:pl-0'>
-          <div className='flex gap-2 items-center'>
-            <div className='w-6 h-6 rounded-full bg-customBlue-200 flex justify-center items-center'>
-              <Image
-                src={'/planner/clouds-sun.svg'}
-                alt='wait-icon'
-                width={14} height={14}
-                className='invert'
-                loading='lazy'
-              />
-            </div>
-
-            <p className='font-semibold text-sm text-customBlue-200'>Weathers</p>
-          </div>
-
-          <div className="absolute top-10 left-11 max-lg:left-0 right-0 overflow-x-auto">
-            <div className="flex gap-2 w-max">
-              {weatherItems.map((item, index) => (
-                <ItemBlock key={index} planner={selected} item={item} showDate={false} />
-              ))}
-            </div>
-          </div>
-        </div>
-      }
 
       {
         unscheduledPlaceItems.length > 0 &&
-        <div className='flex flex-col gap-2 pl-11 relative pb-[360px] max-lg:pl-0'>
-          <div className='flex gap-2 items-center'>
-            <div className='w-6 h-6 rounded-full bg-customBlue-200 flex justify-center items-center'>
-              <Image
-                src={'/planner/hourglass-end.svg'}
-                alt='wait-icon'
-                width={14} height={14}
-                className='invert'
-                loading='lazy'
-              />
-            </div>
-
-            <p className='font-semibold text-sm text-customBlue-200'>Unplanned Items</p>
-          </div>
-
-          <div className="absolute top-10 left-11 max-lg:left-0 right-0 overflow-x-auto">
-            <div className="flex gap-2 w-max">
-              {unscheduledPlaceItems.map((item, index) => (
-                <ItemBlock key={index} planner={selected} item={item} showDate={false} />
-              ))}
-            </div>
-          </div>
-        </div>
+        <CustomButton 
+          type={'button'} 
+          label={'Go to Unplanned Items'}
+          className='fixed bottom-8 max-sm:bottom-16 right-5 max-sm:right-2'
+          onClick={() => {
+            document.getElementById('bottom-of-page')?.scrollIntoView({ behavior: 'smooth' });
+          }}  
+        />
       }
-
-      <div className='flex flex-col gap-4 pl-11 pb-11 max-lg:pl-0'>
-        {
-          scheduledItems.map((item, index) => {
-            if ('fsq_id' in item && item.from_datetime?.substring(0, 10) !== currentDate.substring(0, 10)) {
-              currentDate = item.from_datetime || '';
-              return (
-                <>
-                  <div className='flex gap-2 items-center'>
-                    <div className='w-6 h-6 rounded-full bg-customBlue-200 flex justify-center items-center'>
-                      <Image
-                        src={'/dialog/calendar-clock.svg'}
-                        alt='calendar'
-                        width={14} height={14}
-                        className='invert'
-                        loading='lazy'
-                      />
-                    </div>
-                    <p className='text-sm font-semibold text-customBlue-200'>
-                      Planned on {currentDate.substring(0, 10)}
-                    </p>
-                  </div>
-
-                  <ItemBlock key={index} planner={selected} item={item} showDate={false} />
-                </>
-              )
-            }
-            if ('fsq_id' in item && item.from_datetime?.substring(0, 10) === currentDate.substring(0, 10)) {
-              currentDate = item.from_datetime || '';
-              return <ItemBlock key={index} planner={selected} item={item} showDate={false} />;
-            }
-            else {
-              return <ItemBlock key={index} planner={selected} item={item} />;
-            }
-          })
-        }
-      </div>
     </div>
   );
 }

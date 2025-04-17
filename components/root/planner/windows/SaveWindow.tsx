@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import {
   Select,
   SelectContent,
@@ -12,6 +13,7 @@ import CustomButton from '@/components/global/CustomButton';
 import { CustomDatetimePicker } from '@/components/global/CustomDatetimePicker';
 import { showToast } from '@/lib/utils';
 import CloseWindow from './CloseWindow';
+import WindowLayout from './WindowLayout';
 
 export default function SaveWindow(
   { setShowWindow, selectedItem, isPlace = false, fromDate, setFromDate, toDate, setToDate }:
@@ -25,6 +27,7 @@ export default function SaveWindow(
       setToDate?: React.Dispatch<React.SetStateAction<Date | undefined>>
     }
 ) {
+  const router = useRouter();
   const { planners } = useGetPlanner();
   const { loading, saveToPlanner, selectedID, setSelectedID } = useSaveToPlanner();
   const [defaultMonth, setDefaultMonth] = useState<Date | undefined>();
@@ -61,57 +64,58 @@ export default function SaveWindow(
   }, [selectedID, planners]);
 
   return (
-    <div className='z-50 w-screen h-screen bg-black bg-opacity-50 fixed top-0 left-0 flex justify-center items-center'>
-      <div className='p-8 pt-10 bg-white rounded-2xl flex flex-col gap-4 justify-center relative'>
-        <CloseWindow setShowWindow={setShowWindow} />
+    <WindowLayout className='flex-col gap-4' setShowWindow={setShowWindow}>
+      <p className='font-semibold'>Save To Planner</p>
 
-        <p className='font-semibold'>Save To Planner</p>
-
-        <Select
-          onValueChange={(value) => {
-            setSelectedID(value);
-          }}
-        >
-          <SelectTrigger className="w-full min-w-[400px]">
-            <SelectValue placeholder="Select Planner" />
-          </SelectTrigger>
-          <SelectContent className='bg-white'>
-            {
-              planners?.map((planner, index) => (
-                <SelectItem
-                  key={index}
-                  value={planner.pid!}
-                  className='cursor-pointer'
-                >
-                  {planner.name}
-                </SelectItem>
-              ))
-            }
-          </SelectContent>
-        </Select>
-
-        {
-          isPlace &&
-          <div className='flex gap-4 items-center'>
-            <CustomDatetimePicker date={fromDate} setDate={setFromDate!} defaultMonth={defaultMonth} />
-            <p>to</p>
-            <CustomDatetimePicker date={toDate} setDate={setToDate!} defaultMonth={defaultMonth} />
-          </div>
-        }
-
-        <CustomButton
-          loading={loading}
-          type='button'
-          label='Save'
-          className='rounded-lg'
-          onClick={
-            async () => {
-              await saveToPlanner(selectedItem);
-              setShowWindow(false);
-            }
+      <Select
+        onValueChange={(value) => {
+          setSelectedID(value);
+        }}
+      >
+        <SelectTrigger className="w-full min-w-[400px]" disabled={planners && planners.length === 0}>
+          <SelectValue placeholder={`${planners && planners.length > 0 ? 'Select Planner' : 'No Planner'}`} />
+        </SelectTrigger>
+        <SelectContent className='bg-white'>
+          {
+            planners?.map((planner, index) => (
+              <SelectItem
+                key={index}
+                value={planner.pid!}
+                className='cursor-pointer'
+              >
+                {planner.name}
+              </SelectItem>
+            ))
           }
-        />
-      </div>
-    </div>
+        </SelectContent>
+      </Select>
+
+      {
+        isPlace &&
+        <div className='flex gap-4 items-center'>
+          <CustomDatetimePicker date={fromDate} setDate={setFromDate!} defaultMonth={defaultMonth} />
+          <p>to</p>
+          <CustomDatetimePicker date={toDate} setDate={setToDate!} defaultMonth={defaultMonth} />
+        </div>
+      }
+
+      <CustomButton
+        loading={loading}
+        type='button'
+        label={`${planners && planners.length === 0 ? 'Create Planner' : 'Save'}`}
+        className='rounded-lg'
+        onClick={
+          async () => {
+            if (planners && planners.length === 0) {
+              router.push('/planner');
+              return;
+            }
+
+            await saveToPlanner(selectedItem);
+            setShowWindow(false);
+          }
+        }
+      />
+    </WindowLayout>
   )
 }

@@ -81,7 +81,8 @@ interface TravelModeProps {
   value: number;
 }
 
-interface BotDialogLayoutProps {
-  widthClassName?: string;
+interface LayoutProps {
+  className?: string;
   children: ReactNode;
+  setShowWindow?: React.Dispatch<React.SetStateAction<boolean>>;
 }

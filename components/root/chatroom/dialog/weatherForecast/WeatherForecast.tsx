@@ -17,7 +17,7 @@ export default function WeatherForecast({ weatherForecast, isSaved = false }: { 
   }, [weatherForecast]);
 
   return (
-    <BotDialogLayout widthClassName='w-[40%] max-2xl:w-[50%] max-xl:w-[60%] max-lg:w-[65%] max-md:w-full'>
+    <BotDialogLayout className='w-[40%] max-2xl:w-[50%] max-xl:w-[60%] max-lg:w-[65%] max-md:w-full'>
       <div className='p-6 pb-4'>
         <p>
           Here is the weather in {' '}
@@ -30,11 +30,11 @@ export default function WeatherForecast({ weatherForecast, isSaved = false }: { 
         <HourlyForecast weatherForecast={weatherForecast} />
 
         <p className='font-semibold text-xs text-customBlue-200 mt-4'>3 Days Forecast</p>
-        { 
-          formattedDays && 
-            formattedDays.map((day, index) => (
-              <DayForecast day={day} key={index} />
-            ))
+        {
+          formattedDays &&
+          formattedDays.map((day, index) => (
+            <DayForecast day={day} key={index} />
+          ))
         }
       </div>
       {

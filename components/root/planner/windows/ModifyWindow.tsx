@@ -5,6 +5,7 @@ import CustomButton from '@/components/global/CustomButton';
 import { showToast } from '@/lib/utils';
 import { updateItemDatetimeInPlanner } from '@/lib/actions/firestore/planner.action';
 import { ERROR_TOAST_TITLE } from '@/constants';
+import WindowLayout from './WindowLayout';
 
 export default function ModifyWindow(
   { setShowWindow, fromDate, setFromDate, toDate, setToDate, pid, piid }:
@@ -62,26 +63,22 @@ export default function ModifyWindow(
   }, [toDate]);
 
   return (
-    <div className='z-50 w-screen h-screen bg-black bg-opacity-50 fixed top-0 left-0 flex justify-center items-center'>
-      <div className='p-8 pt-10 bg-white rounded-2xl flex flex-col gap-4 justify-center relative'>
-        <CloseWindow setShowWindow={setShowWindow} />
+    <WindowLayout className='flex-col gap-4' setShowWindow={setShowWindow}>
+      <p className='font-semibold'>Modify Start and End</p>
 
-        <p className='font-semibold'>Modify Start and End</p>
-
-        <div className='flex gap-4 items-center'>
-          <CustomDatetimePicker date={fromDate} setDate={setFromDate!} />
-          <p>to</p>
-          <CustomDatetimePicker date={toDate} setDate={setToDate!} />
-        </div>
-
-        <CustomButton
-          loading={loading}
-          type='button'
-          label='Save'
-          className='rounded-lg'
-          onClick={() => updateItem()}
-        />
+      <div className='flex gap-4 items-center'>
+        <CustomDatetimePicker date={fromDate} setDate={setFromDate!} />
+        <p>to</p>
+        <CustomDatetimePicker date={toDate} setDate={setToDate!} />
       </div>
-    </div>
+
+      <CustomButton
+        loading={loading}
+        type='button'
+        label='Save'
+        className='rounded-lg'
+        onClick={() => updateItem()}
+      />
+    </WindowLayout>
   )
 }

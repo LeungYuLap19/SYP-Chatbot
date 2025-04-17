@@ -8,7 +8,7 @@ import BotDialogLayout from '../BotDialogLayout';
 
 export default function FlightStatus({ flightStatus }: { flightStatus: FlightStatus }) {
   return (
-    <BotDialogLayout widthClassName='max-w-[70%] max-lg:max-w-full'>
+    <BotDialogLayout className='max-w-[70%] max-lg:max-w-full'>
       <div className='p-6'>
         <p>
           Here is the flight status for{' '}
