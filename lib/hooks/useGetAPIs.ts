@@ -70,9 +70,6 @@ export function useGetAPIs(test: boolean) {
     const geoResult = await getLocationDetails(input);
     if (geoResult.data) {
       setGeoResponse(geoResult.data);
-      // const lat = geoResult.data[0].geometry.location.lat;
-      // const lng = geoResult.data[0].geometry.location.lng;
-      // if (!lat || !lng) return;
       const location = geoResult.data[0].formatted_address;
       const response = await getWeatherForecast(location);
       if (response.data) {

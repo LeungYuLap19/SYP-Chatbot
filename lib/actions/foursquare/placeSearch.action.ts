@@ -8,7 +8,7 @@ export async function getPopularPlaces(ne: Northeast, sw: Southwest, ids: number
     const response = await axios.get(`https://api.foursquare.com/v3/places/search?ne=${ne.lat}%2C${ne.lng}&sw=${sw.lat}%2C${sw.lng}&sort=RELEVANCE&limit=${limit}&categories=${ids.join(',')}&fields=${placeSearchFields.join(',')}`, {
       headers: {
         accept: 'application/json',
-        Authorization: 'fsq32n4d1KUF+Q1wTFubzkllNlz98R2t39y5rYq/jRL+ueY='
+        Authorization: process.env.NEXT_PUBLIC_FOURSQUARE_API_KEY
       }
     });
     // console.log(response.data.results[0]);
@@ -24,7 +24,7 @@ export async function getPlaceDetails(fsq_id: string): Promise<Result<ResultItem
     const response = await axios.get(`https://api.foursquare.com/v3/places/${fsq_id}?fields=${placeSearchFields.join(',')}`, {
       headers: {
         accept: 'application/json',
-        Authorization: 'fsq32n4d1KUF+Q1wTFubzkllNlz98R2t39y5rYq/jRL+ueY='
+        Authorization: process.env.NEXT_PUBLIC_FOURSQUARE_API_KEY
       }
     });
     // console.log(response.data);
