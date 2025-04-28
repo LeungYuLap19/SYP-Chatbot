@@ -23,6 +23,9 @@ function HistoryChatPage({ chatroom }: { chatroom?: Chatroom; }) {
   };
   const handleDelete = async () => {
     setLoading(true);
+    router.push('/chatroom');
+    await new Promise(resolve => setTimeout(resolve, 100));
+    
     if (chatroom && chatroom.cid) {
       const result = await deleteChatroom(chatroom.cid);
       if (result.data) {
@@ -67,9 +70,7 @@ function HistoryChatPage({ chatroom }: { chatroom?: Chatroom; }) {
 }
 
 const HistoryChat = ({ chatroom }: { chatroom?: Chatroom; }) => (
-  <Suspense fallback={<div>Loading...</div>}>
-    <HistoryChatPage chatroom={chatroom} />
-  </Suspense>
+  <HistoryChatPage chatroom={chatroom} />
 )
 
 export default HistoryChat;

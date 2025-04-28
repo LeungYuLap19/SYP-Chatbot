@@ -26,9 +26,7 @@ function PlannerDetailsPage() {
 }
 
 const PlannerDetails = () => (
-  <Suspense fallback={<div>Loading...</div>}>
-    <PlannerDetailsPage />
-  </Suspense>
+  <PlannerDetailsPage />
 )
 
 export default PlannerDetails;

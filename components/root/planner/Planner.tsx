@@ -23,6 +23,9 @@ function PlannerPage({ planner }: { planner?: PlannerDetails }) {
   };
   const handleDelete = async () => {
     setLoading(true);
+    router.push('/planner');
+    await new Promise(resolve => setTimeout(resolve, 100));
+
     if (planner && planner.pid) {
       const result = await deletePlanner(planner.pid);
       if (result.data) {
@@ -68,9 +71,7 @@ function PlannerPage({ planner }: { planner?: PlannerDetails }) {
 }
 
 const Planner = ({ planner }: { planner?: PlannerDetails }) => (
-  <Suspense fallback={<div>Loading...</div>}>
-    <PlannerPage planner={planner} />
-  </Suspense>
+  <PlannerPage planner={planner} />
 )
 
 export default Planner

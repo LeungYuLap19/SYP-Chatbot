@@ -40,6 +40,8 @@ export default function ResultBlock(
         <div className="flex-grow flex flex-col gap-2">
           <p className='font-semibold'>{hotelProperty.name}</p>
           {
+            hotelProperty.nearby_places &&
+            hotelProperty.nearby_places.length > 0 &&
             hotelProperty.nearby_places[0].transportations &&
             <p className='text-xs text-gray-400'>
               Near {' '}

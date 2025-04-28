@@ -42,13 +42,12 @@ export default function FlightDetails({ flightDetails }: { flightDetails: Flight
         <div className='flex flex-wrap gap-2'>
           {
             flightDetails.extensions?.map((value, index) => (
-              <>
-                {
-                  index !== 0 &&
-                  <span className='h-4 w-[2px] bg-slate-200'></span>
-                }
-                <p className='text-xs text-gray-400'>{value}</p>
-              </>
+              <React.Fragment key={index}>
+                {index !== 0 && (
+                  <span className="h-4 w-[2px] bg-slate-200"></span>
+                )}
+                <p className="text-xs text-gray-400">{value}</p>
+              </React.Fragment>
             ))
           }
         </div>
