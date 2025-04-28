@@ -70,7 +70,9 @@ function HistoryChatPage({ chatroom }: { chatroom?: Chatroom; }) {
 }
 
 const HistoryChat = ({ chatroom }: { chatroom?: Chatroom; }) => (
-  <HistoryChatPage chatroom={chatroom} />
+  <Suspense fallback={<div>Loading history...</div>}>
+    <HistoryChatPage chatroom={chatroom} />
+  </Suspense>
 )
 
 export default HistoryChat;

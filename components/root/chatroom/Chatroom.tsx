@@ -22,7 +22,9 @@ function ChatroomPage() {
 }
 
 const Chatroom = () => (
-  <ChatroomPage />
+  <Suspense fallback={<div>Loading chatroom...</div>}>
+    <ChatroomPage />
+  </Suspense>
 )
 
 export default Chatroom;

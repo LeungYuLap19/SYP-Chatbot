@@ -71,7 +71,9 @@ function PlannerPage({ planner }: { planner?: PlannerDetails }) {
 }
 
 const Planner = ({ planner }: { planner?: PlannerDetails }) => (
-  <PlannerPage planner={planner} />
+  <Suspense fallback={<div>Loading Planner List...</div>}>
+    <PlannerPage planner={planner} />
+  </Suspense>
 )
 
 export default Planner
